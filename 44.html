@@ -1,56 +1,59 @@
-
-<div class="game-frame">
-  <h1 class="game-title">RHYTHM GAME</h1>
-  <p class="subtitle">Allenamento sui 4/4 con vite 🫀</p>
-
-  <!-- LED -->
-  <div class="top-row">
-    <div class="beat-panel">
-      <div class="led-row">
-        <div class="led" data-index="0"></div>
-        <div class="led" data-index="1"></div>
-        <div class="led" data-index="2"></div>
-        <div class="led" data-index="3"></div>
-      </div>
-      <div class="measure-line">
-        <div class="measure-tick"></div>
-        <div class="measure-tick"></div>
-        <div class="measure-tick"></div>
-        <div class="measure-tick"></div>
+<!DOCTYPE html>
+<html lang="it">
+  
+  <div class="game-frame">
+    <h1 class="game-title">RHYTHM GAME</h1>
+    <p class="subtitle">Allenamento sui 4/4 con vite 🫀</p>
+  
+    <!-- LED -->
+    <div class="top-row">
+      <div class="beat-panel">
+        <div class="led-row">
+          <div class="led" data-index="0"></div>
+          <div class="led" data-index="1"></div>
+          <div class="led" data-index="2"></div>
+          <div class="led" data-index="3"></div>
+        </div>
+        <div class="measure-line">
+          <div class="measure-tick"></div>
+          <div class="measure-tick"></div>
+          <div class="measure-tick"></div>
+          <div class="measure-tick"></div>
+        </div>
       </div>
     </div>
+  
+    <div class="layout-main">
+      <!-- PLAYER PANEL -->
+      <section class="player-panel">
+        <div class="player-panel-title">Premi il bottone a tempo (o barra spaziatrice)</div>
+  
+        <div id="statusText" class="status-text">Premi START per iniziare.</div>
+  
+        <div class="single-btn-wrapper">
+          <button id="hitButton" class="hit-btn-big">HIT</button>
+        </div>
+  
+        <div class="life-display">
+          <span id="lifeContainer"></span>
+        </div>
+  
+        <div class="info-row">
+          <span>BPM: <span id="bpmDisplay">60</span></span>
+          <span>Round: <span id="roundDisplay">1</span></span>
+        </div>
+      </section>
+  
+      <!-- START PANEL -->
+      <aside class="start-panel">
+        <button id="startButton" class="start-btn">START</button>
+        <p class="small-note">
+          Regole:<br>
+          - Hai 3 vite ❤️❤️❤️<br>
+          - Ogni errore = una vita in meno<br>
+          - Game Over a 0 vite
+        </p>
+      </aside>
+    </div>
   </div>
-
-  <div class="layout-main">
-    <!-- PLAYER PANEL -->
-    <section class="player-panel">
-      <div class="player-panel-title">Premi il bottone a tempo (o barra spaziatrice)</div>
-
-      <div id="statusText" class="status-text">Premi START per iniziare.</div>
-
-      <div class="single-btn-wrapper">
-        <button id="hitButton" class="hit-btn-big">HIT</button>
-      </div>
-
-      <div class="life-display">
-        <span id="lifeContainer"></span>
-      </div>
-
-      <div class="info-row">
-        <span>BPM: <span id="bpmDisplay">60</span></span>
-        <span>Round: <span id="roundDisplay">1</span></span>
-      </div>
-    </section>
-
-    <!-- START PANEL -->
-    <aside class="start-panel">
-      <button id="startButton" class="start-btn">START</button>
-      <p class="small-note">
-        Regole:<br>
-        - Hai 3 vite ❤️❤️❤️<br>
-        - Ogni errore = una vita in meno<br>
-        - Game Over a 0 vite
-      </p>
-    </aside>
-  </div>
-</div>
+</html>html>
