@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Grammar Sequence</title>
+</head>
+<body>
+    <h1>Grammar Sequence Test</h1>
+    <p>Apri la Console degli Strumenti per Sviluppatori (F12) per vedere l'output.</p>
+
+    <script>
+        // =================================================================
+        // FUNZIONI HELPER (Devono essere definite PRIMA della classe)
+        // =================================================================
+
+        /**
+         * @param {Array<any>} arr - La lista da cui selezionare.
+         * @returns {any} Un elemento casuale dalla lista.
+         */
+        function getRandomElement(arr) {
+            if (!arr || arr.length === 0) return null;
+            const randomIndex = Math.floor(Math.random() * arr.length);
+            return arr[randomIndex];
+        }
+
+        /**
+         * @param {Array<number>} arr - La lista di indici.
+         * @returns {number} Un indice casuale dalla lista.
+         */
+        function getRandomIndex(arr) {
+            if (!arr || arr.length === 0) return null;
+            const randomIndex = Math.floor(Math.random() * arr.length);
+            return arr[randomIndex];
+        }
+
+        // =================================================================
+        // CLASSE GrammarSequence (La tua traduzione da Python)
+        // =================================================================
+
+        class GrammarSequence {
+            /**
+             * @param {Object<string, Array<string|Array<string>>>} grammar 
+             */
+            constructor(grammar) {
+                this.grammar = grammar;
+                this.grammarKeys = Object.keys(grammar);
+                this.N = this.grammarKeys.length;
+                this.sequence = []; 
+            }
+
+            /**
+             * Sostituisce il simbolo all'indice con uno o più simboli in convertTo.
+             * @param {number} index - Indice della sequenza da sostituire.
+             * @param {string | string[]} convertTo - Simbolo/i con cui sostituire.
+             */
+            replace(index, convertTo) {
+                const conversionArray = Array.isArray(convertTo) ? convertTo : [convertTo];
+                this.sequence.splice(index, 1, ...conversionArray);
+            }
+
+            /**
+             * Converte un simbolo non terminale casuale nella sequenza.
+             * @param {number[]} idxs - Array di indici dove si trovano i simboli non terminali.
+             */
+            convertSequence(idxs) {
+                const index = getRandomIndex(idxs);
+                if (index === null) return;
+
+                const symbol = this.sequence[index];
+                const possibleConversions = this.grammar[symbol];
+                const convertTo = getRandomElement(possibleConversions);
+                
+                this.replace(index, convertTo);
+            }
+
+            /**
+             * Cerca i simboli non terminali in una sequenza e ne restituisce gli indici.
+             * @param {string[]} sequence - La sequenza di simboli.
+             * @returns {[number[], boolean]}
+             */
+            findNonTerminalSymbols(sequence) {
+                const idxs = [];
+                const nonTerminals = new Set(this.grammarKeys);
+
+                sequence.forEach((symbol, s) => {
+                    if (nonTerminals.has(symbol)) {
+                        idxs.push(s); 
+                    }
+                });
+                
+                const toConvert = idxs.length > 0;
+                return [idxs, toConvert];
+            }
+
+            /**
+             * Crea una sequenza di simboli terminali.
+             * @param {string[]} startSequence - La sequenza iniziale di simboli.
+             * @returns {[string[], string[][]]}
+             */
+            createSequence(startSequence) {
+                this.sequence = [...startSequence];
+                const sequenceTransformation = [[...startSequence]]; 
+                
+                while (true) {
+                    const [idxs, toConvert] = this.findNonTerminalSymbols(this.sequence);
+                    
+                    if (!toConvert) {
+                        break;
+                    }
+                    
+                    this.convertSequence(idxs);
+                    sequenceTransformation.push([...this.sequence]);
+                }
+                
+                return [this.sequence, sequenceTransformation];
+            }
+        }
+
+
+        // =================================================================
+        // LOGICA DI ESECUZIONE (Qui definisci la tua grammatica e fai i test)
+        // =================================================================
+
+        /**
+         * Esempio di Grammatica Libera dal Contesto (Context-Free Grammar):
+         * - 'S' (Start) è il simbolo iniziale.
+         * - I simboli racchiusi tra [] rappresentano produzioni multi-simbolo.
+         */
+        const myGrammar = {
+            // Regola di partenza: S può diventare una Nota, un Accordo, o una Sequenza.
+            'M': [
+                ['q','h','q'],
+                ['H', 'H']
+            ],
+            // Definizione di Sequenza: una sequenza è seguita da un altro elemento.
+            'H': [
+                ['q','q'],
+                ['h']
+            ],
+            // Terminali/elementi finali per Nota e Accordo
+            'h': [
+                0.5
+            ],
+            'q': [
+                0.25
+            ]
+        };
+
+        // 1. Inizializza la classe con la grammatica
+        const grammarEngine = new GrammarSequence(myGrammar);
+
+        // 2. Definisci la sequenza iniziale (il simbolo di partenza)
+        const start = ['M'];
+
+        // 3. Esegui la generazione della sequenza
+        const [finalSequence, history] = grammarEngine.createSequence(start);
+
+        // 4. Stampa i risultati nella console
+
+        console.log("--- TEST GRAMMAR SEQUENCE ---");
+        console.log("GRAMMATICA UTILIZZATA:", myGrammar);
+        console.log("SEQUENZA INIZIALE:", start);
+        console.log("---------------------------");
+        
+        console.log("STORIA DELLE TRASFORMAZIONI:");
+        history.forEach((step, index) => {
+            console.log(`Step ${index}: [${step.join(', ')}]`);
+        });
+
+        console.log("---------------------------");
+        console.log("SEQUENZA FINALE (Simboli Terminali):");
+        console.log(finalSequence);
+        console.log("---------------------------");
+
+        // --- Esempio 2: Sequenza più lunga ---
+        console.log("\n--- TEST 2: SEQUENZA LUNGA ---");
+        const grammarEngine2 = new GrammarSequence(myGrammar);
+        const [finalSequence2, history2] = grammarEngine2.createSequence(['Sequenza']);
+        
+        console.log("SEQUENZA INIZIALE:", ['Sequenza']);
+        console.log("SEQUENZA FINALE (Simboli Terminali):");
+        console.log(finalSequence2);
+
+    </script>
+</body>
+</html>
