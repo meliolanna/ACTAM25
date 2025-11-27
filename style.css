@@ -39,7 +39,7 @@ body {
 
 /* Applico l'animazione al testo */
 .pulsating-text {
-    font-size: 24px;
+    font-size: 50px;
     font-weight: bold;
     /* Applica l'animazione:
        - 'pulse' è il nome definito sopra
