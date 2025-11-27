@@ -1,13 +1,14 @@
 body {
       font-family: "Helvetica", sans-serif;
-      background: #fff;
-      color: #000;
+      background: #0d1a2f;
+      color: #fff;
       line-height: 1.6;
+      text-align: center;
     }
 .pulsante {
   display: inline-block; /* Rende il link un blocco per l'applicazione di padding/margini */
   padding: 10px 20px;
-  background-color: #007bff; /* Colore di sfondo blu */
+  background-color: #ff69b4; /* Colore di sfondo rosa shocking */
   color: white; /* Colore del testo bianco */
   text-decoration: none; /* Rimuove la sottolineatura tipica dei link */
   border-radius: 5px; /* Bordi arrotondati */
@@ -18,7 +19,7 @@ body {
 }
 
 .pulsante:hover {
-  background-color: #0056b3; /* Scurisce al passaggio del mouse */
+  background-color: #8a2be2; /* Scurisce al passaggio del mouse */
 }
 
 /* Definisco l'animazione di battito */
@@ -36,9 +37,10 @@ body {
 
 /* Applico l'animazione al testo */
 .pulsating-text {
-    font-size: 50px;
+    font-size: 100px;
     font-weight: bold;
     color: white; 
+    text-align: center;
     /* Applica l'animazione:
        - 'pulse' è il nome definito sopra
        - '1s' è la durata
