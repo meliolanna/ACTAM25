@@ -20,3 +20,31 @@ body {
 .pulsante:hover {
   background-color: #0056b3; /* Scurisce al passaggio del mouse */
 }
+
+/* Definisco l'animazione di battito */
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+        color: black;
+    } /* Stato iniziale */
+    50% {
+        transform: scale(1.05);
+        color: red;
+    } /* Stato di massima espansione/battito */
+    100% {
+        transform: scale(1);
+        color: black;
+    } /* Ritorno allo stato iniziale */
+}
+
+/* Applico l'animazione al testo */
+.pulsating-text {
+    font-size: 24px;
+    font-weight: bold;
+    /* Applica l'animazione:
+       - 'pulse' è il nome definito sopra
+       - '1s' è la durata
+       - 'ease-in-out' è la curva di velocità
+       - 'infinite' per ripeterla all'infinito */
+    animation: pulse 1s ease-in-out infinite;
+}
