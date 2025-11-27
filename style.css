@@ -27,6 +27,9 @@ body {
     0% {
         transform: scale(1);
     } /* Stato iniziale */
+    40% {
+        transform: scale(1);
+    } /* Stato iniziale */
     70% {
         transform: scale(1.05);
     } /* Stato di massima espansione/battito */
