@@ -25,15 +25,12 @@ body {
 @keyframes pulse {
     0% {
         transform: scale(1);
-        color: black;
     } /* Stato iniziale */
-    50% {
+    70% {
         transform: scale(1.05);
-        color: red;
     } /* Stato di massima espansione/battito */
     100% {
         transform: scale(1);
-        color: black;
     } /* Ritorno allo stato iniziale */
 }
 
@@ -41,10 +38,11 @@ body {
 .pulsating-text {
     font-size: 50px;
     font-weight: bold;
+    color: white; 
     /* Applica l'animazione:
        - 'pulse' è il nome definito sopra
        - '1s' è la durata
        - 'ease-in-out' è la curva di velocità
        - 'infinite' per ripeterla all'infinito */
-    animation: pulse 1s ease-in-out infinite;
+    animation: pulse 1.5s ease-in-out infinite;
 }
