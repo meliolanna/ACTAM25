@@ -13,6 +13,8 @@ body {
       color: white;
       line-height: 1.6;
       text-align: center;
+      align-items: center;
+      justify-content: center;
       font: var(--font-family);
     }
 
