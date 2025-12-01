@@ -1,6 +1,6 @@
 **BEAT THE BEAT**
 
-Marzola Pier Matteo, Melioli Anna Chiara, Tortorella Elena (e basta)
+UCETO : Marzola Pier Matteo, Melioli Anna Chiara, Tortorella Elena (e basta)
 
 Advanced Coding, Tools and Methodologies - A.Y. 2025/26
 Professors: Bruschi Francesco, Rana Vincenzo
