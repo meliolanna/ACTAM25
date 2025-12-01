@@ -18,7 +18,7 @@ body {
 .pulsante {
       display: inline-block; /* Rende il link un blocco per l'applicazione di padding/margini */
       padding: 1em 1.5am;
-      background-color: var(--pink)
+      background-color: var(--pink);
       color: white; /* Colore del testo bianco */
       text-decoration: none; /* Rimuove la sottolineatura tipica dei link */
       border-radius: 5px; /* Bordi arrotondati */
@@ -30,6 +30,13 @@ body {
 
 .pulsante:hover {
       background-color: var(--violet); /* Scurisce al passaggio del mouse */
+}
+
+.pulsante--verde {
+      background-color: var(--lime);
+}
+.pulsante--giallo {
+      background-color: var(--yellow);
 }
 
 /* Animazione di battito per il titolo */
