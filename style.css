@@ -9,6 +9,7 @@
 }
 
 body {
+      display: flex;
       background: var(--darkblue);
       color: white;
       line-height: 1.6;
@@ -17,6 +18,7 @@ body {
       justify-content: center;
       text-align: center;
       font: var(--font-family);
+      flex-direction: column;
     }
 
 .main-title {
@@ -39,6 +41,7 @@ body {
       gap: 1.5rem; /* Spazio tra i bottoni */
       width: 80%;
       max-width: 400px;
+      text-align: center;
   }
 
 .pulsante {
