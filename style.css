@@ -75,6 +75,7 @@ body {
 }
 
 .pulsating-text {
+      font: var(--font-family);
       font-size: 5rem;
       font-weight: bold;
       color: white; 
