@@ -22,7 +22,7 @@ body {
     }
 
 .main-title {
-      font-family: var(--font-family-title);
+      font-family: var(--font-family);
       font-size: 3em;
       margin-bottom: 0.5em;
       font-weight: 700;
@@ -55,7 +55,7 @@ body {
       border-radius: 0.5rem; /* Bordi arrotondati */
       border: none;
       cursor: pointer;
-      font: var(--font-family);
+      font-family: var(--font-family);
       font-size: 1.5rem;
 }
 .pulsante:hover {
@@ -92,7 +92,7 @@ body {
 }
 
 .pulsating-text {
-      font: var(--font-family);
+      font-family: var(--font-family);
       font-size: 5rem;
       font-weight: bold;
       color: white; 
