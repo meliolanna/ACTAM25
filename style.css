@@ -19,6 +19,19 @@ body {
       font: var(--font-family);
     }
 
+.main-title {
+      font-family: var(--font-family-title);
+      font-size: 3em;
+      margin-bottom: 0.5em;
+      font-weight: 700;
+}
+
+.subtitle {
+      font-size: 1.5em;
+      margin-bottom: 2em;
+      font-weight: 300;
+      opacity: 0.8;
+}
 
 .button-container {
       display: flex;
