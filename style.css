@@ -26,19 +26,19 @@ body {
   }
 
 .pulsante {
-      display: inline-block; /* Rende il link un blocco per l'applicazione di padding/margini */
-      padding: 1rem 1.5rem;
       --color: var(--pink);
       --colorhover: var(--violet);
+      display: inline-block; /* Rende il link un blocco per l'applicazione di padding/margini */
+      padding: 1rem 1.5rem;
       background-color: var(--color);
       color: white; /* Colore del testo bianco */
       text-decoration: none; /* Rimuove la sottolineatura tipica dei link */
       border-radius: 0.5rem; /* Bordi arrotondati */
       border: none;
       cursor: pointer;
+      font: var(--font-family);
       font-size: 1.5rem;
 }
-
 .pulsante:hover {
       background-color: var(--colorhover); /* Scurisce al passaggio del mouse */
 }
@@ -50,6 +50,10 @@ body {
 .pulsante--giallo {
       --color: var(--yellow);
       --colorhover: var(--pink);
+}
+.pulsante--viola {
+      --color: var(--violet);
+      --colorhover: var(--lime);
 }
 
 /* Animazione di battito per il titolo */
