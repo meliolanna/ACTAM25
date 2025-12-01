@@ -3,106 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rhythm Game Levels</title>
-    <link rel="stylesheet" href="style44.css">
-    <style>
-        /* Variabili per i colori */
-        :root {
-            --bg-color: #0d1a2f; /* Blu scuro */
-            --text-color: #f0f8ff; /* Azzurro chiaro */
-            --easy-color: #ffc700; /* Giallo brillante */
-            --medium-color: #ff69b4; /* Rosa Shocking (Hot Pink) */
-            --hard-color: #8a2be2; /* Blu-Viola (Blue Violet) */
-            --font-family-title: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-        }
-
-        /* Stile del corpo: Sfondo, Font base e Centratura */
-        body {
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            font-family: Arial, sans-serif;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            min-height: 100vh; /* Copre l'intera altezza della finestra */
-            margin: 0;
-            padding: 20px;
-            text-align: center;
-        }
-
-        /* Stile del titolo principale */
-        .main-title {
-            font-family: var(--font-family-title);
-            font-size: 3em;
-            margin-bottom: 0.5em;
-            font-weight: 700;
-        }
-
-        /* Stile del sottotitolo */
-        .subtitle {
-            font-size: 1.5em;
-            margin-bottom: 2em;
-            font-weight: 300;
-            opacity: 0.8;
-        }
-
-        /* Contenitore per i bottoni */
-        .button-container {
-            display: flex;
-            flex-direction: column;
-            gap: 1.5em; /* Spazio tra i bottoni */
-            width: 80%;
-            max-width: 400px;
-        }
-
-        /* Stile base per tutti i bottoni */
-        .level-btn {
-            padding: 15px 30px;
-            font-size: 1.2em;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            color: var(--bg-color); /* Testo scuro sui bottoni chiari */
-            transition: transform 0.2s, box-shadow 0.2s;
-            font-weight: bold;
-            text-transform: uppercase;
-        }
-
-        /* Effetto hover */
-        .level-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-        }
-
-        /* Colori specifici per i bottoni */
-        .btn-easy {
-            background-color: var(--easy-color); /* Giallo */
-        }
-
-        .btn-medium {
-            background-color: var(--medium-color); /* Rosa */
-        }
-
-        .btn-hard {
-            background-color: var(--hard-color); /* Viola */
-            color: var(--text-color); /* Testo chiaro sul viola scuro */
-        }
-
-    </style>
+    <title>Listen and Repeat Levels</title>
+    <link rel="stylesheet" href="style.css">
 </head>
+    
 <body>
     
     <h1 class="main-title">Listen and Repeat the Beat</h1>
-    
     <p class="subtitle">Choose your level:</p>
 
     <div class="button-container">
         <a href="44.html">
-            <button class="level-btn btn-easy" onclick="alert('Hai scelto Facile!')">Easy peasy</button>
+            <button class="pulsante pulsante--giallo">Easy peasy 🍋</button>
         </a>
-        <button class="level-btn btn-medium" onclick="alert('Hai scelto Medio!')">On my way</button>
-        <button class="level-btn btn-hard" onclick="alert('Hai scelto Difficile!')">On Fire</button>
+        <a href="44.html">
+            <button class="pulsante">On my way 🏃‍♂️</button>
+        </a>
+        <a href="44.html">
+            <button class="pulsante pulsante--viola">On Fire 🚀</button>
+        </a>
+        
     </div>
 
 </body>
