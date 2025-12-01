@@ -16,6 +16,15 @@ body {
       font: var(--font-family);
     }
 
+
+.button-container {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem; /* Spazio tra i bottoni */
+      width: 80%;
+      max-width: 400px;
+  }
+
 .pulsante {
       display: inline-block; /* Rende il link un blocco per l'applicazione di padding/margini */
       padding: 1rem 1.5rem;
