@@ -1,14 +1,24 @@
+:root {
+      /*colori plaette*/
+      --darkblue: #131138;
+      --lime: #baff24;
+      --pink: #ff498f;
+      --yellow: #f5ff33;
+      --violet: #a100d1;
+}
+
 body {
       font-family: "Helvetica", sans-serif;
-      background: #0d1a2f;
-      color: #fff;
+      background: var(darkblue);
+      color: white;
       line-height: 1.6;
       text-align: center;
     }
+
 .pulsante {
   display: inline-block; /* Rende il link un blocco per l'applicazione di padding/margini */
   padding: 10px 20px;
-  background-color: #ff69b4; /* Colore di sfondo rosa shocking */
+  background-color: var(--pink)
   color: white; /* Colore del testo bianco */
   text-decoration: none; /* Rimuove la sottolineatura tipica dei link */
   border-radius: 5px; /* Bordi arrotondati */
