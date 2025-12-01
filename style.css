@@ -6,11 +6,12 @@
       --yellow: #f5ff33;
       --violet: #a100d1;
       --font-family: Helvetica, Arial, sans-serif;
+      --sfondo: var(--darkblue);
 }
 
 body {
       display: flex;
-      background: var(--darkblue);
+      background: var(--sfondo);
       color: white;
       line-height: 1.6;
       text-align: center;
@@ -20,6 +21,18 @@ body {
       font: var(--font-family);
       flex-direction: column;
     }
+.pagina-verde {
+      --sfondo: var(--lime);
+}
+.pagina-rosa {
+      --sfondo: var(--pink);
+}
+.pagina-gialla {
+      --sfondo: var(--yellow);
+}
+.pagina-viola {
+      --sfondo: var(--violet);
+}
 
 .main-title {
       font-family: var(--font-family);
@@ -103,4 +116,13 @@ body {
        - 'ease-in-out' è la curva di velocità
        - 'infinite' per ripeterla all'infinito */
       animation: pulse 1.5s ease-in-out infinite;
+}
+
+.game-frame {
+  width: 10vw;
+  max-width: 95vw;
+  background: white;
+  border: 0.1rem solid var(--darkblue);
+  border-radius: 1rem;
+  padding: 1.5rem;
 }
