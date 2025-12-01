@@ -9,7 +9,7 @@
 
 body {
       font-family: "Helvetica", sans-serif;
-      background: var(darkblue);
+      background: var(--darkblue);
       color: white;
       line-height: 1.6;
       text-align: center;
