@@ -23,10 +23,9 @@ body {
       background-color: var(--color);
       color: white; /* Colore del testo bianco */
       text-decoration: none; /* Rimuove la sottolineatura tipica dei link */
-      border-radius: 5px; /* Bordi arrotondati */
+      border-radius: 0.5rem; /* Bordi arrotondati */
       border: none;
       cursor: pointer;
-      font-family: sans-serif;
       font-size: 1.5rem;
 }
 
