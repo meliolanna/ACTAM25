@@ -5,10 +5,10 @@
       --pink: #ff498f;
       --yellow: #f5ff33;
       --violet: #a100d1;
+      --font-family-title: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
 body {
-      font-family: "Helvetica", sans-serif;
       background: var(--darkblue);
       color: white;
       line-height: 1.6;
