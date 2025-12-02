@@ -1,6 +1,6 @@
-import { SoundScheduler, AudioManager } from './GameSounds.js'
-import { GameModel } from './GameModel.js'
-import {RhythmView }from '.RhythmView.js'
+import { SoundScheduler, AudioManager } from './GameSounds.js';
+import { GameModel } from './GameModel.js';
+import { RhythmView } from '.RhythmView.js';
 
 //--------------------------------------------------
 //  MINIGIOCO 1: 4 beat ascolto + 4 beat input
