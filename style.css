@@ -223,6 +223,7 @@ body {
 
 .hit-btn-big {
   font-family: var(--font-family);
+  color: var(--darkblue);
   padding: 18px 40px;
   font-size: 1.3rem;
   font-weight: bold;
