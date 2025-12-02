@@ -1,3 +1,10 @@
+@font-face {
+  font-family: 'PixelFont'; /* Scegli un nome per il tuo font */
+  src: url('minecraft.ttf') format('ttf');
+  font-weight: normal;
+  font-style: normal;
+}
+
 :root {
       /*colori plaette*/
       --darkblue: #131138;
@@ -5,7 +12,7 @@
       --pink: #ff498f;
       --yellow: #f5ff33;
       --violet: #a100d1;
-      --font-family: Helvetica, Arial, sans-serif;
+      --font-family: 'PixelFont', Arial, sans-serif;
       --sfondo: var(--darkblue);
 }
 
