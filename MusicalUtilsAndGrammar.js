@@ -2,16 +2,14 @@
  * FUNZIONI VARIE CHE SERVONO SEMPRE PER GENERARE LE FRASI MUSICALI *
  ****************************************************************** */ 
 
-// Millisecondi per minuto (se ti servisse)
 const MS_PER_MINUTE = 60000;
 
 const DURATION_MAP = {
-  m: 1.0,    // semibreve
-  h: 0.5,    // minima
-  q: 0.25,   // semiminima
-  o: 0.125,   // croma
-  tq: 2/3,   // terzina di semiminime
-  to: 1/3    // terzina di crome
+  m: 1.0,   // semibreve (intera battuta 4/4)
+  h: 0.5,   // minima
+  q: 0.25,  // semiminima
+  o: 0.125  // croma
+  
 };
 
 /* Ritorna un elemento casuale da un array */
@@ -21,14 +19,14 @@ function getRandomElement(arr) {
   return arr[randomIndex];
 }
 
-/* Ritorna un indice casuale dalla lista di indici */
+/*  Ritorna un indice casuale dalla lista di indici */
 function getRandomIndex(arr) {
   if (!arr || arr.length === 0) return null;
   const randomIndex = Math.floor(Math.random() * arr.length);
   return arr[randomIndex];
 }
 
-/* Converte simboli ('q','h', ecc.) in frazioni (rispetto alla battuta intera) */
+/*  Converte simboli ('q','h', ecc.) in frazioni (rispetto alla battuta intera) */
 function convertSymbolsToFractions(symbolSequence, durationMap = DURATION_MAP) {
   const fractionalSequence = symbolSequence.map(symbol => {
     const fraction = durationMap[symbol];
@@ -43,7 +41,7 @@ function convertSymbolsToFractions(symbolSequence, durationMap = DURATION_MAP) {
   return fractionalSequence;
 }
 
-/* Converte frazioni in durate in SECONDI usando i BPM. */
+/*  Converte frazioni in durate in SECONDI usando i BPM. */
 function convertFractionsToSeconds(fractionalSequence, bpm) {
   if (bpm <= 0) {
     console.error("BPM deve essere maggiore di zero.");
@@ -63,30 +61,27 @@ function convertFractionsToSeconds(fractionalSequence, bpm) {
   return secondsSequence;
 }
 
-
-/* *****************************************
- * GRAMMATICHE DIVERSE PER LIVELLI DIVERSI *
- ***************************************** */ 
+// ----------------------
+// GRAMMATICA
+// ----------------------
 
 // M = misura intera (4/4)
 // H = gruppo da 2 beat (mezza misura)
 // B = gruppo da 1 beat (un quarto di misura)
 // E = gruppo da mezzo beat (ottavo)
 
-export const DEFAULT_GRAMMAR = { // per ora una sola, implementabili più grammatiche per i livelli diversi?
+export const DEFAULT_GRAMMAR = { //l'anna ha già tolto le cose ridondanti
   // Misura 4/4
   M: [
     ["H", "H"],            // 2 beat + 2 beat
-    ["H", "B", "B"],       // 2 beat + 1 beat + 1 beat
-    ["B", "H", "B"],       // 1 beat + 2 beat + 1 beat
-    ["B", "B", "H"],       // 1 beat + 1 beat + 2 beat
-    ["B", "B", "B", "B"]   // 1+1+1+1 (quattro gruppi da 1 beat)
+    ["B", "h", "B"],       // 1 beat + 2 beat + 1 beat
   ],
 
   // Gruppo da 2 beat
   H: [
     "h",                   // minima (2 beat)
     ["B", "B"]             // due blocchi da 1 beat
+    //,["E", "q", "E"]        // se vogliamo aggiungere la sincope (Ann)
   ],
 
   // Gruppo da 1 beat
@@ -100,10 +95,6 @@ export const DEFAULT_GRAMMAR = { // per ora una sola, implementabili più gramma
     "o"                    // ottavo
   ]
 };
-
-/* **********************************************
- * CLASSE PER APPLICARE LA GRAMMATICA ALLE COSE *
- ********************************************** */ 
 
 export class GrammarSequence {
   constructor(grammar = DEFAULT_GRAMMAR) {
@@ -157,4 +148,34 @@ export class GrammarSequence {
 
     return this.sequence;
   }
+}
+
+/**
+ * Utility per creare una "partitura" grafica generica
+ * note = array di simboli (es. ["q","q","h"...])
+ * durationsSec = durate tra un colpo e il successivo (IN SECONDI)
+ * ritorna un array di:
+ * { offset: 0..1, duration: 0..1, type: "q"/"h"/"o"/... }
+ */
+export function buildNotationPattern(symbols, durationsSec) {
+  const totalDurationSec = durationsSec.reduce((a, b) => a + b, 0) || 1;
+  const pattern = [];
+
+  let t = 0;
+  for (let i = 0; i < symbols.length; i++) {
+    const onsetSec = t;
+    const dur = durationsSec[i] || 0;
+    const offset = onsetSec / totalDurationSec;
+    const fracDur = dur / totalDurationSec;
+
+    pattern.push({
+      offset: offset,     // dove parte (0..1)
+      duration: fracDur,  // quanto "vale" (0..1) - utile per futuri sviluppi
+      type: symbols[i]    // es. "q", "h", "o"
+    });
+
+    t += dur;
+  }
+
+  return pattern;
 }
