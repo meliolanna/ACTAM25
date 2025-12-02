@@ -131,7 +131,7 @@ body {
       width: 60vw;
       max-width: 95vw;
       background: white;
-      border: 0.1rem solid var(--darkblue);
+      border: 1rem solid var(--darkblue);
       border-radius: 1rem;
       padding: 1.5rem;
 }
@@ -175,6 +175,7 @@ body {
   margin: 0 auto;
   border-radius: 999px;
   position: relative;
+  margin-bottom: 2rem;
 }
 .measure-tick {
   width: 2px;
@@ -191,7 +192,7 @@ body {
 
 /* PLAYER PANEL */
 .player-panel {
-  border: 3px solid #000;
+  border: 3px solid var(--darkblue);
   border-radius: 18px;
   padding: 20px;
   display: flex;
