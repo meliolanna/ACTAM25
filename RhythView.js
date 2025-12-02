@@ -10,6 +10,7 @@ export class RhythmView {
     this.bpmEl = document.getElementById("bpmDisplay");
     this.roundEl = document.getElementById("roundDisplay");
     this.lifeContainer = document.getElementById("lifeContainer");
+    this.notationStaff = document.getElementById("notationStaff");
 
     this.lifeLabel = document.createElement("div");
     this.lifeLabel.style.fontSize = "0.8rem";
@@ -52,5 +53,42 @@ export class RhythmView {
   flashWrong() {
     this.hitBtn.classList.add("hit-btn-big--wrong");
     setTimeout(() => this.hitBtn.classList.remove("hit-btn-big--wrong"), 200);
+  }
+
+  clearNotation() {
+    if (!this.notationStaff) return;
+    this.notationStaff.innerHTML = "";
+  }
+
+  /**
+   * pattern = [{ offset: 0..1, duration: 0..1, type: "q"/"h"/"o"/... }, ...]
+   */
+  renderNotation(pattern) {
+    if (!this.notationStaff) return;
+    this.clearNotation();
+
+    pattern.forEach(note => {
+      const noteEl = document.createElement("div");
+      const typeSymbol = note.type || "q";
+
+      noteEl.className = `note note--${typeSymbol}`;
+      noteEl.style.left = (note.offset * 100) + "%";
+      noteEl.dataset.type = typeSymbol;
+
+      const head = document.createElement("div");
+      head.className = "note-head";
+
+      const stem = document.createElement("div");
+      stem.className = "note-stem";
+
+      const flag = document.createElement("div");
+      flag.className = "note-flag";
+
+      noteEl.appendChild(head);
+      noteEl.appendChild(stem);
+      noteEl.appendChild(flag);
+
+      this.notationStaff.appendChild(noteEl);
+    });
   }
 }
