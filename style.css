@@ -1,6 +1,6 @@
 @font-face {
   font-family: 'PixelFont'; /* Scegli un nome per il tuo font */
-  src: url('Minecraft.ttf') format('ttf');
+  src: url('./Minecraft.ttf') format('ttf');
   font-weight: normal;
   font-style: normal;
 }
@@ -14,6 +14,7 @@
       --violet: #a100d1;
       --font-family: 'PixelFont', Arial, sans-serif;
       --sfondo: var(--darkblue);
+      font: var(--font-family);
 }
 
 body {
