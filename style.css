@@ -198,6 +198,7 @@ body {
 
 .status-text {
   min-height: 40px;
+      color: var(--violet);
 }
 
 /* HIT BUTTON */
