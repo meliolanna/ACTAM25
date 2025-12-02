@@ -73,7 +73,7 @@ function convertFractionsToSeconds(fractionalSequence, bpm) {
 // B = gruppo da 1 beat (un quarto di misura)
 // E = gruppo da mezzo beat (ottavo)
 
-const DEFAULT_GRAMMAR = { // per ora una sola, implementabili più grammatiche per i livelli diversi?
+export const DEFAULT_GRAMMAR = { // per ora una sola, implementabili più grammatiche per i livelli diversi?
   // Misura 4/4
   M: [
     ["H", "H"],            // 2 beat + 2 beat
@@ -105,7 +105,7 @@ const DEFAULT_GRAMMAR = { // per ora una sola, implementabili più grammatiche p
  * CLASSE PER APPLICARE LA GRAMMATICA ALLE COSE *
  ********************************************** */ 
 
-class GrammarSequence {
+export class GrammarSequence {
   constructor(grammar = DEFAULT_GRAMMAR) {
     this.grammar = grammar;
     this.grammarKeys = Object.keys(this.grammar);
