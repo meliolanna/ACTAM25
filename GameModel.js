@@ -1,7 +1,7 @@
 //--------------------------------------------------
 //  GAME MODEL non ho capito cos'è
 //--------------------------------------------------
-class GameModel {
+export class GameModel {
   constructor() {
     this.maxLives = 3;
     this.lives = this.maxLives;
