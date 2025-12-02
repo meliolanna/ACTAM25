@@ -1,6 +1,6 @@
 @font-face {
   font-family: 'PixelFont'; /* Scegli un nome per il tuo font */
-  src: url('Minecraft.ttf') format('truetype');
+  src: url('/fonts/Minecraft.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
 }
