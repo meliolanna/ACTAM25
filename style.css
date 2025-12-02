@@ -50,6 +50,7 @@ body {
 }
 
 .subtitle {
+      font-family: var(--font-family);
       font-size: 1.5em;
       margin-bottom: 2em;
       font-weight: 300;
@@ -131,18 +132,20 @@ body {
       width: 60vw;
       max-width: 95vw;
       background: white;
-      border: 1rem solid var(--darkblue);
+      border: 0.3rem solid var(--darkblue);
       border-radius: 1rem;
       padding: 1.5rem;
 }
 
 .game-title {
+      font-family: var(--font-family);
       text-align: center;
       font-size: 3rem;
       color: var(--darkblue);
       margin-bottom: 0.5rem;
 }
 .game-subtitle {
+      font-family: var(--font-family);
       text-align: center;
       color: var(--darkblue);
       margin-bottom: 0.5rem;
@@ -200,14 +203,16 @@ body {
   gap: 18px;
 }
 .player-panel-title {
+  font-family: var(--font-family);
   font-size: 1rem;
   color: var(--violet);
   text-transform: uppercase;
 }
 
 .status-text {
+  font-family: var(--font-family);
   min-height: 40px;
-      color: var(--violet);
+  color: var(--violet);
 }
 
 /* HIT BUTTON */
@@ -217,6 +222,7 @@ body {
 }
 
 .hit-btn-big {
+  font-family: var(--font-family);
   padding: 18px 40px;
   font-size: 1.3rem;
   font-weight: bold;
@@ -241,6 +247,7 @@ body {
 
 /* VITE */
 .life-display {
+  font-family: var(--font-family);
   text-align: center;
   font-size: 2rem;
   min-height: 40px;
@@ -263,6 +270,7 @@ body {
 }
 
 .info-row {
+  font-family: var(--font-family);
   display: flex;
   justify-content: space-between;
   font-size: 0.85rem;
@@ -279,6 +287,7 @@ body {
 }
 
 .start-btn {
+  font-family: var(--font-family);
   padding: 12px 28px;
   background: var(--pink);
   border: 3px solid white;
