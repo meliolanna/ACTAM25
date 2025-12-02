@@ -159,6 +159,7 @@ body {
   box-shadow: 0 0 10px var(--lime);
 }
 
+/* measure*/
 .measure-line {
   height: 4px;
   background: var(--darkblue);
@@ -189,10 +190,9 @@ body {
   flex-direction: column;
   gap: 18px;
 }
-
 .player-panel-title {
-  font-size: 0.8rem;
-  color: var(--muted);
+  font-size: 1rem;
+  color: var(--violet);
   text-transform: uppercase;
 }
 
@@ -271,7 +271,7 @@ body {
 .start-btn {
   padding: 12px 28px;
   background: var(--pink);
-  border: 3px solid #000;
+  border: 3px solid white;
   border-radius: 999px;
   color: white;
   font-size: 1.2rem;
