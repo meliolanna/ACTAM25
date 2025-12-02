@@ -1,5 +1,6 @@
 # **BEAT THE BEAT**
 *Advanced Coding, Tools and Methodologies - A.Y. 2025/26*
+
 *Professors: Bruschi Francesco, Rana Vincenzo*
 
 Final project by UCETO
