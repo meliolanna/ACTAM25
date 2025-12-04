@@ -2,9 +2,9 @@
  * FUNZIONI VARIE CHE SERVONO SEMPRE PER GENERARE LE FRASI MUSICALI *
  ****************************************************************** */ 
 
-const MS_PER_MINUTE = 60000;
+export const MS_PER_MINUTE = 60000;
 
-const DURATION_MAP = {
+export const DURATION_MAP = {
   m: 1.0,   // semibreve (intera battuta 4/4)
   h: 0.5,   // minima
   q: 0.25,  // semiminima
@@ -13,21 +13,21 @@ const DURATION_MAP = {
 };
 
 /* Ritorna un elemento casuale da un array */
-function getRandomElement(arr) {
+export function getRandomElement(arr) {
   if (!arr || arr.length === 0) return null;
   const randomIndex = Math.floor(Math.random() * arr.length);
   return arr[randomIndex];
 }
 
 /*  Ritorna un indice casuale dalla lista di indici */
-function getRandomIndex(arr) {
+export function getRandomIndex(arr) {
   if (!arr || arr.length === 0) return null;
   const randomIndex = Math.floor(Math.random() * arr.length);
   return arr[randomIndex];
 }
 
 /*  Converte simboli ('q','h', ecc.) in frazioni (rispetto alla battuta intera) */
-function convertSymbolsToFractions(symbolSequence, durationMap = DURATION_MAP) {
+export function convertSymbolsToFractions(symbolSequence, durationMap = DURATION_MAP) {
   const fractionalSequence = symbolSequence.map(symbol => {
     const fraction = durationMap[symbol];
 
@@ -42,7 +42,7 @@ function convertSymbolsToFractions(symbolSequence, durationMap = DURATION_MAP) {
 }
 
 /*  Converte frazioni in durate in SECONDI usando i BPM. */
-function convertFractionsToSeconds(fractionalSequence, bpm) {
+export function convertFractionsToSeconds(fractionalSequence, bpm) {
   if (bpm <= 0) {
     console.error("BPM deve essere maggiore di zero.");
     return [];

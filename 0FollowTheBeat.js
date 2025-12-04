@@ -1,11 +1,9 @@
-import { SoundScheduler, AudioManager } from './GameSounds.js';
-import { GameModel } from './GameModel.js';
-import { RhythmView } from '.RhythmView.js';
+import { convertSymbolsToFractions,  convertFractionsToSeconds, buildNotationPattern } from './MusicalUtilsAndGrammar.js'
 
 //--------------------------------------------------
 //  MINIGIOCO 1: 4 beat ascolto + 4 beat input
 //--------------------------------------------------
-class FourBeatsMetronomeMiniGame {
+export class FourBeatsMetronomeMiniGame {
   constructor() {
     this.id = "4beats_metronome";
     this.name = "4 Beat Hit";

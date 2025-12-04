@@ -1,154 +1,189 @@
 @font-face {
   font-family: 'PixelFont'; /* Scegli un nome per il tuo font */
-  src: url('/fonts/Minecraft.ttf') format('truetype');
+  src: url('./fonts/Minecraft.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
 }
 
 :root {
-      /*colori plaette*/
-      --darkblue: #131138;
-      --lime: #84EB16; /*baff24;*/
-      --pink: #ff498f;
-      --yellow: #f5ff33;
-      --violet: #a100d1;
-      --font-family: 'PixelFont', Arial, sans-serif;
-      --sfondo: var(--darkblue);
-      font: var(--font-family);
+  /*colori plaette*/
+  --darkblue: #131138;
+  --lime: #84EB16; /*baff24;*/
+  --pink: #ff498f;
+  --yellow: #f5ff33;
+  --violet: #a100d1;
+  --font-family: 'PixelFont', Arial, sans-serif;
+  --sfondo: var(--darkblue);
+  font: var(--font-family);
 }
 
 body {
-      display: flex;
-      background: var(--sfondo);
-      color: white;
-      line-height: 1.6;
-      text-align: center;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      font: var(--font-family);
-      flex-direction: column;
+  display: flex;
+  background: var(--sfondo);
+  color: white;
+  line-height: 1.6;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font: var(--font-family);
+  flex-direction: column;
     }
 .pagina-verde {
-      --sfondo: var(--lime);
+  --sfondo: var(--lime);
 }
 .pagina-rosa {
-      --sfondo: var(--pink);
+  --sfondo: var(--pink);
 }
 .pagina-gialla {
-      --sfondo: var(--yellow);
+  --sfondo: var(--yellow);
 }
 .pagina-viola {
-      --sfondo: var(--violet);
+  --sfondo: var(--violet);
 }
 
 .main-title {
-      font-family: var(--font-family);
-      font-size: 3em;
-      margin-bottom: 0.5em;
-      font-weight: 700;
+  font-family: var(--font-family);
+  font-size: 3em;
+  margin-bottom: 0.5em;
+  font-weight: 700;
 }
 
 .subtitle {
-      font-family: var(--font-family);
-      font-size: 1.5em;
-      margin-bottom: 2em;
-      font-weight: 300;
-      opacity: 0.8;
+  font-family: var(--font-family);
+  font-size: 1.5em;
+  margin-bottom: 2em;
+  font-weight: 300;
+  opacity: 0.8;
 }
 
 .button-container {
-      display: flex;
-      flex-direction: column;
-      gap: 1.5rem; /* Spazio tra i bottoni */
-      width: 80%;
-      max-width: 400px;
-      text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem; /* Spazio tra i bottoni */
+  width: 80%;
+  max-width: 400px;
+  text-align: center;
   }
 
 .pulsante {
-      --color: var(--pink);
-      --colorhover: var(--violet);
-      display: inline-block; /* Rende il link un blocco per l'applicazione di padding/margini */
-      padding: 1rem 1.5rem;
-      background-color: var(--color);
-      color: white; /* Colore del testo bianco */
-      text-decoration: none; /* Rimuove la sottolineatura tipica dei link */
-      border-radius: 0.5rem; /* Bordi arrotondati */
-      border: none;
-      cursor: pointer;
-      font-family: var(--font-family);
-      font-size: 1.5rem;
+  --color: var(--pink);
+  --colorhover: var(--violet);
+  display: inline-block; /* Rende il link un blocco per l'applicazione di padding/margini */
+  padding: 1rem 1.5rem;
+  background-color: var(--color);
+  color: white; /* Colore del testo bianco */
+  text-decoration: none; /* Rimuove la sottolineatura tipica dei link */
+  border-radius: 0.5rem; /* Bordi arrotondati */
+  border: none;
+  cursor: pointer;
+  font-family: var(--font-family);
+  font-size: 1.5rem;
 }
 .pulsante:hover {
-      background-color: var(--colorhover); /* Scurisce al passaggio del mouse */
+  background-color: var(--colorhover); /* Scurisce al passaggio del mouse */
 }
 
 .pulsante--verde {
-      --color: var(--lime);
-      --colorhover: var(--yellow);
+  --color: var(--lime);
+  --colorhover: var(--yellow);
 }
 .pulsante--giallo {
-      --color: var(--yellow);
-      --colorhover: var(--pink);
+  --color: var(--yellow);
+  --colorhover: var(--pink);
 }
 .pulsante--viola {
-      --color: var(--violet);
-      --colorhover: var(--lime);
+  --color: var(--violet);
+  --colorhover: var(--lime);
 }
+
+.gigacontainer {
+  display: inline-block;
+}
+
+.gigapulsante {
+  --color: var(--lime);
+  display: inline-block; /* Rende il link un blocco per l'applicazione di padding/margini */
+  padding: 1rem 1.5rem;
+  background-color: white;
+  color: var(--color); /* Colore del testo bianco */
+  text-decoration: none; /* Rimuove la sottolineatura tipica dei link */
+  border-radius: 0.5rem; /* Bordi arrotondati */
+  border: 0.3rem solid var(--color);
+  cursor: pointer;
+  font-family: var(--font-family);
+  font-size: 2rem;
+  width: 12rem;
+  height: 16rem;
+  margin-left: 3rem;
+  margin-right: 3rem;
+}
+
+.gigapulsante:hover {
+  background-color: var(--color); 
+  border: 0.3rem solid white;
+  color: white;
+}
+.gigapulsante--rosa {
+  --color: var(--pink);
+}
+.gigapulsante--viola {
+  --color: var(--violet);
+}
+
 
 /* Animazione di battito per il titolo */
 @keyframes pulse {
-      0% {
-        transform: scale(1);
-      } /* Stato iniziale */
-      40% {
-        transform: scale(1);
-      } /* Inizio espansione */
-      70% {
-        transform: scale(1.05);
-      } /* Stato di massima espansione/battito */
-      100% {
-        transform: scale(1);
-      } /* Ritorno allo stato iniziale */
+  0% {
+    transform: scale(1);
+  } /* Stato iniziale */
+  40% {
+    transform: scale(1);
+  } /* Inizio espansione */
+  70% {
+    transform: scale(1.05);
+  } /* Stato di massima espansione/battito */
+  100% {
+    transform: scale(1);
+  } /* Ritorno allo stato iniziale */
 }
 
 .pulsating-text {
-      font-family: var(--font-family);
-      font-size: 5rem;
-      font-weight: bold;
-      color: white; 
-      text-align: center;
-      /* Applica l'animazione:
-       - 'pulse' è il nome definito sopra
-       - '1s' è la durata
-       - 'ease-in-out' è la curva di velocità
-       - 'infinite' per ripeterla all'infinito */
-      animation: pulse 1.5s ease-in-out infinite;
+  font-family: var(--font-family);
+  font-size: 5rem;
+  font-weight: bold;
+  color: white; 
+  text-align: center;
+  /* Applica l'animazione:
+    - 'pulse' è il nome definito sopra
+    - '1s' è la durata
+    - 'ease-in-out' è la curva di velocità
+    - 'infinite' per ripeterla all'infinito */
+  animation: pulse 1.5s ease-in-out infinite;
 }
 
 /* GAME PART */ 
 .game-frame {
-      width: 60vw;
-      max-width: 95vw;
-      background: white;
-      border: 0.3rem solid var(--darkblue);
-      border-radius: 1rem;
-      padding: 1.5rem;
+  width: 60vw;
+  max-width: 95vw;
+  background: white;
+  border: 0.3rem solid var(--darkblue);
+  border-radius: 1rem;
+  padding: 1.5rem;
 }
 
 .game-title {
-      font-family: var(--font-family);
-      text-align: center;
-      font-size: 3rem;
-      color: var(--darkblue);
-      margin-bottom: 0.5rem;
+  font-family: var(--font-family);
+  text-align: center;
+  font-size: 3rem;
+  color: var(--darkblue);
+  margin-bottom: 0.5rem;
 }
 .game-subtitle {
-      font-family: var(--font-family);
-      text-align: center;
-      color: var(--darkblue);
-      margin-bottom: 0.5rem;
+  font-family: var(--font-family);
+  text-align: center;
+  color: var(--darkblue);
+  margin-bottom: 0.5rem;
 }
 
 /* LED */
@@ -156,6 +191,7 @@ body {
   display: flex;
   gap: 1rem;
   justify-content: center;
+  margin-top: 2rem;
   margin-bottom: 0.5rem;
 }
 .led {
@@ -170,27 +206,114 @@ body {
   box-shadow: 0 0 10px var(--lime);
 }
 
-/* measure*/
-.measure-line {
-  height: 4px;
-  background: var(--darkblue);
-  width: 240px;
-  margin: 0 auto;
-  border-radius: 999px;
+
+/* PANNELLO NOTAZIONE */
+.notation-panel {
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+.notation-label {
+  font-family: var(--font-family);
+  font-size: 0.75rem;
+  color: var(--darkblue);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.notation-staff {
   position: relative;
-  margin-bottom: 2rem;
-}
-.measure-tick {
-  width: 2px;
-  height: 12px;
-  background: var(--darkblue);
+  width: 260px;
+  height: 60px;
+  border-radius: 14px;
+  border: 2px solid var(--darkblue);
+  background: #f0f0f0;
+  overflow: hidden;
+} /* linea centrale tipo rigo / divisione beat */
+.notation-staff::before {
+  content: "";
   position: absolute;
-  top: -4px;
+  left: 0;
+  right: 0;
+  top: 50%;
+  height: 2px;
+  background: var(--darkblue);
+  transform: translateY(-50%);
+} /* guide dei beat (allineate ai LED) */
+.notation-staff::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: linear-gradient(
+    to right,
+    rgba(0, 0, 0, 0.1) 1px,
+    transparent 1px
+  );
+  background-size: calc(100% / 4) 100%;
+  pointer-events: none;
+} 
+
+/* NOTAZIONE: note disegnate in CSS, niente Unicode strano */
+.note {
+  position: absolute;
+  bottom: 8px;
+  width: 22px;
+  height: 34px;
+  transform: translateX(calc(-50% + 8px));
+} /* Testo di debug (se vuoi vederlo): */ /* .note::after { content: attr(data-type); position: absolute; bottom: -12px; font-size: 0.6rem; color: #555; left: 50%; transform: translateX(-50%); } */
+.note-head {
+  position: absolute;
+  bottom: 0;
+  left: 5px;
+  width: 12px;
+  height: 9px;
+  border-radius: 50%;
+  border: 2px solid var(--darkblue);
+  background: var(--darkblue); /* piena di default (semiminima / croma) */
+} /* Minima (non riempita) */
+.note--h .note-head {
+  background: #f0f0f0;
+} /* Intera (solo come esempio, se la usi) */
+.note--m .note-head {
+  background: #f0f0f0;
+  width: 14px;
+  height: 8px;
+  border-radius: 999px;
+} /* Gambo */
+.note-stem {
+  position: absolute;
+  bottom: 8px;
+  left: 15px;
+  width: 2px;
+  height: 22px;
+  background: var(--darkblue);
+} /* niente gambo per la nota intera */
+.note--m .note-stem {
+  display: none;
+} /* Bandierina (ottavo – croma) */
+.note-flag {
+  display: none;
+  position: absolute;
+  top: 3px;
+  left: 15px;
+  width: 10px;
+  height: 10px;
+  border-top: 2px solid var(--darkblue);
+  border-right: 2px solid var(--darkblue);
+  border-radius: 0 8px 0 0;
+  transform-origin: left bottom;
+  transform: rotate(25deg);
+} /* Attiva bandierina per l'ottavo (o) */
+.note--o .note-flag {
+  display: block;
+} /* Layout principale */
+.layout-main {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 20px;
+  margin-top: 25px;
 }
-.measure-tick:nth-child(1) { left: 0; }
-.measure-tick:nth-child(2) { left: 33%; }
-.measure-tick:nth-child(3) { left: 66%; }
-.measure-tick:nth-child(4) { right: 0; }
 
 
 /* PLAYER PANEL */
@@ -304,6 +427,15 @@ body {
 }
 
 .small-note {
+  font-family: var(--font-family);
   font-size: 0.75rem;
   color: var(--darkblue);
 }
+
+
+.pixel-art {
+        width: 10rem;
+        height: 10rem;
+        image-rendering: pixelated; 
+        image-rendering: -moz-crisp-edges; /* Per Firefox */
+    }

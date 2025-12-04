@@ -1,14 +1,13 @@
 import { SoundScheduler, AudioManager } from './GameSounds.js';
-import { GameModel } from './GameModel.js';
-import {RhythmView } from './RhythmView.js';
-import { DEFAULT_GRAMMAR, GrammarSequence } from  './MusicalUtilsAndGrammar';
+import { GrammarSequence, convertSymbolsToFractions,  
+  convertFractionsToSeconds, buildNotationPattern } from  './MusicalUtilsAndGrammar.js';
 
 
 // --------------------------------------------------
 // MINIGIOCO 2: il computer suona un pattern, tu lo ripeti
 //  (versione time-based, compatibile con ottavi / pattern complessi)
 // --------------------------------------------------
-class PatternRepeatMiniGame {
+export class PatternRepeatMiniGame {
   constructor(audioManager) {
     this.audioManager = audioManager;
     

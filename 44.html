@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="style.css">
   </head>
 
-  <body class="pagina-verde">
+  <body class="pagina-viola">
     
     <div class="game-frame">
     <h1 class="game-title">Follow the beat</h1>
@@ -22,11 +22,10 @@
           <div class="led" data-index="2"></div>
           <div class="led" data-index="3"></div>
         </div>
-        <div class="measure-line">
-          <div class="measure-tick"></div>
-          <div class="measure-tick"></div>
-          <div class="measure-tick"></div>
-          <div class="measure-tick"></div>
+        <!-- Riquadro grafico per il ritmo -->
+        <div class="notation-panel">
+          <div class="notation-label">Rhythmic pattern</div>
+          <div class="notation-staff" id="notationStaff"></div>
         </div>
       </div>
     </div>
@@ -64,7 +63,7 @@
       </aside>
     </div>
   </div>
-    <script src="primo.js"></script>
+    <script type="module" src="main.js"></script>
   </body>
   
 </html>

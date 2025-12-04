@@ -1,17 +1,14 @@
-import { SoundScheduler, AudioManager } from './GameSounds.js';
-import { GameModel } from './GameModel.js';
-import {RhythmView } from './RhythmView.js';
-import { DEFAULT_GRAMMAR, GrammarSequence } from  './MusicalUtilsAndGrammar';
+import { GrammarSequence, convertSymbolsToFractions,  convertFractionsToSeconds, buildNotationPattern } from  './MusicalUtilsAndGrammar.js';
 
 // -------------------------------------------------
 //     MINIGIOCO 3: Leggi il ritmo e riproducilo
 // -------------------------------------------------
-class ReadAndPlayMiniGame {
+export class ReadAndPlayMiniGame {
   constructor() {
     this.id = "read_and_play";
     this.name = "Leggi e Suona";
 
-    this.totalBeats = 8;              // 4 lettura + 4 input
+    this.totalBeats = 8;      // 4 lettura + 4 input
     this.timingWindowFraction = 0.20; // ±20% della durata del beat
 
     this.beatIndex = 0;

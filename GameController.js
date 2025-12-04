@@ -3,7 +3,7 @@
 //--------------------------------------------------
 //  CONTROLLER
 //--------------------------------------------------
-class GameController {
+export class GameController {
   constructor(model, view, audio) {
     this.model = model;
     this.view = view;
@@ -53,7 +53,7 @@ class GameController {
       this.view.clearNotation();
     }
 
-    this.view.setStatus("Ascolta i 4 beat…");
+    this.view.setStatus("Listen to the 4 beats...");
 
     if (this.timerId) clearInterval(this.timerId);
 
@@ -81,9 +81,9 @@ class GameController {
           this.audio.click();
 
           if (phase === "listen" && beatIndex === 0) {
-            this.view.setStatus("Ascolta i 4 beat…");
+            this.view.setStatus("Listen to the 4 beats…");
           } else if (phase === "input" && beatIndex === 4) {
-            this.view.setStatus("Ora ripeti il ritmo!");
+            this.view.setStatus("Now repeat the rhythm!");
           }
           break;
         }
@@ -99,13 +99,13 @@ class GameController {
             const gameOver = this.model.loseLife();
             this.view.renderLives(this.model.lives);
             if (gameOver) {
-              this.view.setStatus("Missata! Game Over");
+              this.view.setStatus("Beat missed! Game Over");
               this.view.flashWrong();
               this.stopGameOver();
               return;
             }
           }
-          this.view.setStatus("Missata!");
+          this.view.setStatus("Beat missed!");
           this.view.flashWrong();
           break;
         }
@@ -180,9 +180,9 @@ class GameController {
 
     if (res.type === "timingError") {
       const reason = res.payload.reason;
-      if (reason === "early") this.view.setStatus("Troppo presto!");
-      else if (reason === "late") this.view.setStatus("Troppo tardi!");
-      else this.view.setStatus("Errore!");
+      if (reason === "early") this.view.setStatus("Too early!");
+      else if (reason === "late") this.view.setStatus("Too late!");
+      else this.view.setStatus("Error!");
 
       if (!this.roundLifeLost) {
         this.roundLifeLost = true;
@@ -201,28 +201,9 @@ class GameController {
 
   stopGameOver() {
     if (this.timerId) clearInterval(this.timerId);
-    this.view.setStatus("Game Over – premi START per ricominciare");
+    this.view.setStatus("Game Over – press START to play again");
     this.view.enableStart(true);
   }
 }
 
-//--------------------------------------------------
-//  BOOTSTRAP
-//--------------------------------------------------
-window.addEventListener("load", () => {
-  const audio = new AudioManager();
-  const model = new GameModel();
-  const view = new RhythmView();
-  const controller = new GameController(model, view, audio);
 
-  // Attiva i minigiochi che vuoi usare.
-  // Minigioco 1: allineamento sul metronomo 4/4
-  model.addMiniGame(new FourBeatsMetronomeMiniGame());
-
-  // Minigioco 2: pattern casuale da ripetere
-  model.addMiniGame(new PatternRepeatMiniGame(audio));
-  
-  model.addMiniGame(new ReadAndPlayMiniGame());
-
-  view.setStatus("Premi START per cominciare");
-});
