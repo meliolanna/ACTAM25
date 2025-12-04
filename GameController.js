@@ -173,7 +173,7 @@ export class GameController {
     this.audio.hitSound();
 
     if (res.type === "perfect") {
-      this.view.setStatus("Perfetto!");
+      this.view.setStatus("Perfect!");
       this.view.flashCorrect();
       return;
     }
@@ -205,5 +205,6 @@ export class GameController {
     this.view.enableStart(true);
   }
 }
+
 
 
