@@ -25,6 +25,8 @@ export class PatternRepeatMiniGame {
 
     this.expectedHits = [];           // [{ timeMs, segmentIndex, matched }]
     this.inputStartTimeMs = null;     // t0 della battuta di input (performance.now)
+
+    this.notationPattern = [];
   }
 
   generatePattern(bpm) {
@@ -75,6 +77,9 @@ export class PatternRepeatMiniGame {
         matched: false
       };
     });
+
+    // pattern grafico per il riquadro
+    this.notationPattern = buildNotationPattern(this.symbolSequence, durationsSec);
   }
 
   startRound(gameModel) {
