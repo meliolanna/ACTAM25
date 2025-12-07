@@ -12,6 +12,8 @@ export class GameModel {
 
     this.currentMiniGameIndex = 0;
     this.miniGames = [];
+
+    this.score = 0;
   }
 
   get bpm() {
@@ -43,5 +45,13 @@ export class GameModel {
 
   nextRound() {
     this.round++;
+  }
+
+    resetScore() {
+    this.score = 0;
+  }
+
+  addScore(points) {
+    this.score += points;
   }
 }

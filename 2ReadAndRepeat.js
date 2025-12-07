@@ -9,7 +9,8 @@ export class ReadAndPlayMiniGame {
     this.name = "Leggi e Suona";
 
     this.totalBeats = 8;      // 4 lettura + 4 input
-    this.timingWindowFraction = 0.20; // ±20% della durata del beat
+    this.timingWindowStrictFraction = 0.10; // 10% di un beat
+    this.timingWindowLooseFraction  = 0.20; // 20% di un beat (come prima)
 
     this.beatIndex = 0;
     this.grammar = new GrammarSequence();
@@ -149,14 +150,36 @@ export class ReadAndPlayMiniGame {
       return { type: "timingError", payload: { reason: "extra" } };
     }
 
-    const windowMs = beatDurationMs * this.timingWindowFraction;
+        const strictWindowMs = beatDurationMs * this.timingWindowStrictFraction;
+    const looseWindowMs  = beatDurationMs * this.timingWindowLooseFraction;
 
-    if (best.distance <= windowMs) {
+    if (best.distance <= strictWindowMs) {
       this.expectedHits[best.index].matched = true;
-      return { type: "perfect", payload: {} };
+      return {
+        type: "score",
+        payload: {
+          kind: "perfect",
+          points: 100
+        }
+      };
+    }
+
+    if (best.distance <= looseWindowMs) {
+      this.expectedHits[best.index].matched = true;
+      return {
+        type: "score",
+        payload: {
+          kind: "good",
+          points: 50
+        }
+      };
     }
 
     const reason = hitTimeMs < best.note.timeMs ? "early" : "late";
-    return { type: "timingError", payload: { reason } };
+    return {
+      type: "timingError",
+      payload: { reason }
+    };
+
   }
 }

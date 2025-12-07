@@ -29,6 +29,8 @@ export class GameController {
     this.audio.init();
     this.model.resetLives();
     this.view.renderLives(this.model.lives);
+    this.model.resetScore();
+    this.view.setScore(this.model.score);
     this.view.enableStart(false);
     this.model.round = 1;
     this.model.currentMiniGameIndex = 0;
@@ -172,8 +174,20 @@ export class GameController {
 
     this.audio.hitSound();
 
-    if (res.type === "perfect") {
-      this.view.setStatus("Perfect!");
+    if (res.type === "score") {
+      const { points, kind } = res.payload;
+
+      this.model.addScore(points);
+      this.view.setScore(this.model.score);
+
+      if (kind === "perfect") {
+        this.view.setStatus(`Perfect! +${points}`);
+      } else if (kind === "good") {
+        this.view.setStatus(`Good! +${points}`);
+      } else {
+        this.view.setStatus(`Hit! +${points}`);
+      }
+
       this.view.flashCorrect();
       return;
     }

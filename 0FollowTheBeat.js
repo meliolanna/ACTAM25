@@ -11,7 +11,8 @@ export class FourBeatsMetronomeMiniGame {
     // 1 battuta di ascolto (4 beat) + 1 battuta di input (4 beat)
     this.totalBeats = 8;
 
-    this.timingWindowFraction = 0.20;
+    this.timingWindowStrictFraction = 0.10; // 10% di un beat
+    this.timingWindowLooseFraction  = 0.20; // 20% di un beat (come prima)
 
     this.beatIndex = 0;
 
@@ -141,11 +142,29 @@ export class FourBeatsMetronomeMiniGame {
       };
     }
 
-    const windowMs = beatDurationMs * this.timingWindowFraction;
+        const strictWindowMs = beatDurationMs * this.timingWindowStrictFraction;
+    const looseWindowMs  = beatDurationMs * this.timingWindowLooseFraction;
 
-    if (best.distance <= windowMs) {
+    if (best.distance <= strictWindowMs) {
       this.expectedHits[best.index].matched = true;
-      return { type: "perfect", payload: {} };
+      return {
+        type: "score",
+        payload: {
+          kind: "perfect",
+          points: 100
+        }
+      };
+    }
+
+    if (best.distance <= looseWindowMs) {
+      this.expectedHits[best.index].matched = true;
+      return {
+        type: "score",
+        payload: {
+          kind: "good",
+          points: 50
+        }
+      };
     }
 
     const reason = hitTimeMs < best.note.timeMs ? "early" : "late";
@@ -153,5 +172,6 @@ export class FourBeatsMetronomeMiniGame {
       type: "timingError",
       payload: { reason }
     };
+
   }
 }

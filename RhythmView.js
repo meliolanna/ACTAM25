@@ -12,6 +12,8 @@ export class RhythmView {
     this.lifeContainer = document.getElementById("lifeContainer");
     this.notationStaff = document.getElementById("notationStaff");
 
+    this.scoreEl = document.getElementById("scoreDisplay");
+
     this.lifeLabel = document.createElement("div");
     this.lifeLabel.style.fontSize = "0.8rem";
     this.lifeLabel.style.marginTop = "4px";
@@ -91,4 +93,11 @@ export class RhythmView {
       this.notationStaff.appendChild(noteEl);
     });
   }
+
+    setScore(v) {
+    if (this.scoreEl) {
+      this.scoreEl.textContent = v;
+    }
+  }
+
 }
