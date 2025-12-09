@@ -224,6 +224,8 @@ export class GameController {
     const finalRound = this.model.round;
     const finalBPM = this.model.bpm;
     
+    this.view.showGameOverScreen(finalRound, finalBPM);
+    
     this.view.setStatus("Game Over – press START to play again");
     this.view.enableStart(true);
   }
