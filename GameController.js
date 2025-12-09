@@ -16,6 +16,9 @@ export class GameController {
     this.roundLifeLost = false;
 
     view.onStart(() => this.handleStart());
+    // !!! AGGIUNGI: Mostra la schermata START non appena il Controller è inizializzato
+    this.view.showStartScreen();
+    
     view.onHit(() => this.handleHit());
     document.addEventListener("keydown", (e) => {
       if (e.code === "Space") {
@@ -27,7 +30,7 @@ export class GameController {
 
   handleStart() {
     // !!! CHIAMATA AGGIUNTA QUI:
-    this.view.hideStartModal();
+    this.view.hideModal();
     this.audio.init();
     this.model.resetLives();
     this.view.renderLives(this.model.lives);
@@ -217,10 +220,15 @@ export class GameController {
 
   stopGameOver() {
     if (this.timerId) clearInterval(this.timerId);
+    // !!! CHIAMA IL NUOVO METODO DELLA VIEW CON I DATI DEL PUNTEGGIO
+    const finalRound = this.model.round;
+    const finalBPM = this.model.bpm;
+    
     this.view.setStatus("Game Over – press START to play again");
     this.view.enableStart(true);
   }
 }
+
 
 
 
