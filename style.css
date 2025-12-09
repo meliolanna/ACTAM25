@@ -438,4 +438,60 @@ body {
         height: 10rem;
         image-rendering: pixelated; 
         image-rendering: -moz-crisp-edges; /* Per Firefox */
-    }
+
+  }
+
+
+
+/* --- NUOVI STILI PER IL MODAL --- */
+
+/* Contenitore principale: copre tutto lo schermo */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.9); /* Sfondo scuro semi-trasparente */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 100; /* Assicurati che sia sopra a tutto */
+}
+
+/* Contenuto del pop-up */
+.modal-content {
+    background: white;
+    padding: 30px 40px;
+    border-radius: 15px;
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.4);
+    color: var(--darkblue);
+    text-align: center;
+    max-width: 450px;
+    width: 90%;
+}
+
+.modal-title {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.start-btn--big {
+    font-size: 1.5rem;
+    padding: 15px 35px;
+    margin-top: 10px;
+}
+
+/* Classe per nascondere il pop-up (attivata via JS) */
+.modal--hidden {
+    display: none !important;
+}
+
+/* Assicurati che l'aside start-panel (ora dentro il modal) abbia una spaziatura corretta */
+.start-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    align-items: center;
+    justify-content: center;
+}
