@@ -522,20 +522,11 @@ body {
 }
 
 .start-btn--back {
-    /* Stili per renderlo un pulsante, anche se è un link <a> */
-    display: inline-block; 
-    padding: 12px 28px;
     background: var(--darkblue);
-    border: 3px solid var(--darkblue);
-    border-radius: 999px;
     color: white;
-    font-size: 1.2rem;
-    text-decoration: none;
-    cursor: pointer;
-    transition: background 0.2s;
 }
 .start-btn--back:hover {
-    background: transparent;
+    background: var(--lime);
     color: var(--darkblue);
 }
 
@@ -543,5 +534,6 @@ body {
     /* Puoi colorare il pulsante PLAY AGAIN in modo che risalti (es. rosa) */
     background: var(--pink);
 }
+
 
 
