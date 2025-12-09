@@ -26,12 +26,14 @@ export class GameController {
   }
 
   handleStart() {
+    // !!! CHIAMATA AGGIUNTA QUI:
+    this.view.hideStartModal();
     this.audio.init();
     this.model.resetLives();
     this.view.renderLives(this.model.lives);
     this.model.resetScore();
     this.view.setScore(this.model.score);
-    this.view.enableStart(false);
+    //this.view.enableStart(false);
     this.model.round = 1;
     this.model.currentMiniGameIndex = 0;
     this.startMiniGameRound();
@@ -219,6 +221,7 @@ export class GameController {
     this.view.enableStart(true);
   }
 }
+
 
 
 
