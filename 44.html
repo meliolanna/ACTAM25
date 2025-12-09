@@ -8,21 +8,35 @@
   </head>
 
   <body class="pagina-viola">
+    
     <!-- aggiunto dall'anna per esperimento -->
-    <div id="startModal" class="modal">
-        <div class="modal-content">
-
-            <h2 class="modal-title">READY TO PLAY?</h2>
-            <div class="start-panel">
-                <button id="modalStartButton" class="start-btn start-btn--big">START</button>
-                <p class="small-note">
-                    Rules:<br>
-                    - You have 3 lives ❤️❤️❤️<br>
-                    - You lost one life at every wrong measure<br>
-                    - No more live -> Game Over 
-                </p>
+    <div id="gameModal" class="modal">
+      <div class="modal-content">
+        <!-- Pannello per cominciare -->
+        <div class="startScreen">
+          <h2 class="modal-title">READY TO PLAY?</h2>
+          <div class="start-panel">
+            <button id="modalStartButton" class="start-btn start-btn--big">START</button>
+            <p class="small-note">
+                Rules:<br>
+                - You have 3 lives ❤️❤️❤️<br>
+                - You lost one life at every wrong measure<br>
+                - No more live -> Game Over 
+            </p>
+          </div>
+        </div>
+        <!-- Pannello gameover e ricominciare -->
+        <div id="gameOverScreen" class="hidden">
+          <h2 class="modal-title game-over-title">GAME OVER!</h2>
+            <p class="modal-description">Your final rhythm level was:</p>
+            <p id="finalScore" class="final-score-text">Round 1 @ 60 BPM</p>
+        
+            <div class="modal-button-row">
+              <button id="modalRestartButton" class="start-btn start-btn--big start-btn--pink">PLAY AGAIN</button> 
+              <a href="gameslist.html" class="start-btn start-btn--back">BACK TO MENU</a>
             </div>
-            </div>
+        </div>
+      </div>
     </div>
     
     <div class="game-frame">
@@ -84,4 +98,5 @@
   </body>
   
 </html>
+
 
