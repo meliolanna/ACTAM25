@@ -6,7 +6,7 @@
 }
 
 :root {
-  /*colori plaette*/
+  /*colori palette*/
   --darkblue: #131138;
   --lime: #84EB16; /*baff24;*/
   --pink: #ff498f;
@@ -442,10 +442,8 @@ body {
   }
 
 
+/* --- STILI DEL PANNELLO START --- */
 
-/* --- NUOVI STILI PER IL MODAL --- */
-
-/* Contenitore principale: copre tutto lo schermo */
 .modal {
     position: fixed;
     top: 0;
@@ -459,7 +457,6 @@ body {
     z-index: 100; /* Assicurati che sia sopra a tutto */
 }
 
-/* Contenuto del pop-up */
 .modal-content {
     background: white;
     padding: 30px 40px;
@@ -469,6 +466,7 @@ body {
     text-align: center;
     max-width: 450px;
     width: 90%;
+    font-family: var(--font-family);
 }
 
 .modal-title {
@@ -482,13 +480,14 @@ body {
     padding: 15px 35px;
     margin-top: 10px;
 }
+.start-btn--big:hover {
+    background: var(--violet);
+}
 
-/* Classe per nascondere il pop-up (attivata via JS) */
-.modal--hidden {
+.modal--hidden { /* Classe per nascondere il pop-up (attivata via JS) */
     display: none !important;
 }
 
-/* Assicurati che l'aside start-panel (ora dentro il modal) abbia una spaziatura corretta */
 .start-panel {
     display: flex;
     flex-direction: column;
@@ -497,33 +496,31 @@ body {
     justify-content: center;
 }
 
-/* --- STILI AGGIUNTIVI PER IL MODAL --- */
-
 /* Classe generica per nascondere gli schermi */
 .hidden {
     display: none !important;
 }
 
 .game-over-title {
-    color: var(--pink); /* Evidenzia la scritta GAME OVER */
+    font-family: var(--font-family);
+    color: var(--violet); 
 }
 
 .final-score-text {
+    font-family: var(--font-family);
     font-size: 1.5rem;
     font-weight: bold;
     color: var(--darkblue); 
     margin-bottom: 2rem;
 }
 
-/* Riga per i pulsanti PLAY AGAIN e BACK TO MENU */
-.modal-button-row {
+.modal-button-row { /*play again and back*/
     display: flex;
     justify-content: center;
     gap: 15px;
     margin-top: 20px;
 }
 
-/* Stili per il pulsante BACK TO MENU (basato su <a>) */
 .start-btn--back {
     /* Stili per renderlo un pulsante, anche se è un link <a> */
     display: inline-block; 
@@ -546,4 +543,5 @@ body {
     /* Puoi colorare il pulsante PLAY AGAIN in modo che risalti (es. rosa) */
     background: var(--pink);
 }
+
 
