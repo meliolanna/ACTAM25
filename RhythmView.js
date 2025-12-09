@@ -6,9 +6,13 @@ export class RhythmView {
     this.leds = [...document.querySelectorAll(".led")];
     //this.startBtn = document.getElementById("startButton");
     // !!! AGGIUNGI I NUOVI RIFERIMENTI:
-    this.modal = document.getElementById("startModal");
+    this.gameModal = document.getElementById("gameModal");
     this.startBtn = document.getElementById("modalStartButton"); // Nuovo ID del pulsante START
-
+    this.startScreen = document.getElementById("startScreen");
+    this.gameOverScreen = document.getElementById("gameOverScreen");
+    this.modalRestartBtn = document.getElementById("modalRestartButton");
+    this.finalScoreEl = document.getElementById("finalScore");
+    
     this.hitBtn = document.getElementById("hitButton");
     this.status = document.getElementById("statusText");
     this.bpmEl = document.getElementById("bpmDisplay");
@@ -27,15 +31,41 @@ export class RhythmView {
 
   onStart(cb) {
     this.startBtn.onclick = cb;
+    if (this.modalRestartBtn) {
+        this.modalRestartBtn.onclick = cb;
+    }
   }
 
   onHit(cb) {
     this.hitBtn.onclick = cb;
   }
   // !!! NUOVO METODO PER NASCONDERE IL POP-UP
-  hideStartModal() {
-    if (this.modal) {
-        this.modal.classList.add('modal--hidden');
+  // Nasconde il pop-up e mostra il gioco
+  hideModal() {
+    if (this.gameModal) {
+        this.gameModal.classList.add('modal--hidden');
+    }
+  }
+  // !!! NUOVO: Mostra la schermata Game Over
+  showGameOverScreen(round, bpm) {
+    if (this.gameModal) {
+        this.gameModal.classList.remove('modal--hidden');
+        
+        // Nascondi START, mostra GAME OVER
+        this.startScreen.classList.add('hidden');
+        this.gameOverScreen.classList.remove('hidden');
+        
+        // Aggiorna il punteggio
+        this.finalScoreEl.textContent = `Round ${round} @ ${bpm} BPM`;
+    }
+  }
+  
+  // !!! NUOVO: Mostra la schermata iniziale (per il reset)
+  showStartScreen() {
+    if (this.gameModal) {
+        this.gameModal.classList.remove('modal--hidden');
+        this.startScreen.classList.remove('hidden');
+        this.gameOverScreen.classList.add('hidden');
     }
   }
   
@@ -111,4 +141,5 @@ export class RhythmView {
   }
 
 }
+
 
