@@ -4,7 +4,11 @@
 export class RhythmView {
   constructor() {
     this.leds = [...document.querySelectorAll(".led")];
-    this.startBtn = document.getElementById("startButton");
+    //this.startBtn = document.getElementById("startButton");
+    // !!! AGGIUNGI I NUOVI RIFERIMENTI:
+    this.modal = document.getElementById("startModal");
+    this.startBtn = document.getElementById("modalStartButton"); // Nuovo ID del pulsante START
+
     this.hitBtn = document.getElementById("hitButton");
     this.status = document.getElementById("statusText");
     this.bpmEl = document.getElementById("bpmDisplay");
@@ -28,7 +32,13 @@ export class RhythmView {
   onHit(cb) {
     this.hitBtn.onclick = cb;
   }
-
+  // !!! NUOVO METODO PER NASCONDERE IL POP-UP
+  hideStartModal() {
+    if (this.modal) {
+        this.modal.classList.add('modal--hidden');
+    }
+  }
+  
   setStatus(t) { this.status.textContent = t; }
   setBpm(v) { this.bpmEl.textContent = v; }
   setRound(v) { this.roundEl.textContent = v; }
@@ -101,3 +111,4 @@ export class RhythmView {
   }
 
 }
+
