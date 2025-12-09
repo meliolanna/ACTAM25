@@ -16,7 +16,7 @@ export class GameController {
     this.roundLifeLost = false;
 
     view.onStart(() => this.handleStart());
-    // !!! AGGIUNGI: Mostra la schermata START non appena il Controller è inizializzato
+    // Mostra la schermata START non appena il Controller è inizializzato
     this.view.showStartScreen();
     
     view.onHit(() => this.handleHit());
@@ -29,7 +29,6 @@ export class GameController {
   }
 
   handleStart() {
-    // !!! CHIAMATA AGGIUNTA QUI:
     this.view.hideModal();
     this.audio.init();
     this.model.resetLives();
@@ -230,6 +229,7 @@ export class GameController {
     this.view.enableStart(true);
   }
 }
+
 
 
 
