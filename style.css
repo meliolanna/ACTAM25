@@ -472,6 +472,7 @@ body {
 }
 
 .modal-title {
+    font-family: var(--font-family);
     font-size: 2.5rem;
     margin-bottom: 1rem;
 }
@@ -495,3 +496,4 @@ body {
     align-items: center;
     justify-content: center;
 }
+
