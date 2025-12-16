@@ -9,7 +9,7 @@ export const DURATION_MAP = {
   h: 0.5,   // minima
   q: 0.25,  // semiminima
   o: 0.125,  // croma
-  qdot: 0.75, // semiminima con punto
+  qdot: 0.375, // semiminima con punto
   odot: 0.1875,
   tb: 1/6,    // semiminima in terzina, h/3
   to: 1/12,    // croma in terzina, q/3

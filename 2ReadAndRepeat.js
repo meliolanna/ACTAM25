@@ -4,7 +4,7 @@ import { GrammarSequence, convertSymbolsToFractions,  convertFractionsToSeconds,
 //     MINIGIOCO 3: Leggi il ritmo e riproducilo
 // -------------------------------------------------
 export class ReadAndPlayMiniGame {
-  constructor() {
+  constructor(grammar) {
     this.id = "read_and_play";
     this.name = "Leggi e Suona";
 
@@ -13,7 +13,7 @@ export class ReadAndPlayMiniGame {
     this.timingWindowLooseFraction  = 0.20; // 20% di un beat (come prima)
 
     this.beatIndex = 0;
-    this.grammar = new GrammarSequence();
+    this.grammar = new GrammarSequence(grammar);
 
     this.expectedHits = [];
     this.inputStartTimeMs = null;

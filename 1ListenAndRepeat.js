@@ -8,7 +8,7 @@ import { GrammarSequence, convertSymbolsToFractions,
 //  (versione time-based, compatibile con ottavi / pattern complessi)
 // --------------------------------------------------
 export class PatternRepeatMiniGame {
-  constructor(audioManager) {
+  constructor(audioManager, grammar) {
     this.audioManager = audioManager;
 
     this.id = "pattern_repeat";
@@ -19,7 +19,7 @@ export class PatternRepeatMiniGame {
     this.timingWindowLooseFraction  = 0.20; // 20% di un beat (come prima)
 
     this.beatIndex = 0;
-    this.grammar = new GrammarSequence();
+    this.grammar = new GrammarSequence(grammar);
 
     this.soundScheduler = null;
     this.patternPlayed = false;

@@ -1,40 +1,58 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Games - BEAT THE BEAT</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Games - BEAT THE BEAT</title>
+  <link rel="stylesheet" href="style.css">
 </head>
-    
+
 <body>
-    <a href="index.html" id="backToDifficulties" class="back-link">
-        BACK
-    </a>
-    <h1 class="main-title">Let's play!</h1>
-    <a href="44.html">
-        <button class="pulsante">PLAY ALL THE GAMES</button>
-    </a>
-    <img class="pixel-art" src="gif/pugile.gif">
 
-    
-    <h1 class="main-title">But if you need practice..</h1>
-    <div class="button-container">
-        <!-- Sinoglo minigioco only da inserire, ora cmq tutti-->
-        <a href="44.html">
-            <button class="pulsante pulsante--verde" >1. Follow the beat</button>
-        </a>
-        
-        <a href="44.html">
-          <button class="pulsante" >2. Listen and repeat</button>
-        </a>
+  <a href="index.html" class="back-link">BACK</a>
 
-        <a href="44.html">
-          <button class="pulsante pulsante--viola">3. Read the rhythm</button>
-      </a>
-    </div>
+  <h1 class="main-title">Let's play!</h1>
+
+  <!-- GIOCO COMPLETO -->
+  <a id="playAllBtn">
+    <button class="pulsante">PLAY ALL THE GAMES</button>
+  </a>
+
+  <img class="pixel-art" src="gif/pugile.gif">
+
+  <h1 class="main-title">Or practice a single mode</h1>
+
+  <div class="button-container">
+    <a id="mg1Btn">
+      <button class="pulsante pulsante--verde">1. Follow the beat</button>
+    </a>
+
+    <a id="mg2Btn">
+      <button class="pulsante">2. Listen and repeat</button>
+    </a>
+
+    <a id="mg3Btn">
+      <button class="pulsante pulsante--viola">3. Read the rhythm</button>
+    </a>
+  </div>
+
+  <!-- SCRIPT: collega difficoltà + modalità -->
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const difficulty = params.get("difficulty") || "medium";
+
+    document.getElementById("playAllBtn").href =
+      `44.html?difficulty=${difficulty}&mode=all`;
+
+    document.getElementById("mg1Btn").href =
+      `44.html?difficulty=${difficulty}&mode=mg1`;
+
+    document.getElementById("mg2Btn").href =
+      `44.html?difficulty=${difficulty}&mode=mg2`;
+
+    document.getElementById("mg3Btn").href =
+      `44.html?difficulty=${difficulty}&mode=mg3`;
+  </script>
 
 </body>
-
 </html>
-

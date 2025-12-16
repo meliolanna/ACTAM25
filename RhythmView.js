@@ -106,43 +106,56 @@ export class RhythmView {
    * pattern = [{ offset: 0..1, duration: 0..1, type: "q"/"h"/"o"/... }, ...]
    */
   renderNotation(pattern) {
-    if (!this.notationStaff) return;
-    this.clearNotation();
+  if (!this.notationStaff) return;
+  this.clearNotation();
 
-    pattern.forEach(note => {
-      const noteEl = document.createElement("div");
-      const typeSymbol = note.type || "q";
+  const staff = this.notationStaff;
 
-      noteEl.className = `note note--${typeSymbol}`;
-      noteEl.style.left = (note.offset * 100) + "%";
-      noteEl.dataset.type = typeSymbol;
+  // Legge il padding interno definito in CSS: --edge-pad
+  const style = getComputedStyle(staff);
+  const edgePad = parseFloat(style.getPropertyValue("--edge-pad")) || 0;
 
-      const head = document.createElement("div");
-      head.className = "note-head";
+  // Larghezza “utile” dove disegnare le note (escludendo i margini)
+  const innerWidth = staff.clientWidth - 2 * edgePad;
 
-      const stem = document.createElement("div");
-      stem.className = "note-stem";
+  pattern.forEach(note => {
+    const noteEl = document.createElement("div");
+    const typeSymbol = note.type || "q";
 
-      const flag = document.createElement("div");
-      flag.className = "note-flag";
+    noteEl.className = `note note--${typeSymbol}`;
+    noteEl.dataset.type = typeSymbol;
 
-      const doubleflag = document.createElement("div");
-      flag.className = "note-doubleflag";
+    // offset 0..1 -> pixel dentro [edgePad .. edgePad+innerWidth]
+    const x = edgePad + (note.offset * innerWidth);
+    noteEl.style.left = `${x}px`;
 
-      const dot = document.createElement("div");
-      flag.className = "note-dot";
+    const head = document.createElement("div");
+    head.className = "note-head";
 
-      noteEl.appendChild(head);
-      noteEl.appendChild(stem);
-      noteEl.appendChild(flag);
-      noteEl.appendChild(doubleflag);
-      noteEl.appendChild(dot);
+    const stem = document.createElement("div");
+    stem.className = "note-stem";
 
-      this.notationStaff.appendChild(noteEl);
-    });
-  }
+    const flag = document.createElement("div");
+    flag.className = "note-flag";
 
-    setScore(v) {
+    const doubleflag = document.createElement("div");
+    doubleflag.className = "note-doubleflag";
+
+    const dot = document.createElement("div");
+    dot.className = "note-dot";
+
+    noteEl.appendChild(head);
+    noteEl.appendChild(stem);
+    noteEl.appendChild(flag);
+    noteEl.appendChild(doubleflag);
+    noteEl.appendChild(dot);
+
+    staff.appendChild(noteEl);
+  });
+}
+
+
+  setScore(v) {
     if (this.scoreEl) {
       this.scoreEl.textContent = v;
     }

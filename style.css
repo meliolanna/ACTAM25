@@ -1,5 +1,5 @@
 @font-face {
-  font-family: 'PixelFont'; /* Scegli un nome per il tuo font */
+  font-family: 'PixelFont';
   src: url('./fonts/Minecraft.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
@@ -223,30 +223,26 @@ body {
   letter-spacing: 0.04em;
 }
 .notation-staff {
+  --edge-pad: 28px;
   position: relative;
-  width: 260px;
+  width: min(520px, 80vw);
   height: 60px;
   border-radius: 14px;
   border: 2px solid var(--darkblue);
   background: #f0f0f0;
   overflow: hidden;
-} 
-/* linea centrale tipo rigo / divisione beat */
-.notation-staff::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 50%;
-  height: 2px;
-  background: var(--darkblue);
-  transform: translateY(-50%);
-} 
-/* guide dei beat (allineate ai LED) */
+}
+
+
+/* guide dei beat */
 .notation-staff::after {
   content: "";
   position: absolute;
-  inset: 0;
+  top: 0;
+  bottom: 0;
+  left: var(--edge-pad);
+  right: var(--edge-pad);
+
   background-image: linear-gradient(
     to right,
     rgba(0, 0, 0, 0.1) 1px,
@@ -254,9 +250,10 @@ body {
   );
   background-size: calc(100% / 4) 100%;
   pointer-events: none;
-} 
+}
 
-/* NOTAZIONE: note disegnate in CSS, niente Unicode strano */
+
+/* NOTAZIONE: note disegnate in CSS */
 .note {
   position: absolute;
   bottom: 8px;
@@ -289,7 +286,7 @@ body {
 .note-stem {
   position: absolute;
   bottom: 8px;
-  left: 15px;
+  left: 18px;
   width: 2px;
   height: 22px;
   background: var(--darkblue);
@@ -347,12 +344,12 @@ body {
 .note-dot {
   display: none;
   position: absolute;
-  top: 4px;
-  left: 15px;
   width: 3px;
   height: 3px;
   background: var(--darkblue);
   border-radius: 50%;
+  left: 22px;
+  bottom: 3px;
 }
 /* aggiungo a ottavo e semiminima puntate */
 .note--odot .note-dot {
@@ -362,44 +359,14 @@ body {
   display: block;
 }
 
-/* Contenitore della Terzina: usato per posizionare il numero "3" */
-.note--to {
-    position: absolute;
-    height: 100%; /* Altezza del rigo */
-    /* Lo stile 'left' sarà gestito dal tuo JavaScript */
+.note--odot .note-flag {
+  display: block;
 }
-/* Legatura Orizzontale (Se sono Crome/Ottavi) */
-/* Usiamo ::before per creare una barra orizzontale sopra le note */
-.note--to::before {
-    content: '';
-    position: absolute;
-    /* Adattare questi valori in base alla larghezza effettiva delle note */
-    width: 60px; /* Larghezza che copre le 3 note */ 
-    height: 2px;
-    background: var(--darkblue);
-    top: 5px; /* Posizionamento sopra i gambi */
-    left: 50%;
-    transform: translateX(-50%); /* Centra la barra */
+
+.note--to .note-flag {
+  display: block;
 }
-/* Numero "3" */
-/* Usiamo ::after per disegnare il numero che indica la terzina */
-.note--to::after {
-    content: '3';
-    position: absolute;
-    font-family: sans serif; /* Usa il tuo font pixelato */
-    font-size: 0.9rem;
-    font-weight: bold;
-    color: var(--darkblue);
-    top: -10px; /* Posizionamento sopra la barra */
-    left: 50%;
-    transform: translateX(-50%); /* Centra il numero */
-    padding: 0 4px;
-    background-color: white; /* Per far risaltare il 3 sul rigo */
-}
-/* Nascondi la bandierina sulle note raggruppate */
-.note--to .note--o .note-flag {
-    display: none; 
-}
+
 
 
 
