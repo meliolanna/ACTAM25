@@ -125,7 +125,7 @@ export const GRAMMAR_EASY34 = {
   ]
 };
 
-export const GRAMMAR_MEDIUM44 = { 
+export const DEFAULT_GRAMMAR = {  //GRAMMAR_MEDIUM44
   // Misura 4/4
   M: [
     ["H", "H"],            // 2 beat + 2 beat
@@ -153,7 +153,7 @@ export const GRAMMAR_MEDIUM44 = {
   ]
 };
 
-export const DEFAULT_GRAMMAR = { //GRAMMAR_HARD44
+export const GRAMMAR_HARD44 = { //
   // Misura 4/4
   M: [
     ["H", "H"],            // 2 beat + 2 beat
@@ -266,4 +266,5 @@ export function buildNotationPattern(symbols, durationsSec) {
 
   return pattern;
 }
+
 
