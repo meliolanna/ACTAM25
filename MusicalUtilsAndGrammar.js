@@ -8,8 +8,13 @@ export const DURATION_MAP = {
   m: 1.0,   // semibreve (intera battuta 4/4)
   h: 0.5,   // minima
   q: 0.25,  // semiminima
-  o: 0.125  // croma
-  
+  o: 0.125,  // croma
+  qdot: 0.75, // semiminima con punto
+  odot: 0.1875,
+  tb: 1/6,    // semiminima in terzina, h/3
+  to: 1/12,    // croma in terzina, q/3
+  s: 0.0625,    // semicroma
+  f: 1/20      // croma della quintina
 };
 
 /* Ritorna un elemento casuale da un array */
@@ -70,7 +75,7 @@ export function convertFractionsToSeconds(fractionalSequence, bpm) {
 // B = gruppo da 1 beat (un quarto di misura)
 // E = gruppo da mezzo beat (ottavo)
 
-export const DEFAULT_GRAMMAR = { //l'anna ha già tolto le cose ridondanti
+export const GRAMMAR_EASY44 = { //GRAMMAR DEFAULT
   // Misura 4/4
   M: [
     ["H", "H"],            // 2 beat + 2 beat
@@ -93,6 +98,88 @@ export const DEFAULT_GRAMMAR = { //l'anna ha già tolto le cose ridondanti
   // E = mezzo beat
   E: [
     "o"                    // ottavo
+  ]
+};
+
+/* pezzo aggiunto: grammtiche per il futuro */
+export const GRAMMAR_EASY34 = {
+  // Misura 3/4
+  M: [
+    ["H", "B"],        // 2 beat + 1 beat
+    ["B", "H"],       // 1 beat + 2 beat
+  ],
+  
+  H: [
+    "h",                   // minima (2 beat)
+    ["B", "B"]             // due blocchi da 1 beat
+    //,["E", "q", "E"]        // se vogliamo aggiungere la sincope (Ann)
+  ],
+
+  B: [
+    "q",                   // un quarto
+    ["E", "E"]             // due ottavi
+  ],
+
+  E: [
+    "o"                    // ottavo
+  ]
+};
+
+export const GRAMMAR_MEDIUM44 = { 
+  // Misura 4/4
+  M: [
+    ["H", "H"],            // 2 beat + 2 beat
+    ["B", "h", "B"],       // 1 beat + 2 beat + 1 beat
+  ],
+
+  H: [
+    "h",                   // minima (2 beat)
+    ["B", "B"],             // due blocchi da 1 beat
+    ["E", "q", "E"],        //sincope ottavo semiminima ottavo
+    ["qdot", "E"]          // semiminima con punto + croma
+       // ["tb", "tb", "tb"]// terzina di semiminime
+  ],
+
+  B: [
+    "q",                   // un quarto
+    ["E", "E"],             // due ottavi
+    ["to", "to", "to"],    // terzina
+    ["odot", "s"],        // croma puntata + semicroma e viceversa
+    ["s", "odot"]
+  ],
+
+  E: [
+    "o"                    // ottavo
+  ]
+};
+
+export const DEFAULT_GRAMMAR = { //GRAMMAR_HARD44
+  // Misura 4/4
+  M: [
+    ["H", "H"],            // 2 beat + 2 beat
+    ["B", "h", "B"],       // 1 beat + 2 beat + 1 beat
+  ],
+
+  H: [
+    "h",                   // minima (2 beat)
+    ["B", "B"],             // due blocchi da 1 beat
+    ["E", "q", "E"],        //sincope ottavo semiminima ottavo
+    ["qdot", "E"]   ,       // semiminima con punto + croma
+    ["tb", "tb", "tb"]      // terzina di semiminime
+  ],
+
+  B: [
+    "q",                   // un quarto
+    ["E", "E"],             // due ottavi
+    ["to", "to", "to"],    // terzina
+    ["odot", "s"],        // croma puntata + semicroma e viceversa
+    ["s", "odot"],
+    ["f", "f", "f", "f", "f"]  //quintina
+  ],
+
+  E: [
+    "o",                  // ottavo
+    ["s", "s"]            // due sedicesimi
   ]
 };
 
@@ -179,3 +266,4 @@ export function buildNotationPattern(symbols, durationsSec) {
 
   return pattern;
 }
+
