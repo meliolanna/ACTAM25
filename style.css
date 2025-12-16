@@ -535,5 +535,28 @@ body {
     background: var(--pink);
 }
 
+/* pulsante di BACK*/
+.back-link {
+    position: fixed; 
+    top: 2rem;       /* Distanza dal bordo superiore */
+    left: 2rem;      /* Distanza dal bordo sinistro */
+    
+    font-family: var(--font-family);
+    font-size: 1.2rem;
+    color: white; /* Colore bianco per risaltare sullo sfondo viola */
+    text-decoration: none; /* Rimuove la sottolineatura */
+    
+    /*padding: 8px 15px;
+    background-color: transparent; 
+    border-radius: 5px;*/
+    
+    /* Assicura che sia sopra gli elementi di sfondo ma sotto il modal */
+    z-index: 50; 
+    transition: color 0.2s;
+}
+
+.back-link:hover {
+    color: var(--lime); /* Cambia colore al passaggio del mouse per feedback */
+}
 
 
