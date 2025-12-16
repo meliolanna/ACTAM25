@@ -83,10 +83,19 @@ export class RhythmView {
 
       const flag = document.createElement("div");
       flag.className = "note-flag";
+      
+      const doubleflag = document.createElement("div");
+      flag.className = "note-doubleflag";
+
+      const dot = document.createElement("div");
+      flag.className = "note-dot";
 
       noteEl.appendChild(head);
       noteEl.appendChild(stem);
       noteEl.appendChild(flag);
+      noteEl.appendChild(doubleflag);
+      noteEl.appendChild(dot);
+      
 
       this.notationStaff.appendChild(noteEl);
     });
