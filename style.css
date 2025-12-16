@@ -347,7 +347,7 @@ body {
 .note-dot {
   display: none;
   position: absolute;
-  top: 7px;
+  top: 4px;
   left: 15px;
   width: 3px;
   height: 3px;
@@ -645,6 +645,7 @@ body {
 .back-link:hover {
     color: var(--lime); /* Cambia colore al passaggio del mouse per feedback */
 }
+
 
 
 
