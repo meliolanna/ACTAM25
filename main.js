@@ -24,6 +24,8 @@ window.addEventListener("load", () => {
 
   const audio = new AudioManager();
   const model = new GameModel();
+  model.mode = mode;
+  model.difficulty = difficulty;
   const view = new RhythmView();
   const controller = new GameController(model, view, audio);
 

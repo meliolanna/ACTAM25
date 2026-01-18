@@ -14,6 +14,8 @@
   <h1 class="main-title">Let's play!</h1>
 
   <!-- GIOCO COMPLETO -->
+  <button id="openLeaderboardBtn" class="pulsante pulsante--giallo">LEADERBOARD 🏆</button>
+
   <a id="playAllBtn">
     <button class="pulsante">PLAY ALL THE GAMES</button>
   </a>
@@ -36,23 +38,75 @@
     </a>
   </div>
 
-  <!-- SCRIPT: collega difficoltà + modalità -->
-  <script>
-    const params = new URLSearchParams(window.location.search);
-    const difficulty = params.get("difficulty") || "medium";
+  <script type="module">
+  import { fetchTopLeaderboard } from "./leaderboardService.js";
 
-    document.getElementById("playAllBtn").href =
-      `44.html?difficulty=${difficulty}&mode=all`;
+  const params = new URLSearchParams(window.location.search);
+  const difficulty = params.get("difficulty") || "medium";
 
-    document.getElementById("mg1Btn").href =
-      `44.html?difficulty=${difficulty}&mode=mg1`;
+  document.getElementById("playAllBtn").href =
+    `44.html?difficulty=${difficulty}&mode=all`;
 
-    document.getElementById("mg2Btn").href =
-      `44.html?difficulty=${difficulty}&mode=mg2`;
+  document.getElementById("mg1Btn").href =
+    `44.html?difficulty=${difficulty}&mode=mg1`;
 
-    document.getElementById("mg3Btn").href =
-      `44.html?difficulty=${difficulty}&mode=mg3`;
-  </script>
+  document.getElementById("mg2Btn").href =
+    `44.html?difficulty=${difficulty}&mode=mg2`;
+
+  document.getElementById("mg3Btn").href =
+    `44.html?difficulty=${difficulty}&mode=mg3`;
+
+  // MODAL leaderboard
+  const modal = document.getElementById("leaderboardModal");
+  const openBtn = document.getElementById("openLeaderboardBtn");
+  const closeBtn = document.getElementById("closeLeaderboardBtn");
+  const listEl = document.getElementById("leaderboardList");
+
+  function openModal() {
+    modal.classList.remove("modal--hidden");
+    loadLeaderboard();
+  }
+  function closeModal() {
+    modal.classList.add("modal--hidden");
+  }
+
+  openBtn.onclick = openModal;
+  closeBtn.onclick = closeModal;
+
+  async function loadLeaderboard() {
+    listEl.textContent = "Loading...";
+    try {
+      const items = await fetchTopLeaderboard(10);
+      if (!items.length) {
+        listEl.textContent = "No scores yet.";
+        return;
+      }
+      listEl.innerHTML = `
+        <ol style="text-align:left; padding-left: 18px;">
+          ${items.map(i => `<li><b>${i.name}</b> — ${i.bestScore}</li>`).join("")}
+        </ol>
+      `;
+    } catch (e) {
+      console.error(e);
+      listEl.textContent = "Error loading leaderboard.";
+    }
+  }
+</script>
+
 
 </body>
+
+
+<div id="leaderboardModal" class="modal modal--hidden">
+  <div class="modal-content">
+    <h2 class="modal-title">LEADERBOARD 🏆</h2>
+    <div id="leaderboardList">Loading...</div>
+    <div class="modal-button-row">
+      <button id="closeLeaderboardBtn" class="start-btn start-btn--back">CLOSE</button>
+    </div>
+  </div>
+</div>
+
+
+
 </html>

@@ -31,6 +31,17 @@
           <h2 class="modal-title game-over-title">GAME OVER!</h2>
             <p class="modal-description">Your final rhythm level was:</p>
             <p id="finalScore" class="final-score-text">Round 1 @ 60 BPM</p>
+
+            <div id="namePanel" class="hidden" style="margin: 10px 0 18px;">
+              <p style="margin-bottom: 8px;">Enter your name to save your score:</p>
+              <input id="playerNameInput" type="text" maxlength="24" placeholder="Your name"
+                style="padding:10px; border-radius:10px; border:1px solid #ccc; width: 80%; max-width: 260px;">
+             <div style="margin-top: 10px;">
+              <button id="saveScoreBtn" class="start-btn">SAVE SCORE</button>
+            </div>
+          <div id="nameResult" style="margin-top:10px; font-size:0.9rem;"></div>
+        </div>
+
         
             <div class="modal-button-row">
               <button id="modalRestartButton" class="start-btn">PLAY AGAIN</button> 

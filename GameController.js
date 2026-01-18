@@ -1,4 +1,4 @@
-//import non ho capito aaaaaaaaa
+import { submitScoreIfBest } from "./leaderboardService.js";
 
 //--------------------------------------------------
 //  CONTROLLER
@@ -217,17 +217,33 @@ export class GameController {
     }
   }
 
-  stopGameOver() {
+    stopGameOver() {
     if (this.timerId) clearInterval(this.timerId);
-    // !!! CHIAMA IL NUOVO METODO DELLA VIEW CON I DATI DEL PUNTEGGIO
+
     const finalRound = this.model.round;
     const finalBPM = this.model.bpm;
-    
-    this.view.showGameOverScreen(finalRound, finalBPM);
-    
+    const finalScore = this.model.score;
+
+    const isAllMode = (this.model.mode === "all");
+
+    this.view.showGameOverScreen(finalRound, finalBPM, finalScore, isAllMode);
+
+    if (isAllMode) {
+      this.view.onSubmitName(async (playerName) => {
+        try {
+          await submitScoreIfBest(playerName, finalScore);
+          this.view.setNameSubmitResult("Saved! ✅");
+        } catch (e) {
+          this.view.setNameSubmitResult("Error saving score ❌");
+          console.error(e);
+        }
+      });
+    }
+
     this.view.setStatus("Game Over – press START to play again");
     this.view.enableStart(true);
   }
+
 }
 
 

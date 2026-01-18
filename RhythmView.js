@@ -27,6 +27,13 @@ export class RhythmView {
     this.lifeLabel.style.marginTop = "4px";
     this.lifeLabel.style.color = "#555";
     this.lifeContainer.parentElement.appendChild(this.lifeLabel);
+
+    this.namePanel = document.getElementById("namePanel");
+    this.nameInput = document.getElementById("playerNameInput");
+    this.nameSubmitBtn = document.getElementById("saveScoreBtn");
+    this.nameResult = document.getElementById("nameResult");
+    this._nameSubmitCb = null;
+
   }
 
   onStart(cb) {
@@ -160,6 +167,42 @@ export class RhythmView {
       this.scoreEl.textContent = v;
     }
   }
+
+    showGameOverScreen(round, bpm, score, askName) {
+    if (this.gameModal) {
+      this.gameModal.classList.remove('modal--hidden');
+
+      this.startScreen.classList.add('hidden');
+      this.gameOverScreen.classList.remove('hidden');
+
+      this.finalScoreEl.textContent = `Round ${round} @ ${bpm} BPM — Score: ${score}`;
+
+      if (this.namePanel) {
+        this.namePanel.classList.toggle("hidden", !askName);
+      }
+      if (this.nameResult) this.nameResult.textContent = "";
+      if (this.nameInput) this.nameInput.value = "";
+    }
+  }
+
+  onSubmitName(cb) {
+    this._nameSubmitCb = cb;
+    if (!this.nameSubmitBtn) return;
+
+    this.nameSubmitBtn.onclick = () => {
+      const name = (this.nameInput?.value ?? "").trim();
+      if (!name) {
+        this.setNameSubmitResult("Insert your name 🙂");
+        return;
+      }
+      cb(name);
+    };
+  }
+
+  setNameSubmitResult(msg) {
+    if (this.nameResult) this.nameResult.textContent = msg;
+  }
+
 
 }
 
