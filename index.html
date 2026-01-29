@@ -8,6 +8,20 @@
 </head>
 
 <body>
+  <div class="top-right-toolbar">
+    <button id="settingsBtn" class="mini-btn">
+        <img src="icons/settings-1.png" class="btn-icon" alt="Settings">
+    </button>
+    
+    <button onclick="openLeaderboard()" id="leaderBtn" class="mini-btn">
+        <img src="icons/trophy-1.png" class="btn-icon" alt="LeaderBoard">
+    </button>
+
+    <button id="leaderBtn" class="mini-btn">
+        <img src="icons/question-1.png" class="btn-icon" alt="Info">
+    </button>
+  </div>
+
   <h1 class="pulsating-text">BEAT THE BEAT!</h1>
   <p class="subtitle">Choose your difficulty:</p>
 
@@ -38,5 +52,17 @@
     </a>
 
   </div>
+
+
+  <script type="module">
+  import { initLeaderboard } from "./leaderboardUI.js";
+
+  initLeaderboard();
+</script>
+
+
 </body>
+
+
+
 </html>

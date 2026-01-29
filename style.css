@@ -51,7 +51,7 @@ body {
 
 .subtitle {
   font-family: var(--font-family);
-  font-size: 1.5em;
+  font-size: 3vh;
   margin-bottom: 2em;
   font-weight: 300;
   opacity: 0.8;
@@ -97,10 +97,24 @@ body {
   --colorhover: var(--lime);
 }
 
+/* Pulsanti livelli in home*/
 .gigacontainer {
-  display: inline-block;
+  display: flex;
+  flex-direction: row; /* Di base sono affiancati (PC) */
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
 }
-
+/* Quando lo schermo è piccolo (Smartphone) */
+@media (max-width: 768px) {
+    .gigacontainer {
+        flex-direction: column; /* Li mette uno sotto l'altro */
+        gap: 10px; /* Riduce lo spazio tra i pulsanti */
+    }
+}
 .gigapulsante {
   --color: var(--lime);
   display: inline-block; /* Rende il link un blocco per l'applicazione di padding/margini */
@@ -112,9 +126,9 @@ body {
   border: 0.3rem solid var(--color);
   cursor: pointer;
   font-family: var(--font-family);
-  font-size: 2rem;
-  width: 12rem;
-  height: 16rem;
+  font-size: 5vh;
+  width: 30vh;
+  height: 40vh;
   margin-left: 3rem;
   margin-right: 3rem;
 }
@@ -131,6 +145,17 @@ body {
   --color: var(--violet);
 }
 
+.gigapulsante img {
+    max-height: 80%; /* L'immagine occupa al massimo il 60% del pulsante */
+    width: auto;
+}
+
+@media (max-width: 768px) {
+    .gigapulsante {
+        width: 80%; /* Su mobile occupano quasi tutta la larghezza */
+        height: 20vh; /* Diventano un po' più bassi per starci tutti e tre */
+    }
+}
 
 /* Animazione di battito per il titolo */
 @keyframes pulse {
@@ -150,16 +175,87 @@ body {
 
 .pulsating-text {
   font-family: var(--font-family);
-  font-size: 5rem;
+  font-size: 8vh;
   font-weight: bold;
   color: white; 
   text-align: center;
+  margin-top: 5rem;
   /* Applica l'animazione:
     - 'pulse' è il nome definito sopra
     - '1s' è la durata
     - 'ease-in-out' è la curva di velocità
     - 'infinite' per ripeterla all'infinito */
   animation: pulse 1.5s ease-in-out infinite;
+}
+@media (max-width: 768px) {
+    .pulsating-text {
+        font-size: 6vw; /* Su mobile usiamo la larghezza per non farlo uscire dai bordi */
+    }
+    .subtitle {
+        font-size: 1rem;
+    }
+}
+
+/*Toolbar settings etc*/
+/* Contenitore in alto a destra */
+.top-right-toolbar {
+    position: fixed;
+    top: 15px;
+    right: 15px;
+    display: flex;
+    gap: 8px; /* Spazio tra i bottoni */
+    z-index: 1000; /* Sempre sopra tutto */
+}
+
+/* Contenitore in alto a sinistra */
+.top-left-toolbar {
+    position: fixed;
+    top: 15px;
+    left: 15px;
+    display: flex;
+    gap: 8px; /* Spazio tra i bottoni */
+    z-index: 1000; /* Sempre sopra tutto */
+}
+
+/* Stile base per i mini pulsanti */
+.mini-btn {
+    width: 2rem;
+    height: 2rem;
+    padding: 0;
+    border: 0.01rem solid white;
+    border-radius: 8px;
+    background-color: var(--darkblue);
+    font-size: 1.2rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+}
+
+.mini-btn:hover {
+    background-color: var(--pink);
+    transform: scale(1.1);
+}
+
+/* Ottimizzazione per Smartphone */
+@media (max-width: 768px) {
+    .top-right-toolbar {
+        top: 10px;
+        right: 10px;
+        gap: 5px;
+    }
+
+    .mini-btn {
+        width: 30px;
+        height: 30px;
+        font-size: 1rem;
+    }
+    
+    /* Se il titolo pulsante è troppo vicino, abbassiamo un po' il main-title */
+    .pulsating-text {
+        margin-top: 60px; 
+    }
 }
 
 /* GAME PART */ 

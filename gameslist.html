@@ -8,13 +8,33 @@
 </head>
 
 <body>
+  <!-- fixed toolbar on right -->
+  <div class="top-right-toolbar">
+    <button id="settingsBtn" class="mini-btn">
+        <img src="icons/settings-1.png" class="btn-icon" alt="Settings">
+    </button>
+    
+    <button onclick="openLeaderboard()" id="leaderBtn" class="mini-btn">
+        <img src="icons/trophy-1.png" class="btn-icon" alt="LeaderBoard">
+    </button>
 
-  <a href="index.html" class="back-link">BACK</a>
+    <button id="leaderBtn" class="mini-btn">
+        <img src="icons/question-1.png" class="btn-icon" alt="Info">
+    </button>
+  </div>
+
+  <!-- back button on left -->
+  <div class="top-left-toolbar">
+    <a href="index.html">
+    <button href="index.html" id="back" class="mini-btn">
+        <img src="icons/home-1.png" class="btn-icon" alt="Home">
+    </button>
+  </a>
+  </div>
 
   <h1 class="main-title">Let's play!</h1>
 
   <!-- GIOCO COMPLETO -->
-  <button id="openLeaderboardBtn" class="pulsante pulsante--giallo">LEADERBOARD 🏆</button>
 
   <a id="playAllBtn">
     <button class="pulsante">PLAY ALL THE GAMES</button>
@@ -39,11 +59,14 @@
   </div>
 
   <script type="module">
-  import { fetchTopLeaderboard } from "./leaderboardService.js";
+  // Importiamo solo ciò che serve per inizializzare la pagina
+  import { initLeaderboard } from "./leaderboardUI.js";
 
+  // 1. Gestione parametri URL e Difficoltà
   const params = new URLSearchParams(window.location.search);
   const difficulty = params.get("difficulty") || "medium";
 
+  // 2. Configurazione dinamica dei link ai giochi
   document.getElementById("playAllBtn").href =
     `44.html?difficulty=${difficulty}&mode=all`;
 
@@ -56,56 +79,13 @@
   document.getElementById("mg3Btn").href =
     `44.html?difficulty=${difficulty}&mode=mg3`;
 
-  // MODAL leaderboard
-  const modal = document.getElementById("leaderboardModal");
-  const openBtn = document.getElementById("openLeaderboardBtn");
-  const closeBtn = document.getElementById("closeLeaderboardBtn");
-  const listEl = document.getElementById("leaderboardList");
-
-  function openModal() {
-    modal.classList.remove("modal--hidden");
-    loadLeaderboard();
-  }
-  function closeModal() {
-    modal.classList.add("modal--hidden");
-  }
-
-  openBtn.onclick = openModal;
-  closeBtn.onclick = closeModal;
-
-  async function loadLeaderboard() {
-    listEl.textContent = "Loading...";
-    try {
-      const items = await fetchTopLeaderboard(10);
-      if (!items.length) {
-        listEl.textContent = "No scores yet.";
-        return;
-      }
-      listEl.innerHTML = `
-        <ol style="text-align:left; padding-left: 18px;">
-          ${items.map(i => `<li><b>${i.name}</b> — ${i.bestScore}</li>`).join("")}
-        </ol>
-      `;
-    } catch (e) {
-      console.error(e);
-      listEl.textContent = "Error loading leaderboard.";
-    }
-  }
+  // 3. Inizializzazione Classifica Universale
+  // Questo caricherà il modal HTML e configurerà la funzione globale openLeaderboard()
+  initLeaderboard();
 </script>
 
 
 </body>
-
-
-<div id="leaderboardModal" class="modal modal--hidden">
-  <div class="modal-content">
-    <h2 class="modal-title">LEADERBOARD 🏆</h2>
-    <div id="leaderboardList">Loading...</div>
-    <div class="modal-button-row">
-      <button id="closeLeaderboardBtn" class="start-btn start-btn--back">CLOSE</button>
-    </div>
-  </div>
-</div>
 
 
 
