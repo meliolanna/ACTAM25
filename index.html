@@ -17,7 +17,7 @@
         <img src="icons/trophy-1.png" class="btn-icon" alt="LeaderBoard">
     </button>
 
-    <button onclick="infoModal.html" id="infoBtn" class="mini-btn">
+    <button id="infoBtn" class="mini-btn">
         <img src="icons/question-1.png" class="btn-icon" alt="Info">
     </button>
   </div>
@@ -57,9 +57,11 @@
   <script type="module">
   import { initLeaderboard } from "./leaderboardUI.js";
   import { initSettings } from "./settingsUI.js";
+  import { initInfo } from "./infoUI.js";
 
   initLeaderboard();
   initSettings();
+  initInfo();
 </script>
 
 
@@ -69,4 +71,5 @@
 
 
 </html>
+
 
