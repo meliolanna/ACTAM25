@@ -59,14 +59,15 @@
   </div>
 
   <script type="module">
-  // Importiamo solo ciò che serve per inizializzare la pagina
+  
   import { initLeaderboard } from "./leaderboardUI.js";
+  import { initSettings } from "./settingsUI.js";
 
-  // 1. Gestione parametri URL e Difficoltà
+  
   const params = new URLSearchParams(window.location.search);
   const difficulty = params.get("difficulty") || "medium";
 
-  // 2. Configurazione dinamica dei link ai giochi
+  
   document.getElementById("playAllBtn").href =
     `44.html?difficulty=${difficulty}&mode=all`;
 
@@ -79,9 +80,9 @@
   document.getElementById("mg3Btn").href =
     `44.html?difficulty=${difficulty}&mode=mg3`;
 
-  // 3. Inizializzazione Classifica Universale
-  // Questo caricherà il modal HTML e configurerà la funzione globale openLeaderboard()
+  
   initLeaderboard();
+  initSettings();
 </script>
 
 

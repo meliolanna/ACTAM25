@@ -1,7 +1,3 @@
-/**
- * Schedulatore di suoni che usa l'AudioContext interno.
- * Qui lo usiamo solo per far "suonare" il pattern del computer.
- */
 
 export class SoundScheduler {
   constructor(ctx, durationSequence) {
@@ -11,10 +7,7 @@ export class SoundScheduler {
     this.scheduleTimes = this.calculateAbsoluteTimes(durationSequence);
   }
 
-  /**
-   * Converte durate relative in tempi assoluti di attacco.
-   * Esempio: [1, 1, 1, 1] -> [0, 1, 2, 3]
-   */
+
   calculateAbsoluteTimes(durations) {
     const absoluteTimes = [];
     let cumulativeTime = 0;
@@ -29,9 +22,7 @@ export class SoundScheduler {
     return absoluteTimes;
   }
 
-  /**
-   * Suono del pattern: più in risalto rispetto al metronomo.
-   */
+
   scheduleClick(time) {
     const osc = this.ctx.createOscillator();
     const gain = this.ctx.createGain();
@@ -72,16 +63,49 @@ export class SoundScheduler {
 }
 
 //--------------------------------------------------
-//  AUDIO MANAGER (metronomo + hit player)
+//  AUDIO MANAGER 
 //--------------------------------------------------
 export class AudioManager {
   constructor() {
     this.ctx = null;
+
+    
+    this.inputSound = localStorage.getItem("btb_input_sound") || "osc"; // osc|clap|dog|cat
+
+    
+    this.sampleBuffers = new Map(); // name -> AudioBuffer
+    this.samplesToLoad = ["clap", "dog", "cat"];
   }
 
   init() {
     if (!this.ctx) {
       this.ctx = new (window.AudioContext || window.webkitAudioContext)();
+    }
+
+    
+    this.preloadSamples();
+  }
+
+  setInputSound(value) {
+    this.inputSound = value || "osc";
+    localStorage.setItem("btb_input_sound", this.inputSound);
+  }
+
+  async preloadSamples() {
+    if (!this.ctx) return;
+
+    
+    for (const name of this.samplesToLoad) {
+      if (this.sampleBuffers.has(name)) continue;
+
+      try {
+        const res = await fetch(`samples/${name}.wav`);
+        const arr = await res.arrayBuffer();
+        const buf = await this.ctx.decodeAudioData(arr);
+        this.sampleBuffers.set(name, buf);
+      } catch (e) {
+        console.warn("Could not load sample:", name, e);
+      }
     }
   }
 
@@ -104,8 +128,34 @@ export class AudioManager {
     osc.stop(t0 + 0.1);
   }
 
+
+
   hitSound() {
     if (!this.ctx) return;
+
+    
+    const selected = localStorage.getItem("btb_input_sound") || this.inputSound || "osc";
+
+    
+    if (selected !== "osc") {
+      const buffer = this.sampleBuffers.get(selected);
+
+      
+      if (buffer) {
+        const src = this.ctx.createBufferSource();
+        const gain = this.ctx.createGain();
+        gain.gain.value = 0.9; // volume
+
+        src.buffer = buffer;
+        src.connect(gain);
+        gain.connect(this.ctx.destination);
+
+        src.start();
+        return;
+      }
+    }
+
+    // 2) DEFAULT OSC
     const osc = this.ctx.createOscillator();
     const gain = this.ctx.createGain();
 
@@ -121,3 +171,4 @@ export class AudioManager {
     osc.stop(this.ctx.currentTime + 0.15);
   }
 }
+
