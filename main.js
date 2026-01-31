@@ -20,6 +20,40 @@ window.addEventListener("load", () => {
   const difficulty = params.get("difficulty") || "medium";
   const mode = params.get("mode") || "all";
 
+   
+  // gestione titoli
+  
+  const titleEl = document.getElementById("mainTitle");
+  const subTitleEl = document.getElementById("subTitle");
+
+  // Qui definisci i testi per ogni codice modalità (mg1, mg2, mg3)
+  const gameTexts = {
+    "mg1": { 
+        title: "Follow the Beat", 
+        desc: "Training to keep on time the beat, increasing the BPM." 
+    },
+    "mg2": { 
+        title: "Listen and Repeat", 
+        desc: "Listen to the pattern first, then repeat it accurately." 
+    },
+    "mg3": { 
+        title: "Read the Rhythm", 
+        desc: "Read the notes on the staff and hit the beat." 
+    },
+    "all": {
+        title: "Beat the Beat",
+        desc: "Complete all rhythm challenges in sequence."
+    }
+  };
+
+  // Se la modalità attuale è nella lista, aggiorna l'HTML
+  if (gameTexts[mode]) {
+      if (titleEl) titleEl.innerText = gameTexts[mode].title;
+      if (subTitleEl) subTitleEl.innerText = gameTexts[mode].desc;
+  }
+  
+  
+
   const grammar = pickGrammar(difficulty);
 
   const audio = new AudioManager();
