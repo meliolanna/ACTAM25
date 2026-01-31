@@ -1,0 +1,27 @@
+/* roba per responsive*/
+@media (max-width: 768px) {
+  .main-title {
+        font-size: 8dvw;
+    }
+  .button-container {
+      gap: 0.5dvh;
+  }
+  /*.pulsante {
+      padding: 1dvh 0.5rem;
+      font-size: 1.8dvh;
+  }*/
+  .gigacontainer {
+        flex-direction: column; /* Li mette uno sotto l'altro */
+        gap: 1dvh; /* Riduce lo spazio tra i pulsanti */
+  }
+  .gigapulsante {
+      height: 20dvh; /* Diventano un po' più bassi per starci tutti e tre */
+    width: auto;
+  }
+  .pulsating-text{
+    font-size: 8dvw;
+  }
+  .pixel-art {
+    max-height: 20dvh;
+  }
+}
