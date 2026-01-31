@@ -147,25 +147,11 @@ body {
     width: auto;
 }
 
-/* roba per responsive*/
+/* /* roba per responsive*/
 @media (max-width: 768px) {
-  .main-title {
-        font-size: 4vh;
-    }
-  .button-container {
-      gap: 0.5vh;
-  }
-  .pulsante {
-      padding: 1vh 0.5rem;
-      font-size: 1.8vh;
-  }
   .gigacontainer {
         flex-direction: column; /* Li mette uno sotto l'altro */
-        gap: 10px; /* Riduce lo spazio tra i pulsanti */
-  }
-  .gigapulsante {
-      width: 80%; /* Su mobile occupano quasi tutta la larghezza */
-      height: 20vh; /* Diventano un po' più bassi per starci tutti e tre */
+        gap: 1vh; /* Riduce lo spazio tra i pulsanti */
   }
 }
 
@@ -198,14 +184,6 @@ body {
     - 'ease-in-out' è la curva di velocità
     - 'infinite' per ripeterla all'infinito */
   animation: pulse 1.5s ease-in-out infinite;
-}
-@media (max-width: 768px) {
-    .pulsating-text {
-        font-size: 6vw; /* Su mobile usiamo la larghezza per non farlo uscire dai bordi */
-    }
-    .subtitle {
-        font-size: 1rem;
-    }
 }
 
 /*Toolbar settings etc*/
@@ -250,25 +228,6 @@ body {
     transform: scale(1.1);
 }
 
-/* Ottimizzazione per Smartphone */
-@media (max-width: 768px) {
-    .top-right-toolbar {
-        top: 10px;
-        right: 10px;
-        gap: 5px;
-    }
-
-    .mini-btn {
-        width: 30px;
-        height: 30px;
-        font-size: 1rem;
-    }
-    
-    /* Se il titolo pulsante è troppo vicino, abbassiamo un po' il main-title */
-    .pulsating-text {
-        margin-top: 60px; 
-    }
-}
 
 /* GAME PART */ 
 .game-frame {
@@ -707,6 +666,7 @@ body {
 #leaderboardList ol li {
   margin: 6px 0;
 }
+
 
 
 
