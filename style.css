@@ -1,3 +1,5 @@
+@import url("style-notesdisplay.css");
+
 @font-face {
   font-family: 'PixelFont';
   src: url('./fonts/Minecraft.ttf') format('truetype');
@@ -547,6 +549,7 @@ body {
 #leaderboardList ol li {
   margin: 6px 0;
 }
+
 
 
 
