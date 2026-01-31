@@ -1,4 +1,4 @@
-@import url("style-notesdisplay.css");
+@import url("style-notedisplay.css");
 
 @font-face {
   font-family: 'PixelFont';
@@ -549,6 +549,7 @@ body {
 #leaderboardList ol li {
   margin: 6px 0;
 }
+
 
 
 
