@@ -28,7 +28,9 @@ body {
   text-align: center;
   font: var(--font-family);
   flex-direction: column;
-    }
+  height: 100vh; /*100% dello schermo*/
+  overflow: hidden;
+}
 .pagina-verde {
   --sfondo: var(--lime);
 }
@@ -44,15 +46,15 @@ body {
 
 .main-title {
   font-family: var(--font-family);
-  font-size: 3em;
-  margin-bottom: 0.5em;
+  font-size: 7vh;
+  margin-top: 10vh;
   font-weight: 700;
 }
 
 .subtitle {
   font-family: var(--font-family);
-  font-size: 3vh;
-  margin-bottom: 2em;
+  font-size: 4vh;
+  margin-bottom: 5vh;
   font-weight: 300;
   opacity: 0.8;
 }
@@ -60,25 +62,26 @@ body {
 .button-container {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem; /* Spazio tra i bottoni */
+  gap: 2vh; /* Spazio tra i bottoni */
   width: 80%;
   max-width: 400px;
   text-align: center;
+  margin-bottom: 5vh;
   }
 
 .pulsante {
   --color: var(--pink);
   --colorhover: var(--violet);
   display: inline-block; /* Rende il link un blocco per l'applicazione di padding/margini */
-  padding: 1rem 1.5rem;
+  padding: 2.5vh 2.5vh;
   background-color: var(--color);
   color: white; /* Colore del testo bianco */
   text-decoration: none; /* Rimuove la sottolineatura tipica dei link */
-  border-radius: 0.5rem; /* Bordi arrotondati */
+  border-radius: 4vh; /* Bordi arrotondati */
   border: none;
   cursor: pointer;
   font-family: var(--font-family);
-  font-size: 1.5rem;
+  font-size: 3vh;
 }
 .pulsante:hover {
   background-color: var(--colorhover); /* Scurisce al passaggio del mouse */
@@ -108,13 +111,7 @@ body {
   max-width: 1200px;
   margin: 0 auto;
 }
-/* Quando lo schermo è piccolo (Smartphone) */
-@media (max-width: 768px) {
-    .gigacontainer {
-        flex-direction: column; /* Li mette uno sotto l'altro */
-        gap: 10px; /* Riduce lo spazio tra i pulsanti */
-    }
-}
+
 .gigapulsante {
   --color: var(--lime);
   display: inline-block; /* Rende il link un blocco per l'applicazione di padding/margini */
@@ -126,9 +123,9 @@ body {
   border: 0.3rem solid var(--color);
   cursor: pointer;
   font-family: var(--font-family);
-  font-size: 5vh;
-  width: 30vh;
-  height: 40vh;
+  font-size: 4vh;
+  width: 25vh;
+  height: 30vh;
   margin-left: 3rem;
   margin-right: 3rem;
 }
@@ -150,11 +147,26 @@ body {
     width: auto;
 }
 
+/* roba per responsive*/
 @media (max-width: 768px) {
-    .gigapulsante {
-        width: 80%; /* Su mobile occupano quasi tutta la larghezza */
-        height: 20vh; /* Diventano un po' più bassi per starci tutti e tre */
+  .main-title {
+        font-size: 4vh;
     }
+  .button-container {
+      gap: 0.5vh;
+  }
+  .pulsante {
+      padding: 1vh 0.5rem;
+      font-size: 1.8vh;
+  }
+  .gigacontainer {
+        flex-direction: column; /* Li mette uno sotto l'altro */
+        gap: 10px; /* Riduce lo spazio tra i pulsanti */
+  }
+  .gigapulsante {
+      width: 80%; /* Su mobile occupano quasi tutta la larghezza */
+      height: 20vh; /* Diventano un po' più bassi per starci tutti e tre */
+  }
 }
 
 /* Animazione di battito per il titolo */
@@ -179,7 +191,7 @@ body {
   font-weight: bold;
   color: white; 
   text-align: center;
-  margin-top: 5rem;
+  /*margin-top: 5rem;*/
   /* Applica l'animazione:
     - 'pulse' è il nome definito sopra
     - '1s' è la durata
@@ -200,20 +212,20 @@ body {
 /* Contenitore in alto a destra */
 .top-right-toolbar {
     position: fixed;
-    top: 15px;
-    right: 15px;
+    top: 2vh;
+    right: 2vw;
     display: flex;
-    gap: 8px; /* Spazio tra i bottoni */
+    gap: 10px; /* Spazio tra i bottoni */
     z-index: 1000; /* Sempre sopra tutto */
 }
 
 /* Contenitore in alto a sinistra */
 .top-left-toolbar {
     position: fixed;
-    top: 15px;
-    left: 15px;
+    top: 2vh;
+    left: 2vw;
     display: flex;
-    gap: 8px; /* Spazio tra i bottoni */
+    gap: 10px; /* Spazio tra i bottoni */
     z-index: 1000; /* Sempre sopra tutto */
 }
 
@@ -584,10 +596,16 @@ body {
 
 
 .pixel-art {
-        width: 10rem;
-        height: 10rem;
-        image-rendering: pixelated; 
-        image-rendering: -moz-crisp-edges; /* Per Firefox */
+  /*max-height: 20vh;  Non supera mai il 20% dell'altezza schermo */
+  flex-grow: 1;
+  /*width: auto;*/
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  margin: 1vh 0;
+  image-rendering: pixelated; 
+  image-rendering: -moz-crisp-edges; /* Per Firefox */
 
   }
 
@@ -685,29 +703,6 @@ body {
     background: var(--pink);
 }
 
-/* pulsante di BACK*/
-.back-link {
-    position: fixed; 
-    top: 2rem;       /* Distanza dal bordo superiore */
-    left: 2rem;      /* Distanza dal bordo sinistro */
-    
-    font-family: var(--font-family);
-    font-size: 1.5rem;
-    color: white; /* Colore bianco per risaltare sullo sfondo viola */
-    text-decoration: none; /* Rimuove la sottolineatura */
-    
-    padding: 1rem 2rem;
-    background-color: transparent; 
-    border-radius: 5px;
-    
-    /* Assicura che sia sopra gli elementi di sfondo ma sotto il modal */
-    z-index: 50; 
-    transition: color 0.2s;
-}
-
-.back-link:hover {
-    color: var(--lime); /* Cambia colore al passaggio del mouse per feedback */
-}
 
 #leaderboardList ol li {
   margin: 6px 0;
