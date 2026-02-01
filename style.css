@@ -278,8 +278,8 @@ body {
 
 /* GAME PART */ 
 .game-frame {
-  width: 60vw;
-  max-width: 95vw;
+  width: 50dvw;
+  height: 80dvh;
   background: white;
   border: 0.3rem solid var(--darkblue);
   border-radius: 1rem;
@@ -289,13 +289,14 @@ body {
 .game-title {
   font-family: var(--font-family);
   text-align: center;
-  font-size: 3rem;
+  font-size: 4dvh;
   color: var(--darkblue);
   margin-bottom: 0.5rem;
 }
 .game-subtitle {
   font-family: var(--font-family);
   text-align: center;
+  font-size: 3dvh;
   color: var(--darkblue);
   margin-bottom: 0.5rem;
 }
@@ -303,21 +304,21 @@ body {
 /* LED */
 .led-row {
   display: flex;
-  gap: 1rem;
+  gap: 15dvh;
   justify-content: center;
   margin-top: 2rem;
   margin-bottom: 0.5rem;
 }
 .led {
-  width: 24px;
-  height: 24px;
+  width: 5dvh;
+  height: 5dvh;
   border-radius: 50%;
   background: var(--darkblue);
   transition: 0.15s;
 }
 .led--active {
   background: var(--lime);
-  box-shadow: 0 0 10px var(--lime);
+  box-shadow: 0 0 6dvh var(--lime);
 }
 
 
@@ -333,16 +334,11 @@ body {
   flex-direction: column;
   gap: 18px;
 }
-.player-panel-title {
-  font-family: var(--font-family);
-  font-size: 1rem;
-  color: var(--violet);
-  text-transform: uppercase;
-}
 
 .status-text {
   font-family: var(--font-family);
-  min-height: 40px;
+  font-size: 5dvh;
+  margin-top: 4dvh;
   color: var(--violet);
 }
 
@@ -363,6 +359,7 @@ body {
   background: white;
   cursor: pointer;
   transition: 0.12s;
+  margin-top: 4dvh;
 }
 
 .hit-btn-big:active {
@@ -381,13 +378,14 @@ body {
 .life-display {
   font-family: var(--font-family);
   text-align: center;
-  font-size: 2rem;
+  font-size: 7dvh;
   min-height: 40px;
+  margin-top: 2dvh;
 }
 
 .life-heart {
   display: inline-block;
-  margin: 0 5px;
+  margin: 0 1dvh;
   transition: transform 0.2s;
 }
 
@@ -402,10 +400,14 @@ body {
 }
 
 .info-row {
+  position: fixed;
+  bottom: 8dvh;
+  left: 30dvw;
+  right: 30dvw;
   font-family: var(--font-family);
   display: flex;
   justify-content: space-between;
-  font-size: 0.85rem;
+  font-size: 3dvh;
   color: var(--darkblue);
 }
 

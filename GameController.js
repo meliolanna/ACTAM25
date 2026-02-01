@@ -87,8 +87,8 @@ export class GameController {
           this.audio.click();
 
           if (phase === "listen" && beatIndex === 0) {
-            this.view.setStatus("Listen to the 4 beats…");
-          } else if (phase === "input" && beatIndex === 4) {
+            //this.view.setStatus("Listen to the 4 beats…");
+          } else if (phase === "listen" && beatIndex === 3) {
             this.view.setStatus("Now repeat the rhythm!");
           }
           break;

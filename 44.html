@@ -56,6 +56,7 @@
     <div class="game-frame">
     <h1 id="mainTitle" class="game-title">Follow the beat</h1>
     <p id="subTitle" class="game-subtitle">Training to keep on time the beat, increasing the BPM.</p>
+    <div id="statusText" class="status-text">Press START to begin.</div>
   
     <!-- LED -->
     <div class="top-row">
@@ -68,18 +69,12 @@
         </div>
         <!-- Riquadro grafico per il ritmo -->
         <div class="notation-panel">
-          <div class="notation-label">Rhythmic pattern</div>
           <div class="notation-staff" id="notationStaff"></div>
         </div>
       </div>
     </div>
   
-    <div class="layout-main">
-      <!-- PLAYER PANEL -->
-      <section class="player-panel">
-        <div class="player-panel-title">Press the HIT button or the spacebar on time.</div>
-  
-        <div id="statusText" class="status-text">Press START to begin.</div>
+    
   
         <div class="single-btn-wrapper">
           <button id="hitButton" class="hit-btn-big">HIT</button>
@@ -94,19 +89,6 @@
           <span>Round: <span id="roundDisplay">1</span></span>
           <span>Score: <span id="scoreDisplay">0</span></span>
         </div>
-      </section>
-  
-      <!-- START PANEL 
-      <aside class="start-panel">
-        <button id="startButton" class="start-btn">START</button>
-        <p class="small-note">
-          Rules:<br>
-          - You have 3 lives ❤️❤️❤️<br>
-          - You lost one life at every wrong measure<br>
-          - No more live -> Game Over 
-        </p>
-      </aside>-->
-    </div>
   </div>
     <script type="module" src="main.js"></script>
   </body>

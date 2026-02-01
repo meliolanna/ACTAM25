@@ -24,4 +24,17 @@
   .pixel-art {
     max-height: 20dvh;
   }
+
+
+  .game-frame {
+    width: 90dvw;
+    height: 80dvh;
+  }
+
+  .info-row {
+    position: fixed;
+    bottom: 10dvh;
+    left: 7dvw;
+    right: 7dvw;
+  }
 }

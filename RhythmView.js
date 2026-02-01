@@ -85,7 +85,7 @@ export class RhythmView {
     this.lifeContainer.innerHTML = "";
     const hearts = "❤️".repeat(Math.max(0, lives));
     this.lifeContainer.textContent = hearts;
-    this.lifeLabel.textContent = `Lives: ${lives}`;
+    //this.lifeLabel.textContent = `Lives: ${lives}`;
   }
 
   setActiveLed(i) {
