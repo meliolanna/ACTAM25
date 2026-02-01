@@ -38,6 +38,7 @@
 }
 .start-btn--big:hover {
     background: var(--violet);
+    transform: scale(1.1);
 }
 
 .modal--hidden { /* Classe per nascondere il pop-up (attivata via JS) */
@@ -84,6 +85,7 @@
 .start-btn--back:hover {
     background: var(--lime);
     color: var(--darkblue);
+    transform: scale(1.1);
 }
 
 .start-btn--pink {

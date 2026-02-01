@@ -430,6 +430,9 @@ body {
   font-size: 1.2rem;
   cursor: pointer;
 }
+.start-btn:hover{
+  transform: scale(1.1);
+}
 
 .start-btn:disabled {
   background: var(--yellow);
@@ -458,98 +461,7 @@ body {
   }
 
 
-/* --- STILI DEL PANNELLO START --- */
 
-.modal {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.9); /* Sfondo scuro semi-trasparente */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 100; /* Assicurati che sia sopra a tutto */
-}
-
-.modal-content {
-    background: white;
-    padding: 30px 40px;
-    border-radius: 15px;
-    box-shadow: 0 0 20px rgba(255, 255, 255, 0.4);
-    color: var(--darkblue);
-    text-align: center;
-    max-width: 450px;
-    width: 90%;
-    font-family: var(--font-family);
-}
-
-.modal-title {
-    font-family: var(--font-family);
-    font-size: 2.5rem;
-    margin-bottom: 1rem;
-}
-
-.start-btn--big {
-    font-size: 1.5rem;
-    padding: 15px 35px;
-    margin-top: 10px;
-}
-.start-btn--big:hover {
-    background: var(--violet);
-}
-
-.modal--hidden { /* Classe per nascondere il pop-up (attivata via JS) */
-    display: none !important;
-}
-
-.start-panel {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    align-items: center;
-    justify-content: center;
-}
-
-/* Classe generica per nascondere gli schermi */
-.hidden {
-    display: none !important;
-}
-
-.game-over-title {
-    font-family: var(--font-family);
-    color: var(--violet); 
-}
-
-.final-score-text {
-    font-family: var(--font-family);
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: var(--darkblue); 
-    margin-bottom: 2rem;
-}
-
-.modal-button-row { /*play again and back*/
-    display: flex;
-    justify-content: center;
-    gap: 15px;
-    margin-top: 20px;
-}
-
-.start-btn--back {
-    background: var(--darkblue);
-    color: white;
-}
-.start-btn--back:hover {
-    background: var(--lime);
-    color: var(--darkblue);
-}
-
-.start-btn--pink {
-    /* Puoi colorare il pulsante PLAY AGAIN in modo che risalti (es. rosa) */
-    background: var(--pink);
-}
 
 
 #leaderboardList ol li {
