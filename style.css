@@ -88,6 +88,7 @@ body {
 }
 .pulsante:hover {
   background-color: var(--colorhover); /* Scurisce al passaggio del mouse */
+  transform: scale(1.1);
 }
 
 .pulsante--verde {
@@ -137,6 +138,7 @@ body {
   background-color: var(--color); 
   border: 0.3rem solid white;
   color: white;
+  transform: scale(1.1);
 }
 .gigapulsante--rosa {
   --color: var(--pink);
@@ -550,6 +552,7 @@ body {
 #leaderboardList ol li {
   margin: 6px 0;
 }
+
 
 
 
