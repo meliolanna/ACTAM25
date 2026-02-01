@@ -1,5 +1,6 @@
 @import url("style-notedisplay.css");
 @import url("style-device.css");
+@import url("style-modal.css");
 
 @font-face {
   font-family: 'PixelFont';
@@ -552,6 +553,7 @@ body {
 #leaderboardList ol li {
   margin: 6px 0;
 }
+
 
 
 
