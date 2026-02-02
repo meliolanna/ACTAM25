@@ -102,6 +102,7 @@ export class GameController {
         case "miss": {
           if (!this.roundLifeLost) {
             this.roundLifeLost = true;
+            if (this.audio.playError) this.audio.playError(); //suono errore
             const gameOver = this.model.loseLife();
             this.view.renderLives(this.model.lives);
             if (gameOver) {
@@ -204,6 +205,7 @@ export class GameController {
 
       if (!this.roundLifeLost) {
         this.roundLifeLost = true;
+        if (this.audio.playError) this.audio.playError(); //suono errore
         const gameOver = this.model.loseLife();
         this.view.renderLives(this.model.lives);
         if (gameOver) {

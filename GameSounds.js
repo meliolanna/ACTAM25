@@ -74,7 +74,7 @@ export class AudioManager {
 
     
     this.sampleBuffers = new Map(); // name -> AudioBuffer
-    this.samplesToLoad = ["clap", "dog", "cat"];
+    this.samplesToLoad = ["clap", "dog", "cat", "error"];
   }
 
   init() {
@@ -169,6 +169,32 @@ export class AudioManager {
 
     osc.start();
     osc.stop(this.ctx.currentTime + 0.15);
+
+
+
+
   }
+
+  // --------------------------------------------------
+  //  NUOVO METODO: playError()
+  // --------------------------------------------------
+  playError() {
+    if (!this.ctx) return;
+
+    // 1. Proviamo a suonare il sample "error.wav" se è stato caricato
+    const buffer = this.sampleBuffers.get("error");
+    if (buffer) {
+      const src = this.ctx.createBufferSource();
+      const gain = this.ctx.createGain();
+      gain.gain.value = 0.8; // Volume errore
+
+      src.buffer = buffer;
+      src.connect(gain);
+      gain.connect(this.ctx.destination);
+      src.start();
+      return;
+    }
+  }
+  
 }
 
