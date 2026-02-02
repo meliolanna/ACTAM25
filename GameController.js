@@ -29,6 +29,7 @@ export class GameController {
   }
 
   handleStart() {
+    this.audio.stopMenuMusic(); // Ferma la musica del menu quando inizia il gioco
     this.view.hideModal();
     this.audio.init();
     this.model.resetLives();
@@ -224,6 +225,7 @@ export class GameController {
     stopGameOver() {
     if (this.timerId) clearInterval(this.timerId);
 
+    this.audio.playMenuMusic(); // Riprendi la musica del menu
     const finalRound = this.model.round;
     const finalBPM = this.model.bpm;
     const finalScore = this.model.score;
