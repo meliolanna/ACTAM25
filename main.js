@@ -46,7 +46,7 @@ window.addEventListener("load", () => {
     }
   };
 
-  // Se la modalità attuale è nella lista, aggiorna l'HTML
+  // aggiorna l'HTML
   if (gameTexts[mode]) {
       if (titleEl) titleEl.innerText = gameTexts[mode].title;
       if (subTitleEl) subTitleEl.innerText = gameTexts[mode].desc;

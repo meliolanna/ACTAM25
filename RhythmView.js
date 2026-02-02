@@ -46,7 +46,7 @@ export class RhythmView {
   onHit(cb) {
     this.hitBtn.onclick = cb;
   }
-  // !!! NUOVO METODO PER NASCONDERE IL POP-UP
+ 
   // Nasconde il pop-up e mostra il gioco
   hideModal() {
     if (this.gameModal) {
@@ -67,7 +67,7 @@ export class RhythmView {
     }
   }
   
-  // !!! NUOVO: Mostra la schermata iniziale (per il reset)
+  //Mostra la schermata iniziale (per il reset)
   showStartScreen() {
     if (this.gameModal) {
         this.gameModal.classList.remove('modal--hidden');
