@@ -108,6 +108,7 @@ export class GameController {
             if (gameOver) {
               this.view.setStatus("Beat missed! Game Over");
               this.view.flashWrong();
+              if (this.audio.playGameOver) this.audio.playGameOver();
               this.stopGameOver();
               return;
             }
@@ -211,6 +212,7 @@ export class GameController {
         if (gameOver) {
           this.view.flashWrong();
           this.stopGameOver();
+          if (this.audio.playGameOver) this.audio.playGameOver();
           return;
         }
       }

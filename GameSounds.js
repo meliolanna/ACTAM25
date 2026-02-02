@@ -74,7 +74,7 @@ export class AudioManager {
 
     
     this.sampleBuffers = new Map(); // name -> AudioBuffer
-    this.samplesToLoad = ["clap", "dog", "cat", "error"];
+    this.samplesToLoad = ["clap", "dog", "cat", "error", "ui_touch", "gameOver"];
   }
 
   init() {
@@ -175,13 +175,11 @@ export class AudioManager {
 
   }
 
-  // --------------------------------------------------
-  //  NUOVO METODO: playError()
-  // --------------------------------------------------
+  
   playError() {
     if (!this.ctx) return;
 
-    // 1. Proviamo a suonare il sample "error.wav" se è stato caricato
+    
     const buffer = this.sampleBuffers.get("error");
     if (buffer) {
       const src = this.ctx.createBufferSource();
@@ -196,5 +194,43 @@ export class AudioManager {
     }
   }
   
+/*
+   playTouchUI() {
+    if (!this.ctx) return;
+
+    
+    const buffer = this.sampleBuffers.get("ui_touch");
+    if (buffer) {
+      const src = this.ctx.createBufferSource();
+      const gain = this.ctx.createGain();
+      gain.gain.value = 0.8; // Volume touch
+
+      src.buffer = buffer;
+      src.connect(gain);
+      gain.connect(this.ctx.destination);
+      src.start();
+      return;
+    }
+  }
+*/
+
+  playGameOver() {
+    if (!this.ctx) return;
+
+    
+    const buffer = this.sampleBuffers.get("gameOver");
+    if (buffer) {
+      const src = this.ctx.createBufferSource();
+      const gain = this.ctx.createGain();
+      gain.gain.value = 0.8; 
+      src.playbackRate.value = 2.0; 
+      src.buffer = buffer;
+      src.connect(gain);
+      gain.connect(this.ctx.destination);
+      src.start(0,0.90);
+      return;
+    }
+} 
+
 }
 
