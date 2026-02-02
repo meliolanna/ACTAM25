@@ -3,7 +3,7 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/12.8.0/firebas
 import { getFirestore } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-firestore.js";
 import { getAuth, signInAnonymously } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-auth.js";
 
-// INCOLLA QUI la tua config da Firebase Console
+
 const firebaseConfig = {
   apiKey: "AIzaSyANYC7HAmS_ktgxiF5vH6D3M0rMTlyS-jk",
   authDomain: "beat-the-beat-9114f.firebaseapp.com",
