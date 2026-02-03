@@ -79,7 +79,7 @@ body {
   display: inline-block; /* Rende il link un blocco per l'applicazione di padding/margini */
   padding: 2.5dvh 2.5dvh;
   background-color: var(--color);
-  color: white; /* Colore del testo bianco */
+  color: white; 
   text-decoration: none; /* Rimuove la sottolineatura tipica dei link */
   border-radius: 4dvh; /* Bordi arrotondati */
   border: none;
@@ -88,7 +88,7 @@ body {
   font-size: 3dvh;
 }
 .pulsante:hover {
-  background-color: var(--colorhover); /* Scurisce al passaggio del mouse */
+  background-color: var(--colorhover); 
   transform: scale(1.1);
 }
 
@@ -122,9 +122,9 @@ body {
   display: inline-block; /* Rende il link un blocco per l'applicazione di padding/margini */
   padding: 1rem 1.5rem;
   background-color: white;
-  color: var(--color); /* Colore del testo bianco */
+  color: var(--color); 
   text-decoration: none; /* Rimuove la sottolineatura tipica dei link */
-  border-radius: 0.5rem; /* Bordi arrotondati */
+  border-radius: 0.5rem; 
   border: 0.3rem solid var(--color);
   cursor: pointer;
   font-family: var(--font-family);
@@ -149,31 +149,10 @@ body {
 }
 
 .gigapulsante img {
-    max-height: 80%; /* L'immagine occupa al massimo il 60% del pulsante */
+    max-height: 80%; /* L'immagine occupa al massimo del pulsante */
     width: auto;
 }
 
-/* roba per responsive*/
-@media (max-width: 768px) {
-  .main-title {
-        font-size: 4dvh;
-    }
-  .button-container {
-      gap: 0.5dvh;
-  }
-  .pulsante {
-      padding: 1dvh 0.5rem;
-      font-size: 1.8dvh;
-  }
-  .gigacontainer {
-        flex-direction: column; /* Li mette uno sotto l'altro */
-        gap: 10px; /* Riduce lo spazio tra i pulsanti */
-  }
-  .gigapulsante {
-      width: 80%; /* Su mobile occupano quasi tutta la larghezza */
-      height: 20dvh; /* Diventano un po' più bassi per starci tutti e tre */
-  }
-}
 
 /* Animazione di battito per il titolo */
 @keyframes pulse {
@@ -205,14 +184,7 @@ body {
     - 'infinite' per ripeterla all'infinito */
   animation: pulse 1.5s ease-in-out infinite;
 }
-@media (max-width: 768px) {
-    .pulsating-text {
-        font-size: 6vw; /* Su mobile usiamo la larghezza per non farlo uscire dai bordi */
-    }
-    .subtitle {
-        font-size: 1rem;
-    }
-}
+
 
 /*Toolbar settings etc*/
 /* Contenitore in alto a destra */
@@ -320,8 +292,6 @@ body {
   background: var(--lime);
   box-shadow: 0 0 6dvh var(--lime);
 }
-
-
 
 
 
@@ -462,11 +432,10 @@ body {
 
 
 
-
-
 #leaderboardList ol li {
   margin: 6px 0;
 }
+
 
 
 
