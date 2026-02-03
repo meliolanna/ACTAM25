@@ -14,7 +14,7 @@
         <div id="startScreen" class="startScreen">
             <h2 class="modal-title">READY TO PLAY?</h2>
             <div class="start-panel">
-              <button id="modalStartButton" class="start-btn start-btn--big">START</button>
+              <button id="modalStartButton" class="pulsante">START</button> <!-- prima era start-btn--big -->
               <p class="small-note">
                 Press the HIT button or the spacebar on time to play the rhythm. <br>
                   Rules:<br>
@@ -29,22 +29,22 @@
             <p class="modal-description">Your final rhythm level was:</p>
             <p id="finalScore" class="final-score-text">Round 1 @ 60 BPM</p>
 
-            <div id="namePanel" class="hidden" style="margin: 10px 0 18px;">
+            <div id="namePanel" class="hidden" style="margin: 10px 0 18px;"> <!-- ANNA RIGUARDA STE COSE IN PX -->
               <p style="margin-bottom: 8px;">Enter your name to save your score:</p>
-              <input id="playerNameInput" type="text" maxlength="24" placeholder="Your name"
-                style="padding:10px; border-radius:10px; border:1px solid #ccc; width: 80%; max-width: 260px;">
+              <input id="playerNameInput" type="text" maxlength="24" placeholder="Your name" 
+                style="padding:10px; border-radius:10px; border:1px solid #ccc; width: 80%; max-width: 260px; font:Arial;">
              <div style="margin-top: 10px;">
-              <button id="saveScoreBtn" class="start-btn">SAVE SCORE</button>
+              <button id="saveScoreBtn" class="pulsante pulsante--verde">SAVE SCORE</button>
             </div>
           <div id="nameResult" style="margin-top:10px; font-size:0.9rem;"></div>
         </div>
 
         
             <div class="modal-button-row">
-              <button id="modalRestartButton" class="start-btn">PLAY AGAIN</button> 
+              <button id="modalRestartButton" class="pulsante">PLAY AGAIN</button> 
               
               <a href="gameslist.html" class="sound-link">
-                <button class="start-btn start-btn--back">BACK TO MENU</button>
+                <button class="pulsante pulsante--back">BACK TO MENU</button>
               </a>
             </div>
         </div>
@@ -139,4 +139,5 @@
         });
     </script>
   </body>
+
 </html>
