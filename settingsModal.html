@@ -35,3 +35,57 @@
     </div>
   </div>
 </div>
+
+<script type="module" src="main.js"></script>
+
+    <script type="module">
+        import { AudioManager } from './GameSounds.js';
+
+        window.addEventListener('load', () => {
+            
+            const audio = new AudioManager();
+            audio.init(); 
+
+           
+            const unlockAudio = () => {
+                if (!audio.ctx) audio.init();
+                else if (audio.ctx.state === 'suspended') audio.ctx.resume();
+            };
+
+            // 1. GESTIONE DEI PULSANTI UI STANDARD (Start, Save, Restart)
+            
+            document.querySelectorAll('.closeSettingsBtn').forEach(btn => {
+                
+                if(btn.closest('.sound-link')) return;
+
+                btn.addEventListener('click', () => {
+                    unlockAudio();
+                    audio.playTouchUI();
+                });
+            });
+
+            // 2. GESTIONE LINK DI NAVIGAZIONE (Back to Menu)
+            const navLinks = document.querySelectorAll('.sound-link');
+
+            navLinks.forEach(link => {
+                link.addEventListener('click', (event) => {
+                    
+                    event.preventDefault();
+
+                   
+                    unlockAudio();
+                    audio.playTouchUI();
+
+                    // C. Recupera destinazione
+                    const targetUrl = link.getAttribute('href');
+
+                    // D. Aspetta 300ms e vai
+                    setTimeout(() => {
+                        window.location.href = targetUrl;
+                    }, 300);
+                });
+            });
+        });
+    </script>
+  </body>
+</html>

@@ -9,10 +9,8 @@
 
   <body class="pagina-viola">
     
-    <!-- Pannello modal = pannello sopra pre e post gioco -->
     <div id="gameModal" class="modal">
       <div class="modal-content">
-        <!-- Pannello per cominciare -->
         <div id="startScreen" class="startScreen">
             <h2 class="modal-title">READY TO PLAY?</h2>
             <div class="start-panel">
@@ -26,7 +24,6 @@
               </p>
             </div>
         </div>
-        <!-- Pannello gameover e ricominciare -->
         <div id="gameOverScreen" class="hidden">
           <h2 class="modal-title game-over-title">GAME OVER!</h2>
             <p class="modal-description">Your final rhythm level was:</p>
@@ -45,7 +42,8 @@
         
             <div class="modal-button-row">
               <button id="modalRestartButton" class="start-btn">PLAY AGAIN</button> 
-              <a href="gameslist.html">
+              
+              <a href="gameslist.html" class="sound-link">
                 <button class="start-btn start-btn--back">BACK TO MENU</button>
               </a>
             </div>
@@ -58,7 +56,6 @@
     <p id="subTitle" class="game-subtitle">Training to keep on time the beat, increasing the BPM.</p>
     <div id="statusText" class="status-text">Press START to begin.</div>
   
-    <!-- LED -->
     <div class="top-row">
       <div class="beat-panel">
         <div class="led-row">
@@ -67,7 +64,6 @@
           <div class="led" data-index="2"></div>
           <div class="led" data-index="3"></div>
         </div>
-        <!-- Riquadro grafico per il ritmo -->
         <div class="notation-panel">
           <div class="notation-staff" id="notationStaff"></div>
         </div>
@@ -90,12 +86,57 @@
           <span>Score: <span id="scoreDisplay">0</span></span>
         </div>
   </div>
+
     <script type="module" src="main.js"></script>
+
+    <script type="module">
+        import { AudioManager } from './GameSounds.js';
+
+        window.addEventListener('load', () => {
+            
+            const audio = new AudioManager();
+            audio.init(); 
+
+            
+            const unlockAudio = () => {
+                if (!audio.ctx) audio.init();
+                else if (audio.ctx.state === 'suspended') audio.ctx.resume();
+            };
+
+            // 1. GESTIONE DEI PULSANTI UI STANDARD (Start, Save, Restart)
+           
+            document.querySelectorAll('.start-btn').forEach(btn => {
+               
+                if(btn.closest('.sound-link')) return;
+
+                btn.addEventListener('click', () => {
+                    unlockAudio();
+                    audio.playTouchUI();
+                });
+            });
+
+            // 2. GESTIONE LINK DI NAVIGAZIONE (Back to Menu)
+            const navLinks = document.querySelectorAll('.sound-link');
+
+            navLinks.forEach(link => {
+                link.addEventListener('click', (event) => {
+                    
+                    event.preventDefault();
+
+                   
+                    unlockAudio();
+                    audio.playTouchUI();
+
+                   
+                    const targetUrl = link.getAttribute('href');
+
+                    
+                    setTimeout(() => {
+                        window.location.href = targetUrl;
+                    }, 300);
+                });
+            });
+        });
+    </script>
   </body>
-  
 </html>
-
-
-
-
-

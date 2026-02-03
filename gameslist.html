@@ -8,7 +8,6 @@
 </head>
 
 <body>
-  <!-- fixed toolbar on right -->
   <div class="top-right-toolbar">
     <button id="settingsBtn" class="mini-btn">
         <img src="icons/settings-1.png" class="btn-icon" alt="Settings">
@@ -18,80 +17,138 @@
         <img src="icons/trophy-1.png" class="btn-icon" alt="LeaderBoard">
     </button>
 
-    <button id="leaderBtn" class="mini-btn">
+    <button id="infoBtn" class="mini-btn">
         <img src="icons/question-1.png" class="btn-icon" alt="Info">
     </button>
   </div>
 
-  <!-- back button on left -->
   <div class="top-left-toolbar">
-    <a href="index.html">
-    <button href="index.html" id="back" class="mini-btn">
+    <a href="index.html" class="sound-link">
+      <button class="mini-btn">
         <img src="icons/home-1.png" class="btn-icon" alt="Home">
-    </button>
-  </a>
+      </button>
+    </a>
   </div>
 
   <h1 class="main-title">Let's play!</h1>
 
-  <!-- GIOCO COMPLETO -->
-
-  <a id="playAllBtn">
+  <a id="playAllBtn" class="sound-link">
     <button class="pulsante">PLAY ALL THE GAMES</button>
   </a>
 
-  <img class="pixel-art" src="gif/pugile.gif">
+  <img class="pixel-art" src="gif/pugile.gif" alt="Boxer">
 
   <h1 class="subtitle">or practice a single mode:</h1>
 
   <div class="button-container">
-    <a id="mg1Btn">
+    <a id="mg1Btn" class="sound-link">
       <button class="pulsante pulsante--verde">1. Follow the beat</button>
     </a>
 
-    <a id="mg2Btn">
+    <a id="mg2Btn" class="sound-link">
       <button class="pulsante">2. Listen and repeat</button>
     </a>
 
-    <a id="mg3Btn">
+    <a id="mg3Btn" class="sound-link">
       <button class="pulsante pulsante--viola">3. Read the rhythm</button>
     </a>
   </div>
 
+  <div id="leaderboardModal" class="modal modal--hidden">
+    <div class="modal-content">
+      <h2 class="modal-title">LEADERBOARD 🏆</h2>
+      <div id="leaderboardList">Loading...</div>
+      <div class="modal-button-row">
+        <button id="closeLeaderboardBtn" class="start-btn start-btn--back">CLOSE</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="infoModal" class="modal modal--hidden">
+    <div class="modal-content">
+      <h2 class="modal-title">THE BEATERS</h2>
+      <p>Any suggestion?</p>
+      <a href="https://github.com/meliolanna" target="_blank">
+        <button class="start-btn">CONTACT US</button>
+      </a>
+      <div class="modal-button-row">
+        <button id="closeInfoBtn" class="start-btn start-btn--back">CLOSE</button>
+      </div>
+    </div>
+  </div>
+
   <script type="module">
-  
-  import { initLeaderboard } from "./leaderboardUI.js";
-  import { initSettings } from "./settingsUI.js";
-  import { initInfo } from "./infoUI.js";
+    import { initLeaderboard } from "./leaderboardUI.js";
+    import { initSettings } from "./settingsUI.js";
+    import { initInfo } from "./infoUI.js";
+    import { AudioManager } from './GameSounds.js';
 
-  
-  const params = new URLSearchParams(window.location.search);
-  const difficulty = params.get("difficulty") || "medium";
+    // 1. GESTIONE PARAMETRI URL E LINK DINAMICI )
+    const params = new URLSearchParams(window.location.search);
+    const difficulty = params.get("difficulty") || "medium";
 
-  
-  document.getElementById("playAllBtn").href =
-    `44.html?difficulty=${difficulty}&mode=all`;
+    // Imposta gli href dinamici in base alla difficoltà
+    document.getElementById("playAllBtn").href = `44.html?difficulty=${difficulty}&mode=all`;
+    document.getElementById("mg1Btn").href = `44.html?difficulty=${difficulty}&mode=mg1`;
+    document.getElementById("mg2Btn").href = `44.html?difficulty=${difficulty}&mode=mg2`;
+    document.getElementById("mg3Btn").href = `44.html?difficulty=${difficulty}&mode=mg3`;
 
-  document.getElementById("mg1Btn").href =
-    `44.html?difficulty=${difficulty}&mode=mg1`;
+    
+    initLeaderboard();
+    initSettings();
+    initInfo();
 
-  document.getElementById("mg2Btn").href =
-    `44.html?difficulty=${difficulty}&mode=mg2`;
+    // 2. GESTIONE AUDIO 
+    window.addEventListener('load', () => {
+        const audio = new AudioManager();
+        audio.init(); 
 
-  document.getElementById("mg3Btn").href =
-    `44.html?difficulty=${difficulty}&mode=mg3`;
+        
+        const unlockAudio = () => {
+            if (!audio.ctx) audio.init();
+            else if (audio.ctx.state === 'suspended') audio.ctx.resume();
+        };
 
-  
-  initLeaderboard();
-  initSettings();
-  initInfo();
-</script>
+        // A. PULSANTI SEMPLICI (Toolbar, Modali)
+        
+        const simpleButtons = document.querySelectorAll('.mini-btn, .start-btn');
 
+        simpleButtons.forEach(btn => {
+            
+            if (btn.closest('.sound-link')) return;
+
+            btn.addEventListener('click', () => {
+                unlockAudio();
+                audio.playTouchUI();
+            });
+        });
+
+        // B. LINK DI NAVIGAZIONE (Giochi, Back button)
+        
+        const navLinks = document.querySelectorAll('.sound-link');
+
+        navLinks.forEach(link => {
+            link.addEventListener('click', (event) => {
+               
+                event.preventDefault();
+
+               
+                unlockAudio();
+                audio.playTouchUI();
+
+                
+                const targetUrl = link.getAttribute('href');
+
+                
+                if (targetUrl) {
+                    setTimeout(() => {
+                        window.location.href = targetUrl;
+                    }, 300);
+                }
+            });
+        });
+    });
+  </script>
 
 </body>
-
-
-
 </html>
-
-

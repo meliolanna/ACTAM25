@@ -27,7 +27,7 @@
 
   <div class="gigacontainer">
 
-    <a href="gameslist.html?difficulty=easy">
+    <a href="gameslist.html?difficulty=easy" class="sound-link">
       <div class="gigapulsante">
         Easy Peasy
         <p></p>
@@ -35,7 +35,7 @@
       </div>
     </a>
 
-    <a href="gameslist.html?difficulty=medium">
+    <a href="gameslist.html?difficulty=medium" class="sound-link">
       <div class="gigapulsante gigapulsante--rosa">
         Smooth
         <p></p>
@@ -43,7 +43,7 @@
       </div>
     </a>
 
-    <a href="gameslist.html?difficulty=hard">
+    <a href="gameslist.html?difficulty=hard" class="sound-link">
       <div class="gigapulsante gigapulsante--viola">
         On Fire
         <p></p>
@@ -53,23 +53,93 @@
 
   </div>
 
+  <div id="leaderboardModal" class="modal modal--hidden">
+    <div class="modal-content">
+      <h2 class="modal-title">LEADERBOARD 🏆</h2>
+      <div id="leaderboardList">Loading...</div>
+      <div class="modal-button-row">
+        <button id="closeLeaderboardBtn" class="start-btn start-btn--back">CLOSE</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="infoModal" class="modal modal--hidden">
+    <div class="modal-content">
+      <h2 class="modal-title">THE BEATERS</h2>
+      <p>Any suggestion?</p>
+      <a href="https://github.com/meliolanna" target="_blank">
+        <button class="start-btn">CONTACT US</button>
+      </a>
+      <div class="modal-button-row">
+        <button id="closeInfoBtn" class="start-btn start-btn--back">CLOSE</button>
+      </div>
+    </div>
+  </div>
+
 
   <script type="module">
-  import { initLeaderboard } from "./leaderboardUI.js";
-  import { initSettings } from "./settingsUI.js";
-  import { initInfo } from "./infoUI.js";
+    import { initLeaderboard } from "./leaderboardUI.js";
+    import { initSettings } from "./settingsUI.js";
+    import { initInfo } from "./infoUI.js";
+    import { AudioManager } from './GameSounds.js';
 
-  initLeaderboard();
-  initSettings();
-  initInfo();
-</script>
+    
+    initLeaderboard();
+    initSettings();
+    initInfo();
 
+    window.addEventListener('load', () => {
+        const audio = new AudioManager();
+        audio.init(); 
 
+        
+        const unlockAudio = () => {
+            if (!audio.ctx) audio.init();
+            else if (audio.ctx.state === 'suspended') audio.ctx.resume();
+        };
+
+        // -----------------------------------------------------------
+        // 1. GESTIONE PULSANTI "SEMPLICI" )
+        // -----------------------------------------------------------
+        
+        const simpleButtons = document.querySelectorAll('.mini-btn, .start-btn');
+
+        simpleButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                unlockAudio();
+                audio.playTouchUI();
+                
+            });
+        });
+
+        // -----------------------------------------------------------
+        // 2. GESTIONE PULSANTI DI NAVIGAZIONE (Cambiano pagina)
+        // -----------------------------------------------------------
+       
+        const gameLinks = document.querySelectorAll('.gigacontainer a, .sound-link');
+
+        gameLinks.forEach(link => {
+            link.addEventListener('click', (event) => {
+               
+                event.preventDefault();
+
+                
+                unlockAudio();
+                audio.playTouchUI();
+
+                
+                const targetUrl = link.getAttribute('href');
+
+                
+                if (targetUrl) {
+                    setTimeout(() => {
+                        window.location.href = targetUrl;
+                    }, 250);
+                }
+            });
+        });
+    });
+  </script>
 
 </body>
-
-
-
 </html>
-
-

@@ -194,7 +194,7 @@ export class AudioManager {
     }
   }
   
-/*
+
    playTouchUI() {
     if (!this.ctx) return;
 
@@ -203,16 +203,16 @@ export class AudioManager {
     if (buffer) {
       const src = this.ctx.createBufferSource();
       const gain = this.ctx.createGain();
-      gain.gain.value = 0.8; // Volume touch
+      gain.gain.value = 0.9; // Volume touch
 
       src.buffer = buffer;
       src.connect(gain);
       gain.connect(this.ctx.destination);
-      src.start();
+      src.start(0,0.0677); 
       return;
     }
   }
-*/
+
 
   playGameOver() {
     if (!this.ctx) return;
