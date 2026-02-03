@@ -184,7 +184,7 @@ export class AudioManager {
     if (buffer) {
       const src = this.ctx.createBufferSource();
       const gain = this.ctx.createGain();
-      gain.gain.value = 0.8; // Volume errore
+      gain.gain.value = 0.6; // Volume errore
 
       src.buffer = buffer;
       src.connect(gain);
@@ -227,7 +227,7 @@ export class AudioManager {
       src.buffer = buffer;
       src.connect(gain);
       gain.connect(this.ctx.destination);
-      src.start(0,0.90);
+      src.start(this.ctx.currentTime + 0.50,0.9);
       return;
     }
 } 
@@ -251,7 +251,7 @@ playMenuMusic() {
     this.bgmSource.connect(this.bgmGain);
     this.bgmGain.connect(this.ctx.destination);
 
-    this.bgmSource.start(this.ctx.currentTime + 1.55); // Parte dopo 1 secondo e mezzo
+    this.bgmSource.start(this.ctx.currentTime + 2.19); // Parte dopo 1 secondo e mezzo
   }
 
   // --- NUOVO METODO: Ferma la musica ---
