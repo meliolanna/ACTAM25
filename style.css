@@ -73,6 +73,7 @@ body {
   margin-bottom: 5dvh;
   }
 
+/* PULSANTI GENERICI TUTTI*/
 .pulsante {
   --color: var(--pink);
   --colorhover: var(--violet);
@@ -91,6 +92,10 @@ body {
   background-color: var(--colorhover); 
   transform: scale(1.1);
 }
+.pulsante:disabled {
+  background: var(--yellow);
+  cursor: default;
+}
 
 .pulsante--verde {
   --color: var(--lime);
@@ -103,6 +108,14 @@ body {
 .pulsante--viola {
   --color: var(--violet);
   --colorhover: var(--lime);
+}
+.pulsante--back {
+  --color: var(--darkblue);
+  color: white;
+}
+.pulsante--back:hover {
+  background: var(--lime);
+  color: var(--darkblue);
 }
 
 /* Pulsanti livelli in home*/
@@ -381,32 +394,13 @@ body {
   color: var(--darkblue);
 }
 
-/* START BUTTON */
+/* START ? */
 .start-panel {
   display: flex;
   flex-direction: column;
   gap: 12px;
   align-items: center;
   justify-content: center;
-}
-
-.start-btn {
-  font-family: var(--font-family);
-  padding: 12px 28px;
-  background: var(--pink);
-  border: 3px solid white;
-  border-radius: 999px;
-  color: white;
-  font-size: 1.2rem;
-  cursor: pointer;
-}
-.start-btn:hover{
-  transform: scale(1.1);
-}
-
-.start-btn:disabled {
-  background: var(--yellow);
-  cursor: default;
 }
 
 .small-note {
@@ -435,6 +429,7 @@ body {
 #leaderboardList ol li {
   margin: 6px 0;
 }
+
 
 
 
