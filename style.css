@@ -394,21 +394,11 @@ body {
   color: var(--darkblue);
 }
 
-/* START ? */
-.start-panel {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  align-items: center;
-  justify-content: center;
-}
-
 .small-note {
   font-family: var(--font-family);
   font-size: 0.75rem;
   color: var(--darkblue);
 }
-
 
 .pixel-art {
   /*max-height: 20dvh;  Non supera mai il 20% dell'altezza schermo */
@@ -425,10 +415,10 @@ body {
   }
 
 
-
 #leaderboardList ol li {
   margin: 6px 0;
 }
+
 
 
 
