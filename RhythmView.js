@@ -88,11 +88,20 @@ export class RhythmView {
     //this.lifeLabel.textContent = `Lives: ${lives}`;
   }
 
-  setActiveLed(i) {
+  // modificato qui
+  /*setActiveLed(i) {
     this.leds.forEach((led, idx) =>
       led.classList.toggle("led--active", idx === i)
     );
-  }
+  }*/
+  setActiveLed(index, activeClass) {
+    leds.forEach((led, i) => {
+      led.classList.remove('led--active', 'led--listen');
+      if (i === index) {
+        led.classList.add(activeClass);
+      }
+    });
+  }  
 
   flashCorrect() {
     this.hitBtn.classList.add("hit-btn-big--correct");
@@ -205,6 +214,7 @@ export class RhythmView {
 
 
 }
+
 
 
 
