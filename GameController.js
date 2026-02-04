@@ -84,7 +84,9 @@ export class GameController {
       switch (e.type) {
         case "beat": {
           const { beatIndex, ledIndex, phase } = e.payload;
-          this.view.setActiveLed(ledIndex);
+          // modifica da controllare
+          const activeClass = (phase === "listen") ? "led--listen" : "led--active"; //questa riga
+          this.view.setActiveLed(ledIndex, activeClass); //agiunto active class
           this.audio.click();
 
           if (phase === "listen" && beatIndex === 0) {
@@ -251,6 +253,7 @@ export class GameController {
   }
 
 }
+
 
 
 
