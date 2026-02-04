@@ -3,7 +3,8 @@
 //--------------------------------------------------
 export class RhythmView {
   constructor() {
-    this.leds = [...document.querySelectorAll(".led")];
+    //this.leds = [...document.querySelectorAll(".led")];
+    this.leds = document.querySelectorAll(".led");
     //this.startBtn = document.getElementById("startButton");
     // !!! AGGIUNGI I NUOVI RIFERIMENTI:
     this.gameModal = document.getElementById("gameModal");
@@ -96,7 +97,7 @@ export class RhythmView {
   }*/
   setActiveLed(index, activeClass) {
     leds.forEach((led, i) => {
-      
+      led.classList.remove('led--active', 'led--listen');
       if (i === index) {
         led.classList.add(activeClass);
       }
@@ -214,6 +215,7 @@ export class RhythmView {
 
 
 }
+
 
 
 
