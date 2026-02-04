@@ -96,7 +96,7 @@ export class RhythmView {
   }*/
   setActiveLed(index, activeClass) {
     leds.forEach((led, i) => {
-      led.classList.remove('led--active', 'led--listen');
+      
       if (i === index) {
         led.classList.add(activeClass);
       }
@@ -214,6 +214,7 @@ export class RhythmView {
 
 
 }
+
 
 
 
