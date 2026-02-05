@@ -361,14 +361,6 @@ body {
 }
 
 /* VITE */
-.life-display {
-  font-family: var(--font-family);
-  text-align: center;
-  font-size: 7dvh;
-  min-height: 40px;
-  margin-top: 2dvh;
-}
-
 .life-heart {
   display: inline-block;
   margin: 0 1dvh;
@@ -384,6 +376,23 @@ body {
   40%  { transform: scale(1.3) rotate(0deg); color: #ff0000; }
   100% { transform: scale(0) rotate(-45deg); opacity: 0; }
 }
+
+#lives {
+  margin-top: 1dvh;
+  margin-bottom: 1dvh;
+  display: flex;
+  gap: 1dvw; 
+  align-items: center;
+  justify-content: center;
+}
+
+.heart-icon {
+  height: 10dvh; 
+  width: auto;
+  max-height: 300px; /* Limite massimo per PC */
+  image-rendering: pixelated; /* Se sono icone in pixel art, rimarranno nitide */
+}
+
 
 .info-row {
   position: fixed;
@@ -421,6 +430,7 @@ body {
 #leaderboardList ol li {
   margin: 6px 0;
 }
+
 
 
 
