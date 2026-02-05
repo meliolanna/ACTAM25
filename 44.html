@@ -103,8 +103,7 @@
                 else if (audio.ctx.state === 'suspended') audio.ctx.resume();
             };
 
-            // 1. GESTIONE DEI PULSANTI UI STANDARD (Start, Save, Restart)
-           
+            // pulsanti standard 
             document.querySelectorAll('.pulsante').forEach(btn => {
                
                 if(btn.closest('.sound-link')) return;
@@ -115,7 +114,7 @@
                 });
             });
 
-            // 2. GESTIONE LINK DI NAVIGAZIONE (Back to Menu)
+            // pulsanti di navigazione
             const navLinks = document.querySelectorAll('.sound-link');
 
             navLinks.forEach(link => {

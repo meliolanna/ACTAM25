@@ -77,7 +77,7 @@
     initSettings();
     initInfo();
 
-    // 2. GESTIONE AUDIO 
+    //feedback sonoro per i pulsanti
     window.addEventListener('load', () => {
         const audio = new AudioManager();
         audio.init(); 
@@ -88,7 +88,7 @@
             else if (audio.ctx.state === 'suspended') audio.ctx.resume();
         };
 
-        // A. PULSANTI SEMPLICI (Toolbar, Modali)
+         //gestione pulsanti semplici (senza cambio pagina)
         
         const simpleButtons = document.querySelectorAll('.mini-btn, .start-btn');
 
@@ -102,7 +102,7 @@
             });
         });
 
-        // B. LINK DI NAVIGAZIONE (Giochi, Back button)
+         //gestione pulsanti di navigazione (viene ritardato il cambio pagina per permettere il suono)
         
         const navLinks = document.querySelectorAll('.sound-link');
 
