@@ -78,9 +78,9 @@
             else if (audio.ctx.state === 'suspended') audio.ctx.resume();
         };
 
-        // -----------------------------------------------------------
-        // 1. GESTIONE PULSANTI "SEMPLICI" )
-        // -----------------------------------------------------------
+        
+        //gestione pulsanti semplici (senza cambio pagina)
+       
         
         const simpleButtons = document.querySelectorAll('.mini-btn, .start-btn');
 
@@ -92,10 +92,9 @@
             });
         });
 
-        // -----------------------------------------------------------
-        // 2. GESTIONE PULSANTI DI NAVIGAZIONE (Cambiano pagina)
-        // -----------------------------------------------------------
-       
+        
+        //gestione pulsanti di navigazione (viene ritardato il cambio pagina per permettere il suono)
+        
         const gameLinks = document.querySelectorAll('.gigacontainer a, .sound-link');
 
         gameLinks.forEach(link => {
