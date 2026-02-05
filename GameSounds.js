@@ -74,7 +74,7 @@ export class AudioManager {
 
     
     this.sampleBuffers = new Map(); // name -> AudioBuffer
-    this.samplesToLoad = ["clap", "dog", "cat", "error", "ui_touch", "gameOver","menuMusic"];
+    this.samplesToLoad = ["clap", "dog", "cat", "error", "ui_touch", "gameOver","menuMusicLF"];
   }
 
   init() {
@@ -238,7 +238,7 @@ playMenuMusic() {
     // Se sta già suonando, non farne partire un'altra sovrapposta
     if (this.bgmSource) return;
 
-    const buffer = this.sampleBuffers.get("menuMusic");
+    const buffer = this.sampleBuffers.get("menuMusicLF");
     if (!buffer) return;
 
     this.bgmSource = this.ctx.createBufferSource();
