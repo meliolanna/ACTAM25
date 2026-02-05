@@ -78,5 +78,5 @@ window.addEventListener("load", () => {
     model.addMiniGame(new ReadAndPlayMiniGame(grammar));
   }
 
-  view.setStatus(`Press START to begin! (Difficulty: ${difficulty}, Mode: ${mode})`);
+ 
 });
