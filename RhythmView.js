@@ -4,11 +4,8 @@
 export class RhythmView {
   constructor() {
     this.leds = [...document.querySelectorAll(".led")];
-    //this.leds = document.querySelectorAll(".led");
-    //this.startBtn = document.getElementById("startButton");
-    // !!! AGGIUNGI I NUOVI RIFERIMENTI:
     this.gameModal = document.getElementById("gameModal");
-    this.startBtn = document.getElementById("modalStartButton"); // Nuovo ID del pulsante START
+    this.startBtn = document.getElementById("modalStartButton");
     this.startScreen = document.getElementById("startScreen");
     this.gameOverScreen = document.getElementById("gameOverScreen");
     this.modalRestartBtn = document.getElementById("modalRestartButton");
@@ -33,7 +30,9 @@ export class RhythmView {
     this.nameInput = document.getElementById("playerNameInput");
     this.nameSubmitBtn = document.getElementById("saveScoreBtn");
     this.nameResult = document.getElementById("nameResult");
-    this._nameSubmitCb = null;
+    this._nameSubmitLocked = false;
+    this.namePrompt = document.getElementById("namePrompt");
+
 
   }
 
@@ -54,19 +53,6 @@ export class RhythmView {
         this.gameModal.classList.add('modal--hidden');
     }
   }
-  // !!! NUOVO: Mostra la schermata Game Over
-  showGameOverScreen(round, bpm) {
-    if (this.gameModal) {
-        this.gameModal.classList.remove('modal--hidden');
-        
-        // Nascondi START, mostra GAME OVER
-        this.startScreen.classList.add('hidden');
-        this.gameOverScreen.classList.remove('hidden');
-        
-        // Aggiorna il punteggio
-        this.finalScoreEl.textContent = `Round ${round} @ ${bpm} BPM`;
-    }
-  }
   
   //Mostra la schermata iniziale (per il reset)
   showStartScreen() {
@@ -75,6 +61,7 @@ export class RhythmView {
         this.startScreen.classList.remove('hidden');
         this.gameOverScreen.classList.add('hidden');
     }
+    this.showNameForm();
   }
   
   setStatus(t) { this.status.textContent = t; }
@@ -190,16 +177,21 @@ export class RhythmView {
       if (this.namePanel) {
         this.namePanel.classList.toggle("hidden", !askName);
       }
+      if (askName) this.showNameForm();
+
       if (this.nameResult) this.nameResult.textContent = "";
       if (this.nameInput) this.nameInput.value = "";
+      this.setNameSubmitLocked(false);
+
     }
   }
 
   onSubmitName(cb) {
-    this._nameSubmitCb = cb;
     if (!this.nameSubmitBtn) return;
 
     this.nameSubmitBtn.onclick = () => {
+      if (this._nameSubmitLocked) return;
+
       const name = (this.nameInput?.value ?? "").trim();
       if (!name) {
         this.setNameSubmitResult("Insert your name 🙂");
@@ -209,9 +201,32 @@ export class RhythmView {
     };
   }
 
+  setNameSubmitLocked(locked) {
+  this._nameSubmitLocked = !!locked;
+
+  if (this.nameInput) this.nameInput.disabled = this._nameSubmitLocked;
+  if (this.nameSubmitBtn) this.nameSubmitBtn.disabled = this._nameSubmitLocked;
+  }
+
   setNameSubmitResult(msg) {
     if (this.nameResult) this.nameResult.textContent = msg;
   }
+
+hideNameForm() {
+  if (this.namePrompt) this.namePrompt.style.display = "none";
+  if (this.nameInput) this.nameInput.style.display = "none";
+  if (this.nameSubmitBtn) this.nameSubmitBtn.style.display = "none";
+}
+
+showNameForm() {
+  if (this.namePrompt) this.namePrompt.style.display = "";
+  if (this.nameInput) this.nameInput.style.display = "";
+  if (this.nameSubmitBtn) this.nameSubmitBtn.style.display = "";
+}
+
+
+
+
 
 
 }

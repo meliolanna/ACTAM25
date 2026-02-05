@@ -8,12 +8,14 @@ export class GameController {
     this.model = model;
     this.view = view;
     this.audio = audio;
+    this.isRunning = false;
 
     this.timerId = null;
     this.lastBeatTime = 0;
     this.currentBeatIndex = 0;
 
     this.roundLifeLost = false;
+    this._scoreSubmittedThisGameOver = false;
 
     view.onStart(() => this.handleStart());
     // Mostra la schermata START non appena il Controller è inizializzato
@@ -33,10 +35,10 @@ export class GameController {
     this.view.hideModal();
     this.audio.init();
     this.model.resetLives();
+    this.isRunning = true;
     this.view.renderLives(this.model.lives);
     this.model.resetScore();
     this.view.setScore(this.model.score);
-    //this.view.enableStart(false);
     this.model.round = 1;
     this.model.currentMiniGameIndex = 0;
     this.startMiniGameRound();
@@ -146,6 +148,8 @@ export class GameController {
   }
 
   handleHit() {
+    if (!this.isRunning) return;
+
     const mg = this.model.currentMiniGame;
     const now = performance.now();
 
@@ -226,8 +230,9 @@ export class GameController {
   }
 
     stopGameOver() {
+    this.isRunning = false;
     if (this.timerId) clearInterval(this.timerId);
-
+    this._scoreSubmittedThisGameOver = false;
     this.audio.playMenuMusic(); // Riprendi la musica del menu
     const finalRound = this.model.round;
     const finalBPM = this.model.bpm;
@@ -238,16 +243,31 @@ export class GameController {
     this.view.showGameOverScreen(finalRound, finalBPM, finalScore, isAllMode);
 
     if (isAllMode) {
-      this.view.onSubmitName(async (playerName) => {
-        try {
-          await submitScoreIfBest(playerName, finalScore);
-          this.view.setNameSubmitResult("Saved! ✅");
-        } catch (e) {
-          this.view.setNameSubmitResult("Error saving score ❌");
-          console.error(e);
-        }
-      });
+  this.view.onSubmitName(async (playerName) => {
+    // Se già salvato in questo Game Over, blocca doppi invii
+    if (this._scoreSubmittedThisGameOver) {
+      this.view.setNameSubmitResult("Score already saved ✅");
+      return;
     }
+
+    // Blocca UI per impedire cambi nome + doppio click
+    this.view.setNameSubmitLocked(true);
+
+    try {
+      await submitScoreIfBest(playerName, finalScore);
+      this.view.setNameSubmitResult(`Saved as ${playerName} ✅`);
+      this._scoreSubmittedThisGameOver = true;
+      this.view.hideNameForm();
+    } catch (e) {
+      // In caso di errore, permetti di riprovare
+      this.view.setNameSubmitResult("Error saving score ❌");
+      this._scoreSubmittedThisGameOver = false;
+      this.view.setNameSubmitLocked(false);
+      console.error(e);
+    }
+  });
+}
+
 
     this.view.setStatus("Game Over – press START to play again");
     this.view.enableStart(true);

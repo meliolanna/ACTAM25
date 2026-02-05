@@ -30,7 +30,7 @@
             <p id="finalScore" class="final-score-text">Round 1 @ 60 BPM</p>
 
             <div id="namePanel" class="hidden" style="margin: 10px 0 18px;"> <!-- ANNA RIGUARDA STE COSE IN PX -->
-              <p style="margin-bottom: 8px;">Enter your name to save your score:</p>
+              <p id="namePrompt" style="margin-bottom: 8px;">Enter your name to save your score:</p>
               <input id="playerNameInput" type="text" maxlength="24" placeholder="Your name" 
                 style="padding:10px; border-radius:10px; border:1px solid #ccc; width: 80%; max-width: 260px; font:var(--font-family);">
              <div style="margin-top: 10px;">
@@ -103,8 +103,9 @@
                 else if (audio.ctx.state === 'suspended') audio.ctx.resume();
             };
 
-            // pulsanti standard 
-            document.querySelectorAll('.pulsante').forEach(btn => {
+            // 1. GESTIONE DEI PULSANTI UI STANDARD (Start, Save, Restart)
+           
+            document.querySelectorAll('.start-btn').forEach(btn => {
                
                 if(btn.closest('.sound-link')) return;
 
@@ -114,7 +115,7 @@
                 });
             });
 
-            // pulsanti di navigazione
+            // 2. GESTIONE LINK DI NAVIGAZIONE (Back to Menu)
             const navLinks = document.querySelectorAll('.sound-link');
 
             navLinks.forEach(link => {
