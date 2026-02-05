@@ -20,11 +20,7 @@ export class RhythmView {
 
     this.scoreEl = document.getElementById("scoreDisplay");
 
-    this.lifeLabel = document.createElement("div");
-    this.lifeLabel.style.fontSize = "0.8rem";
-    this.lifeLabel.style.marginTop = "4px";
-    this.lifeLabel.style.color = "#555";
-    this.lifeContainer.parentElement.appendChild(this.lifeLabel);
+    this.livesEl = document.getElementById("lives");
 
     this.namePanel = document.getElementById("namePanel");
     this.nameInput = document.getElementById("playerNameInput");
@@ -70,10 +66,20 @@ export class RhythmView {
   enableStart(v) { this.startBtn.disabled = !v; }
 
   renderLives(lives) {
-    this.lifeContainer.innerHTML = "";
-    const hearts = "❤️".repeat(Math.max(0, lives));
-    this.lifeContainer.textContent = hearts;
-    //this.lifeLabel.textContent = `Lives: ${lives}`;
+    if (!this.livesEl) return;
+    this.livesEl.innerHTML = "";
+    const maxLives = 3;
+
+    for (let i = 0; i < maxLives; i++) {
+        const heartImg = document.createElement('img');
+        
+        if (i < lives) {
+            heartImg.src = "icons/life.png"; 
+            heartImg.alt = "Life";
+        } 
+        heartImg.classList.add('heart-icon');
+        livesEl.appendChild(heartImg);
+    }
   }
 
   // modificato qui
@@ -230,6 +236,7 @@ showNameForm() {
 
 
 }
+
 
 
 
