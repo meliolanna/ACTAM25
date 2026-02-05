@@ -3,8 +3,8 @@
 //--------------------------------------------------
 export class RhythmView {
   constructor() {
-    //this.leds = [...document.querySelectorAll(".led")];
-    this.leds = document.querySelectorAll(".led");
+    this.leds = [...document.querySelectorAll(".led")];
+    //this.leds = document.querySelectorAll(".led");
     //this.startBtn = document.getElementById("startButton");
     // !!! AGGIUNGI I NUOVI RIFERIMENTI:
     this.gameModal = document.getElementById("gameModal");
@@ -215,6 +215,7 @@ export class RhythmView {
 
 
 }
+
 
 
 
