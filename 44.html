@@ -8,7 +8,7 @@
   </head>
 
   <body class="pagina-viola">
-    
+
     <div id="gameModal" class="modal">
       <div class="modal-content">
         <div id="startScreen" class="startScreen">
@@ -39,10 +39,10 @@
           <div id="nameResult" style="margin-top:10px; font-size:0.9rem;"></div>
         </div>
 
-        
+
             <div class="modal-button-row">
               <button id="modalRestartButton" class="pulsante">PLAY AGAIN</button> 
-              
+
               <a href="gameslist.html" class="sound-link">
                 <button class="pulsante pulsante--back">BACK TO MENU</button>
               </a>
@@ -50,12 +50,12 @@
         </div>
       </div>
     </div>
-    
+
     <div class="game-frame">
     <h1 id="mainTitle" class="game-title">Follow the beat</h1>
     <p id="subTitle" class="game-subtitle">Training to keep on time the beat, increasing the BPM.</p>
     <div id="statusText" class="status-text">Press START to begin.</div>
-  
+
     <div class="top-row">
       <div class="beat-panel">
         <div class="led-row">
@@ -69,17 +69,17 @@
         </div>
       </div>
     </div>
-  
-    
-  
+
+
+
         <div class="single-btn-wrapper">
           <button id="hitButton" class="hit-btn-big">HIT</button>
         </div>
-  
+
         <div class="life-display">
           <span id="lifeContainer"></span>
         </div>
-  
+
         <div class="info-row">
           <span>BPM: <span id="bpmDisplay">60</span></span>
           <span>Round: <span id="roundDisplay">1</span></span>
@@ -93,20 +93,20 @@
         import { AudioManager } from './GameSounds.js';
 
         window.addEventListener('load', () => {
-            
+
             const audio = new AudioManager();
             audio.init(); 
 
-            
+
             const unlockAudio = () => {
                 if (!audio.ctx) audio.init();
                 else if (audio.ctx.state === 'suspended') audio.ctx.resume();
             };
 
-            // 1. GESTIONE DEI PULSANTI UI STANDARD (Start, Save, Restart)
-           
-            document.querySelectorAll('.start-btn').forEach(btn => {
-               
+            // pulsanti standard 
+            document.querySelectorAll('.pulsante').forEach(btn => {
+
+
                 if(btn.closest('.sound-link')) return;
 
                 btn.addEventListener('click', () => {
@@ -115,22 +115,22 @@
                 });
             });
 
-            // 2. GESTIONE LINK DI NAVIGAZIONE (Back to Menu)
+            // pulsanti di navigazione
             const navLinks = document.querySelectorAll('.sound-link');
 
             navLinks.forEach(link => {
                 link.addEventListener('click', (event) => {
-                    
+
                     event.preventDefault();
 
-                   
+
                     unlockAudio();
                     audio.playTouchUI();
 
-                   
+
                     const targetUrl = link.getAttribute('href');
 
-                    
+
                     setTimeout(() => {
                         window.location.href = targetUrl;
                     }, 300);
@@ -141,4 +141,3 @@
   </body>
 
 </html>
-
