@@ -78,7 +78,7 @@ export class RhythmView {
             heartImg.alt = "Life";
         } 
         heartImg.classList.add('heart-icon');
-        livesEl.appendChild(heartImg);
+        this.livesEl.appendChild(heartImg);
     }
   }
 
@@ -236,6 +236,7 @@ showNameForm() {
 
 
 }
+
 
 
 
