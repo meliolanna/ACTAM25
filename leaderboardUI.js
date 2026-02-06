@@ -1,10 +1,11 @@
 import { fetchTopLeaderboard } from "./leaderboardService.js";
+import { AudioManager } from './GameSounds.js';
 
-/**
- * Inietta il modal nella pagina e configura i pulsanti
- */
+
 export async function initLeaderboard() {
-  // 1. Carica la struttura HTML del modal
+
+  const audio = new AudioManager();
+  await audio.init(); 
   const response = await fetch("leaderboardModal.html");
   const html = await response.text();
   document.body.insertAdjacentHTML("beforeend", html);
@@ -14,7 +15,11 @@ export async function initLeaderboard() {
   const listEl = document.getElementById("leaderboardList");
 
   // Funzioni di controllo
-  const closeModal = () => modal.classList.add("modal--hidden");
+  const closeModal = () => {
+    modal.classList.add("modal--hidden");
+    if (audio.playTouchUI) audio.playTouchUI();
+  };
+
   const openModal = () => {
     modal.classList.remove("modal--hidden");
     loadLeaderboardData(listEl);
