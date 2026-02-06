@@ -26,6 +26,7 @@ export async function initLeaderboard() {
   };
 
   closeBtn.onclick = closeModal;
+  modal.onclick = (e) => closeModal();
 
   // Esportiamo la funzione di apertura globalmente per i pulsanti HTML
   window.openLeaderboard = openModal;
