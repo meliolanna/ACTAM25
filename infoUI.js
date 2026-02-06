@@ -20,10 +20,12 @@ export async function initInfo() {
       if (audio.playTouchUI) audio.playTouchUI();
       modal.classList.add("modal--hidden");
     };
-  
-    modal.onclick = (e) => {
-    if (e.target === modal) modal.classList.add("modal--hidden");
+    
+    
+   modal.onclick = (e) => {
+    if (e.target === modal) {
     if (audio.playTouchUI) audio.playTouchUI();
-      modal.classList.add("modal--hidden");
-    };
+    modal.classList.add("modal--hidden");
+  }
+};
 }
