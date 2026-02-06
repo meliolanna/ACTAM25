@@ -1,5 +1,8 @@
+import { AudioManager } from './GameSounds.js';
+
 const LS_KEY = "btb_input_sound"; // osc | clap | dog | cat
 let previewCtx = null;
+const settingsAudio = new AudioManager();
 
 function getPreviewCtx() {
   if (!previewCtx) {
@@ -48,9 +51,12 @@ function samplePath(value) {
 }
 
 export async function initSettings() {
+
   
   const btn = document.getElementById("settingsBtn");
   if (!btn) return;
+
+   await settingsAudio.init();
 
   
   if (document.getElementById("settingsModal")) {
@@ -82,6 +88,7 @@ function wireSettingsHandlers() {
   }
 
   function close() {
+    if (settingsAudio.playTouchUI) settingsAudio.playTouchUI();
     modal.classList.add("modal--hidden");
   }
 
