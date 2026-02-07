@@ -1,37 +1,33 @@
-import { SoundScheduler, AudioManager } from './GameSounds.js';
-import { GrammarSequence, convertSymbolsToFractions,  
-  convertFractionsToSeconds, buildNotationPattern } from  './MusicalUtilsAndGrammar.js';
+import { BaseRhythmMiniGame } from "./BaseRhythmMiniGame.js";
+import {
+  GrammarSequence,
+  convertSymbolsToFractions,
+  convertFractionsToSeconds,
+  buildNotationPattern
+} from "./MusicalUtilsAndGrammar.js";
+import { SoundScheduler } from "./GameSounds.js";
 
-
-// --------------------------------------------------
-// MINIGIOCO 2: il computer suona un pattern, tu lo ripeti
-//  (versione time-based, compatibile con ottavi / pattern complessi)
-// --------------------------------------------------
-export class PatternRepeatMiniGame {
+export class PatternRepeatMiniGame extends BaseRhythmMiniGame {
   constructor(audioManager, grammar) {
+    super({
+      id: "pattern_repeat",
+      name: "Ripeti il ritmo",
+      totalBeats: 8,
+      timingWindowStrictFraction: 0.10,
+      timingWindowLooseFraction: 0.20,
+      inputStartBeat: 4
+    });
+
     this.audioManager = audioManager;
-
-    this.id = "pattern_repeat";
-    this.name = "Ripeti il ritmo";
-
-    this.totalBeats = 8;              // 4 ascolto + 4 input
-    this.timingWindowStrictFraction = 0.10; // 10% di un beat
-    this.timingWindowLooseFraction  = 0.20; // 20% di un beat (come prima)
 
     this.beatIndex = 0;
     this.grammar = new GrammarSequence(grammar);
 
     this.soundScheduler = null;
     this.patternPlayed = false;
-
-    this.expectedHits = [];
-    this.inputStartTimeMs = null;
-
-    this.notationPattern = [];
   }
 
   generatePattern(bpm) {
-    // 1) simboli terminali
     this.symbolSequence = this.grammar.createSequence();
     const fractionsRaw = convertSymbolsToFractions(this.symbolSequence);
 
@@ -42,118 +38,55 @@ export class PatternRepeatMiniGame {
       totalFraction = 1;
     }
 
-    const fractions = fractionsRaw.map(f => f / totalFraction);
-
-    // durate tra un colpo e il successivo in secondi
+    const fractions = fractionsRaw.map((f) => f / totalFraction);
     const durationsSec = convertFractionsToSeconds(fractions, bpm);
 
-    // scheduler audio del pattern
-    if (!this.audioManager.ctx) {
+    if (!this.audioManager?.ctx) {
       console.warn("AudioContext non inizializzato in AudioManager");
+      this.soundScheduler = null;
+      this.patternPlayed = false;
     } else {
       this.soundScheduler = new SoundScheduler(this.audioManager.ctx, durationsSec);
       this.patternPlayed = false;
     }
 
-    // onsets in ms
-    const onsetsMs = [];
-    let t = 0;
-    for (let i = 0; i < durationsSec.length; i++) {
-      onsetsMs.push(t * 1000);
-      t += durationsSec[i];
-    }
+    this._buildExpectedHitsFromDurations(bpm, durationsSec);
 
-    const beatDurationMs = 60000 / bpm;
-
-    this.expectedHits = onsetsMs.map(tMs => {
-      const seg = Math.min(
-        3,
-        Math.max(0, Math.floor(tMs / beatDurationMs))
-      );
-      return {
-        timeMs: tMs,
-        segmentIndex: seg,
-        matched: false
-      };
-    });
-
-    // pattern grafico per il riquadro
     this.notationPattern = buildNotationPattern(this.symbolSequence, durationsSec);
   }
 
   startRound(gameModel) {
-    this.beatIndex = 0;
-    this.expectedHits = [];
-    this.inputStartTimeMs = null;
-
-    const bpm = gameModel.bpm;
-    this.generatePattern(bpm);
-
-    return {
-      type: "roundStart",
-      payload: {
-        miniGameId: this.id,
-        miniGameName: this.name,
-        patternSymbols: this.symbolSequence,
-        notation: {
-          enabled: true,
-          notes: this.notationPattern
-        }
-      }
-    };
+    // deve includere patternSymbols come prima
+    return this._startRoundCommon(gameModel, {
+      patternSymbols: this.symbolSequence
+    });
   }
 
-  onBeat(gameModel, beatIndex, nowMs) {
-    const events = [];
-    this.beatIndex = beatIndex;
-
-    const prev = beatIndex - 1;
-
-    if (prev >= 4 && prev < this.totalBeats) {
-      const segment = prev - 4;
-      const hasUnmatchedInSegment = this.expectedHits.some(
-        h => h.segmentIndex === segment && !h.matched
-      );
-      if (hasUnmatchedInSegment) {
-        events.push({
-          type: "miss",
-          payload: { beatIndex: prev }
-        });
-      }
-    }
-
-    if (beatIndex === 4 && this.inputStartTimeMs == null) {
+  _maybeSetInputStartTimeOnBeat(beatIndex, nowMs) {
+    if (beatIndex === this.inputStartBeat && this.inputStartTimeMs == null) {
       this.inputStartTimeMs = nowMs;
     }
+  }
 
-    if (beatIndex >= this.totalBeats) {
-      return { type: "roundEnd", payload: { events } };
-    }
-
-    const phase = beatIndex < 4 ? "listen" : "input";
-    const ledIndex = beatIndex % 4;
-
-    events.push({
-      type: "beat",
-      payload: { beatIndex, ledIndex, phase }
-    });
-
+  _onBeatSideEffects(beatIndex, _nowMs) {
     if (beatIndex === 0 && this.soundScheduler && !this.patternPlayed) {
       this.patternPlayed = true;
       this.soundScheduler.play();
     }
+  }
 
-    return { type: "continue", payload: { events } };
+  onBeat(gameModel, beatIndex, nowMs) {
+    return this._onBeatCommon(gameModel, beatIndex, nowMs);
   }
 
   onInput(gameModel, _deltaMs, targetBeatIndex, nowMs) {
     const bpm = gameModel.bpm;
-    const beatDurationMs = 60000 / bpm;
-    const measureDurationMs = 4 * beatDurationMs;
+    const beatDurationMs = this._beatDurationMs(bpm);
+    const measureDurationMs = this._measureDurationMs(bpm);
 
     if (this.inputStartTimeMs == null) {
-      if (typeof targetBeatIndex === "number" && targetBeatIndex >= 4) {
-        const beatOffset = targetBeatIndex - 4;
+      if (typeof targetBeatIndex === "number" && targetBeatIndex >= this.inputStartBeat) {
+        const beatOffset = targetBeatIndex - this.inputStartBeat;
         const beatCenterAbs = nowMs - _deltaMs;
         this.inputStartTimeMs = beatCenterAbs - beatOffset * beatDurationMs;
       } else {
@@ -163,62 +96,11 @@ export class PatternRepeatMiniGame {
 
     const hitTimeMs = nowMs - this.inputStartTimeMs;
 
-    if (hitTimeMs < -beatDurationMs ||
-        hitTimeMs > measureDurationMs + beatDurationMs) {
+    if (hitTimeMs < -beatDurationMs || hitTimeMs > measureDurationMs + beatDurationMs) {
       return { type: "ignore", payload: {} };
     }
 
-    let best = null;
-    for (let i = 0; i < this.expectedHits.length; i++) {
-      const h = this.expectedHits[i];
-      if (h.matched) continue;
-      const d = Math.abs(hitTimeMs - h.timeMs);
-      if (best === null || d < best.distance) {
-        best = { index: i, distance: d, note: h };
-      }
-    }
-
-    if (!best) {
-      return {
-        type: "timingError",
-        payload: { reason: "extra" }
-      };
-    }
-
-        const strictWindowMs = beatDurationMs * this.timingWindowStrictFraction;
-    const looseWindowMs  = beatDurationMs * this.timingWindowLooseFraction;
-
-    if (best.distance <= strictWindowMs) {
-      this.expectedHits[best.index].matched = true;
-      return {
-        type: "score",
-        payload: {
-          kind: "perfect",
-          points: 100
-        }
-      };
-    }
-
-    if (best.distance <= looseWindowMs) {
-      this.expectedHits[best.index].matched = true;
-      return {
-        type: "score",
-        payload: {
-          kind: "good",
-          points: 50
-        }
-      };
-    }
-
-    const reason = hitTimeMs < best.note.timeMs ? "early" : "late";
-    return {
-      type: "timingError",
-      payload: { reason }
-    };
-
-  }
-
-  getId() {
-    return this.id;
+    const best = this._findClosestExpectedHit(hitTimeMs);
+    return this._scoreHitOrTimingError(best, hitTimeMs, beatDurationMs);
   }
 }
