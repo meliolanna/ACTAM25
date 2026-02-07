@@ -16,7 +16,7 @@ window.addEventListener("load", () => {
     else if (audio.ctx.state === "suspended") audio.ctx.resume();
   };
 
-  // pulsanti semplici (toolbar)
+  // toolbar
   const simpleButtons = document.querySelectorAll(".mini-btn, .start-btn");
 
   simpleButtons.forEach(btn => {
