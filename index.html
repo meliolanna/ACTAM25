@@ -57,69 +57,8 @@
   </div>
 
 
-  <script type="module">
-    import { initLeaderboard } from "./leaderboardUI.js";
-    import { initSettings } from "./settingsUI.js";
-    import { initInfo } from "./infoUI.js";
-    import { AudioManager } from './GameSounds.js';
-
-    
-    initLeaderboard();
-    initSettings();
-    initInfo();
-
-    window.addEventListener('load', () => {
-        const audio = new AudioManager();
-        audio.init(); 
-
-        
-        const unlockAudio = () => {
-            if (!audio.ctx) audio.init();
-            else if (audio.ctx.state === 'suspended') audio.ctx.resume();
-        };
-
-        
-        //gestione pulsanti semplici (senza cambio pagina)
-       
-        
-        const simpleButtons = document.querySelectorAll('.mini-btn, .start-btn');
-
-        simpleButtons.forEach(btn => {
-            btn.addEventListener('click', () => {
-                unlockAudio();
-                audio.playTouchUI();
-                
-            });
-        });
-
-        
-        //gestione pulsanti di navigazione (viene ritardato il cambio pagina per permettere il suono)
-        
-        const gameLinks = document.querySelectorAll('.gigacontainer a, .sound-link');
-
-        gameLinks.forEach(link => {
-            link.addEventListener('click', (event) => {
-               
-                event.preventDefault();
-
-                
-                unlockAudio();
-                audio.playTouchUI();
-
-                
-                const targetUrl = link.getAttribute('href');
-
-                
-                if (targetUrl) {
-                    setTimeout(() => {
-                        window.location.href = targetUrl;
-                    }, 250);
-                }
-            });
-        });
-    });
-  </script>
-
+  <script type="module" src="./indexUI.js"></script>
+  
 </body>
 
 </html>
