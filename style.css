@@ -413,14 +413,14 @@ body {
 }
 
 .pixel-art {
-  /*max-height: 20dvh;  Non supera mai il 20% dell'altezza schermo */
-  flex-grow: 1;
-  /*width: auto;*/
-  display: flex;
+  
+  display: block;
   justify-content: center;
   align-items: center;
   overflow: hidden;
-  margin: 1dvh 0;
+  margin: 1dvh auto;
+  max-width: 100%;
+  height: auto;
   image-rendering: pixelated; 
   image-rendering: -moz-crisp-edges; /* Per Firefox */
 
