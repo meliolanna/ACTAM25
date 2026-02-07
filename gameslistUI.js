@@ -3,7 +3,7 @@ import { initSettings } from "./settingsUI.js";
 import { initInfo } from "./infoUI.js";
 import { AudioManager } from "./GameSounds.js";
 
-// 1) Parametri URL + link dinamici
+// Parametri URL + link dinamici
 const params = new URLSearchParams(window.location.search);
 const difficulty = params.get("difficulty") || "medium";
 
@@ -12,12 +12,12 @@ document.getElementById("mg1Btn").href = `44.html?difficulty=${difficulty}&mode=
 document.getElementById("mg2Btn").href = `44.html?difficulty=${difficulty}&mode=mg2`;
 document.getElementById("mg3Btn").href = `44.html?difficulty=${difficulty}&mode=mg3`;
 
-// 2) Init UI modali
+// Init UI modali
 initLeaderboard();
 initSettings();
 initInfo();
 
-// 3) Feedback sonoro pulsanti + ritardo navigazione
+// Feedback sonoro pulsanti + ritardo navigazione
 window.addEventListener("load", () => {
   const audio = new AudioManager();
   audio.init();
@@ -27,11 +27,9 @@ window.addEventListener("load", () => {
     else if (audio.ctx.state === "suspended") audio.ctx.resume();
   };
 
-  // pulsanti semplici (senza cambio pagina)
   const simpleButtons = document.querySelectorAll(".mini-btn, .start-btn");
 
   simpleButtons.forEach(btn => {
-    // se è un link di navigazione lo gestiamo sotto
     if (btn.closest(".sound-link")) return;
 
     btn.addEventListener("click", () => {
