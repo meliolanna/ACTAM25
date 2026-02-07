@@ -1,5 +1,5 @@
 //--------------------------------------------------
-//  GAME MODEL non ho capito cos'è
+//  GAME MODEL
 //--------------------------------------------------
 export class GameModel {
   constructor() {
@@ -54,4 +54,9 @@ export class GameModel {
   addScore(points) {
     this.score += points;
   }
+
+  getMiniGameCount() {
+  return this.miniGames.length;
+}
+
 }

@@ -238,7 +238,7 @@ export class GameController {
     const finalBPM = this.model.bpm;
     const finalScore = this.model.score;
 
-    const isAllMode = (this.model.mode === "all");
+    const isAllMode = (this.model.getMiniGameCount() === 3);
 
     this.view.showGameOverScreen(finalRound, finalBPM, finalScore, isAllMode);
 
