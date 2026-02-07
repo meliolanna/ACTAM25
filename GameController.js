@@ -277,17 +277,17 @@ export class GameController {
   getStatusTexts() {
   const id = this.model.currentMiniGame.getId();
 
-  let listen = "Listen to the 4 beats";
+  let listen = "Listen to the 4 beats...";
   let action = "Now repeat!";
 
   switch (id) {
     case "pattern_repeat":
-      listen = "Listen to the rhythm";
+      listen = "Listen to the rhythm...";
       action = "Now repeat!";
       break;
 
     case "read_and_play":
-      listen = "Read the rhythm";
+      listen = "Read the rhythm...";
       action = "Now play!";
       break;
   }
@@ -297,6 +297,7 @@ export class GameController {
 
 
 }
+
 
 
 
