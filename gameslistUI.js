@@ -7,10 +7,10 @@ import { AudioManager } from "./GameSounds.js";
 const params = new URLSearchParams(window.location.search);
 const difficulty = params.get("difficulty") || "medium";
 
-document.getElementById("playAllBtn").href = `44.html?difficulty=${difficulty}&mode=all`;
-document.getElementById("mg1Btn").href = `44.html?difficulty=${difficulty}&mode=mg1`;
-document.getElementById("mg2Btn").href = `44.html?difficulty=${difficulty}&mode=mg2`;
-document.getElementById("mg3Btn").href = `44.html?difficulty=${difficulty}&mode=mg3`;
+document.getElementById("playAllBtn").href = `gamesPage.html?difficulty=${difficulty}&mode=all`;
+document.getElementById("mg1Btn").href = `gamesPage.html?difficulty=${difficulty}&mode=mg1`;
+document.getElementById("mg2Btn").href = `gamesPage.html?difficulty=${difficulty}&mode=mg2`;
+document.getElementById("mg3Btn").href = `gamesPage.html?difficulty=${difficulty}&mode=mg3`;
 
 // Init UI modali
 initLeaderboard();
