@@ -15,65 +15,67 @@ function pickGrammar(difficulty) {
   return DEFAULT_GRAMMAR; // medium di default
 }
 
-window.addEventListener("load", () => {
+function getParams() {
   const params = new URLSearchParams(window.location.search);
   const difficulty = params.get("difficulty") || "medium";
   const mode = params.get("mode") || "all";
+  return { difficulty, mode };
+}
 
-   
-  // gestione titoli
-  
+function setTitles(mode, gameModes) {
   const titleEl = document.getElementById("mainTitle");
   const subTitleEl = document.getElementById("subTitle");
 
-  // Qui definisci i testi per ogni codice modalità (mg1, mg2, mg3)
-  const gameTexts = {
-    "mg1": { 
-        title: "Follow the Beat", 
-        desc: "Training to keep on time the beat, increasing the BPM." 
-    },
-    "mg2": { 
-        title: "Listen and Repeat", 
-        desc: "Listen to the pattern first, then repeat it accurately." 
-    },
-    "mg3": { 
-        title: "Read the Rhythm", 
-        desc: "Read the notes on the staff and hit the beat." 
-    },
-    "all": {
-        title: "Beat the Beat",
-        desc: "Complete all rhythm challenges in sequence."
-    }
-  };
+  const data = gameModes[mode] ?? gameModes.all;
 
-  // aggiorna l'HTML
-  if (gameTexts[mode]) {
-      if (titleEl) titleEl.innerText = gameTexts[mode].title;
-      if (subTitleEl) subTitleEl.innerText = gameTexts[mode].desc;
-  }
-  
-  
+  if (titleEl) titleEl.innerText = data.title;
+  if (subTitleEl) subTitleEl.innerText = data.desc;
+}
+
+window.addEventListener("load", () => {
+  const { difficulty, mode: rawMode } = getParams();
 
   const grammar = pickGrammar(difficulty);
   const audio = new AudioManager();
+
   const model = new GameModel();
   const view = new RhythmView();
   const controller = new GameController(model, view, audio);
 
-  // Modalità:
-  // all = tutti in sequenza
-  // mg1 / mg2 / mg3 = pratica singolo
-  if (mode === "mg1") {
-    model.addMiniGame(new FourBeatsMetronomeMiniGame());
-  } else if (mode === "mg2") {
-    model.addMiniGame(new PatternRepeatMiniGame(audio, grammar));
-  } else if (mode === "mg3") {
-    model.addMiniGame(new ReadAndPlayMiniGame(grammar));
-  } else {
-    model.addMiniGame(new FourBeatsMetronomeMiniGame());
-    model.addMiniGame(new PatternRepeatMiniGame(audio, grammar));
-    model.addMiniGame(new ReadAndPlayMiniGame(grammar));
-  }
+  const gameModes = {
+    mg1: {
+      title: "Follow the Beat",
+      desc: "Training to keep on time the beat, increasing the BPM.",
+      build: () => [new FourBeatsMetronomeMiniGame()],
+    },
+    mg2: {
+      title: "Listen and Repeat",
+      desc: "Listen to the pattern first, then repeat it accurately.",
+      build: () => [new PatternRepeatMiniGame(audio, grammar)],
+    },
+    mg3: {
+      title: "Read the Rhythm",
+      desc: "Read the notes on the staff and hit the beat.",
+      build: () => [new ReadAndPlayMiniGame(grammar)],
+    },
+    all: {
+      title: "Beat the Beat",
+      desc: "Complete all rhythm challenges in sequence.",
+      build: () => [
+        new FourBeatsMetronomeMiniGame(),
+        new PatternRepeatMiniGame(audio, grammar),
+        new ReadAndPlayMiniGame(grammar),
+      ],
+    },
+  };
 
- 
+  // fallback se mode sconosciuta
+  const mode = gameModes[rawMode] ? rawMode : "all";
+
+  setTitles(mode, gameModes);
+
+  // aggiunta minigames
+  for (const mg of gameModes[mode].build()) {
+    model.addMiniGame(mg);
+  }
 });
