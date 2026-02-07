@@ -16,6 +16,7 @@ window.addEventListener("load", () => {
     btn.addEventListener("click", () => {
       unlockAudio();
       audio.playTouchUI();
+
     });
   });
 
@@ -26,6 +27,9 @@ window.addEventListener("load", () => {
 
       unlockAudio();
       audio.playTouchUI();
+
+       // fadeout sottofondo  
+       audio.stopMenuMusic();
 
       const targetUrl = link.getAttribute("href");
       if (!targetUrl) return;

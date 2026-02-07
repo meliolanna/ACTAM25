@@ -16,6 +16,45 @@ window.addEventListener("load", () => {
     else if (audio.ctx.state === "suspended") audio.ctx.resume();
   };
 
+//  Logica per la musica di sottofondo 
+  const startMusicOnFirstInteraction = () => {
+    unlockAudio(); 
+    
+    // Controlla se esiste la funzione nel tuo AudioManager e la chiama
+    if (audio.playIndexMusic) { 
+        audio.playIndexMusic(); 
+    }
+
+    // Rimuoviamo gli ascoltatori: vogliamo che succeda solo UNA volta
+    document.removeEventListener("click", startMusicOnFirstInteraction);
+    document.removeEventListener("keydown", startMusicOnFirstInteraction);
+    document.removeEventListener("touchstart", startMusicOnFirstInteraction);
+  };
+
+  // Aggiungiamo ascoltatori globali: al primo tocco o tasto premuto, parte la musica
+  document.addEventListener("click", startMusicOnFirstInteraction);
+  document.addEventListener("keydown", startMusicOnFirstInteraction);
+  document.addEventListener("touchstart", startMusicOnFirstInteraction);
+  
+
+
+  const modal = document.getElementById("gameModal"); 
+
+  if (modal) {
+    modal.onclick = (e) => {
+      
+      if (e.target === modal) {
+        unlockAudio();
+        if (audio.playIndexMusic) audio.playIndexMusic();
+      }
+    };
+  }
+
+  audio.playIndexMusic();
+
+
+
+  
   // toolbar
   const simpleButtons = document.querySelectorAll(".mini-btn, .start-btn");
 
@@ -36,12 +75,16 @@ window.addEventListener("load", () => {
       unlockAudio();
       audio.playTouchUI();
 
+     //fadeout 
+
+     audio.stopMenuMusic();
+
       const targetUrl = link.getAttribute("href");
 
       if (targetUrl) {
         setTimeout(() => {
           window.location.href = targetUrl;
-        }, 250);
+        }, 300);
       }
     });
   });

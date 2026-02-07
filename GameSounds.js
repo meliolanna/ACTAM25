@@ -74,7 +74,7 @@ export class AudioManager {
 
     
     this.sampleBuffers = new Map(); // name -> AudioBuffer
-    this.samplesToLoad = ["clap", "dog", "cat", "error", "ui_touch", "gameOver","menuMusicLF"];
+    this.samplesToLoad = ["clap", "dog", "cat", "error", "ui_touch", "gameOver","menuMusicLF","menuMusic"];
   }
 
   init() {
@@ -232,10 +232,65 @@ export class AudioManager {
     }
 } 
 
+
+
+playIndexMusic() {
+    if (!this.ctx) return;
+    
+    //non sovrapporre più istanze della stessa musica
+    if (this.bgmSource) return;
+
+    const buffer = this.sampleBuffers.get("menuMusic");
+    if (!buffer) return;
+
+    this.bgmSource = this.ctx.createBufferSource();
+    this.bgmGain = this.ctx.createGain();
+
+    // filtro passa-basso musica ovattata
+    this.bgmFilter = this.ctx.createBiquadFilter();
+    this.bgmFilter.type = 'lowpass'; 
+    this.bgmFilter.frequency.value = 650; // freq di taglio
+    this.bgmSource.buffer = buffer;
+    this.bgmSource.loop = true; 
+    this.bgmGain.gain.value = 0.2; 
+    this.bgmSource.connect(this.bgmFilter);
+    this.bgmFilter.connect(this.bgmGain);
+    this.bgmGain.connect(this.ctx.destination);
+
+    this.bgmSource.start(); 
+}
+
+
+
+
+playGamesListMusic() {
+    if (!this.ctx) return;
+    
+   
+    if (this.bgmSource) return;
+
+    const buffer = this.sampleBuffers.get("menuMusic");
+    if (!buffer) return;
+
+    this.bgmSource = this.ctx.createBufferSource();
+    this.bgmGain = this.ctx.createGain();
+
+    this.bgmSource.buffer = buffer;
+    this.bgmSource.loop = true; 
+    this.bgmGain.gain.value = 0.3; 
+
+    this.bgmSource.connect(this.bgmGain);
+    this.bgmGain.connect(this.ctx.destination);
+
+    this.bgmSource.start(); 
+  }
+
+
+
 playMenuMusic() {
     if (!this.ctx) return;
     
-    // Se sta già suonando, non farne partire un'altra sovrapposta
+    
     if (this.bgmSource) return;
 
     const buffer = this.sampleBuffers.get("menuMusicLF");
@@ -245,27 +300,26 @@ playMenuMusic() {
     this.bgmGain = this.ctx.createGain();
 
     this.bgmSource.buffer = buffer;
-    this.bgmSource.loop = true; // <--- FONDAMENTALE: Ripete all'infinito
-    this.bgmGain.gain.value = 0.4; // Volume più basso per il sottofondo (0.0 a 1.0)
+    this.bgmSource.loop = true; 
+    this.bgmGain.gain.value = 0.4; 
 
     this.bgmSource.connect(this.bgmGain);
     this.bgmGain.connect(this.ctx.destination);
 
-    this.bgmSource.start(this.ctx.currentTime + 2.19); // Parte dopo 1 secondo e mezzo
+    this.bgmSource.start(this.ctx.currentTime + 2.3); // Parte dopo 1 secondo e mezzo
   }
 
-  // --- NUOVO METODO: Ferma la musica ---
+  //ferma la musica di sottofondo 
   stopMenuMusic() {
     if (this.bgmSource) {
-      // Opzionale: Fade out (sfuma in 0.5 secondi invece di tagliare di colpo)
+      // Fade out 
       try {
         this.bgmGain.gain.setTargetAtTime(0, this.ctx.currentTime, 0.1);
         this.bgmSource.stop(this.ctx.currentTime + 0.5);
       } catch(e) {
-        this.bgmSource.stop(); // Fallback se qualcosa va storto
+        this.bgmSource.stop(); 
       }
       
-      // Resettiamo le variabili
       this.bgmSource = null;
       this.bgmGain = null;
     }
