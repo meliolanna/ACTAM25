@@ -2,7 +2,19 @@ import { AudioManager } from './GameSounds.js';
 
 const LS_KEY = "btb_input_sound"; // osc | clap | dog | cat
 let previewCtx = null;
+
 const settingsAudio = new AudioManager();
+let settingsWired = false;
+
+function ensureAudioUnlocked() {
+  // init() è safe chiamarla più volte
+  settingsAudio.init();
+
+  // Resume se il browser ha sospeso l'audio (molto comune su mobile)
+  if (settingsAudio.ctx && settingsAudio.ctx.state === "suspended") {
+    try { settingsAudio.ctx.resume(); } catch (_) {}
+  }
+}
 
 function getPreviewCtx() {
   if (!previewCtx) {
@@ -21,7 +33,7 @@ async function previewDefaultOsc() {
   const osc = ctx.createOscillator();
   const gain = ctx.createGain();
 
-  // suono simile al default usato in game
+  // suono tipo "default" del gioco
   const t0 = ctx.currentTime;
   osc.frequency.value = 300;
 
@@ -36,7 +48,6 @@ async function previewDefaultOsc() {
   osc.stop(t0 + 0.15);
 }
 
-
 function getDefaultValue() {
   return localStorage.getItem(LS_KEY) || "osc";
 }
@@ -46,25 +57,22 @@ function setValue(v) {
 }
 
 function samplePath(value) {
-  
   return `samples/${value}.wav`;
 }
 
 export async function initSettings() {
-
-  
   const btn = document.getElementById("settingsBtn");
   if (!btn) return;
 
-   await settingsAudio.init();
+  ensureAudioUnlocked();
 
-  
+  // Se il modal esiste già, non rifetchare
   if (document.getElementById("settingsModal")) {
     wireSettingsHandlers();
     return;
   }
 
-  
+  // Carica e inietta il fragment HTML
   const res = await fetch("./settingsModal.html");
   const html = await res.text();
   document.body.insertAdjacentHTML("beforeend", html);
@@ -73,21 +81,27 @@ export async function initSettings() {
 }
 
 function wireSettingsHandlers() {
+  if (settingsWired) return;
+  settingsWired = true;
+
   const modal = document.getElementById("settingsModal");
   const closeBtn = document.getElementById("closeSettingsBtn");
   const previewBtn = document.getElementById("previewSoundBtn");
   const btn = document.getElementById("settingsBtn");
 
   function open() {
+    ensureAudioUnlocked();
+    if (settingsAudio.playTouchUI) settingsAudio.playTouchUI();
     modal.classList.remove("modal--hidden");
 
-    
+    // preseleziona radio in base al valore salvato
     const current = getDefaultValue();
     const radio = modal.querySelector(`input[name="inputSound"][value="${current}"]`);
     if (radio) radio.checked = true;
   }
 
   function close() {
+    ensureAudioUnlocked();
     if (settingsAudio.playTouchUI) settingsAudio.playTouchUI();
     modal.classList.add("modal--hidden");
   }
@@ -95,33 +109,32 @@ function wireSettingsHandlers() {
   btn.addEventListener("click", open);
   closeBtn.addEventListener("click", close);
 
-  
+  // click fuori dal pannello chiude
   modal.addEventListener("click", (e) => {
     if (e.target === modal) close();
   });
 
-  
+  // salva scelta in localStorage
   modal.querySelectorAll(`input[name="inputSound"]`).forEach((r) => {
     r.addEventListener("change", () => {
       setValue(r.value);
     });
   });
 
-  
+  // preview
   previewBtn.addEventListener("click", () => {
-  const sel = modal.querySelector(`input[name="inputSound"]:checked`)?.value || "osc";
+    ensureAudioUnlocked();
+    const sel = modal.querySelector(`input[name="inputSound"]:checked`)?.value || "osc";
 
-  if (sel === "osc") {
-    previewDefaultOsc();
-    return;
-  }
+    if (sel === "osc") {
+      previewDefaultOsc();
+      return;
+    }
 
-  const a = new Audio(`samples/${sel}.wav`);
-  a.currentTime = 0;
-  a.play();
-});
-
+    const a = new Audio(samplePath(sel));
+    a.currentTime = 0;
+    a.play();
+  });
 
   
-  window.openSettings = open;
 }
