@@ -56,78 +56,8 @@
 
   
 
-  <script type="module">
-    import { initLeaderboard } from "./leaderboardUI.js";
-    import { initSettings } from "./settingsUI.js";
-    import { initInfo } from "./infoUI.js";
-    import { AudioManager } from './GameSounds.js';
+  <script type="module" src="./gameslistUI.js"></script>
 
-    // 1. GESTIONE PARAMETRI URL E LINK DINAMICI )
-    const params = new URLSearchParams(window.location.search);
-    const difficulty = params.get("difficulty") || "medium";
-
-    // Imposta gli href dinamici in base alla difficoltà
-    document.getElementById("playAllBtn").href = `44.html?difficulty=${difficulty}&mode=all`;
-    document.getElementById("mg1Btn").href = `44.html?difficulty=${difficulty}&mode=mg1`;
-    document.getElementById("mg2Btn").href = `44.html?difficulty=${difficulty}&mode=mg2`;
-    document.getElementById("mg3Btn").href = `44.html?difficulty=${difficulty}&mode=mg3`;
-
-    
-    initLeaderboard();
-    initSettings();
-    initInfo();
-
-    //feedback sonoro per i pulsanti
-    window.addEventListener('load', () => {
-        const audio = new AudioManager();
-        audio.init(); 
-
-        
-        const unlockAudio = () => {
-            if (!audio.ctx) audio.init();
-            else if (audio.ctx.state === 'suspended') audio.ctx.resume();
-        };
-
-         //gestione pulsanti semplici (senza cambio pagina)
-        
-        const simpleButtons = document.querySelectorAll('.mini-btn, .start-btn');
-
-        simpleButtons.forEach(btn => {
-            
-            if (btn.closest('.sound-link')) return;
-
-            btn.addEventListener('click', () => {
-                unlockAudio();
-                audio.playTouchUI();
-            });
-        });
-
-         //gestione pulsanti di navigazione (viene ritardato il cambio pagina per permettere il suono)
-        
-        const navLinks = document.querySelectorAll('.sound-link');
-
-        navLinks.forEach(link => {
-            link.addEventListener('click', (event) => {
-               
-                event.preventDefault();
-
-               
-                unlockAudio();
-                audio.playTouchUI();
-
-                
-                const targetUrl = link.getAttribute('href');
-
-                
-                if (targetUrl) {
-                    setTimeout(() => {
-                        window.location.href = targetUrl;
-                    }, 300);
-                }
-            });
-        });
-    });
-  </script>
 
 </body>
 
