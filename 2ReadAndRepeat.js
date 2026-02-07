@@ -182,4 +182,8 @@ export class ReadAndPlayMiniGame {
     };
 
   }
+
+  getId() {
+    return this.id;
+  }
 }

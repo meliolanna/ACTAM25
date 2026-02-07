@@ -55,14 +55,15 @@ export class GameController {
     this.view.setBpm(bpm);
     this.view.setRound(this.model.round);
 
-    // Gestione notazione: se il minigioco la espone, la disegniamo
+    // Printa il pattern ritmico
     if (info && info.payload && info.payload.notation && info.payload.notation.enabled) {
       this.view.renderNotation(info.payload.notation.notes);
     } else {
       this.view.clearNotation();
     }
 
-    this.view.setStatus("Listen to the 4 beats...");
+    const texts = this.getStatusTexts();
+    this.view.setStatus(texts.listen);
 
     if (this.timerId) clearInterval(this.timerId);
 
@@ -76,9 +77,7 @@ export class GameController {
   tick() {
     const mg = this.model.currentMiniGame;
     const now = performance.now();
-
     const res = mg.onBeat(this.model, this.currentBeatIndex, now);
-
     this.lastBeatTime = now;
     const events = (res && res.payload && res.payload.events) || [];
 
@@ -86,16 +85,16 @@ export class GameController {
       switch (e.type) {
         case "beat": {
           const { beatIndex, ledIndex, phase } = e.payload;
-          // modifica da controllare
+
+          //gestione led
           const activeClass = (phase === "listen"|| phase === "read") ? 'led--listen' : 'led--active'; //questa riga
-          this.view.setActiveLed(ledIndex, activeClass); //agiunto active class
-          //this.view.setActiveLed(ledIndex); 
+          this.view.setActiveLed(ledIndex, activeClass); 
           this.audio.click();
 
-          if (phase === "listen" && beatIndex === 0) {
-            //this.view.setStatus("Listen to the 4 beats…");
-          } else if (phase === "listen" && beatIndex === 3) {
-            this.view.setStatus("Now repeat the rhythm!");
+          // Messaggio 'now play/repeat'
+          const texts = this.getStatusTexts();
+            if ((phase === "listen"|| phase === "read") && beatIndex === 3) {
+            this.view.setStatus(texts.action);
           }
           break;
         }
@@ -105,6 +104,7 @@ export class GameController {
           break;
         }
 
+        
         case "miss": {
           if (!this.roundLifeLost) {
             this.roundLifeLost = true;
@@ -131,7 +131,7 @@ export class GameController {
 
       const prevIndex = this.model.currentMiniGameIndex;
       this.model.nextMiniGame();
-
+      
       if (prevIndex === this.model.miniGames.length - 1) {
         this.model.nextRound();
       }
@@ -272,6 +272,29 @@ export class GameController {
     this.view.setStatus("Game Over – press START to play again");
     this.view.enableStart(true);
   }
+
+
+  getStatusTexts() {
+  const id = this.model.currentMiniGame.getId();
+
+  let listen = "Listen to the 4 beats";
+  let action = "Now repeat!";
+
+  switch (id) {
+    case "pattern_repeat":
+      listen = "Listen to the rhythm";
+      action = "Now repeat!";
+      break;
+
+    case "read_and_play":
+      listen = "Read the rhythm";
+      action = "Now play!";
+      break;
+  }
+
+  return { listen, action };
+}
+
 
 }
 

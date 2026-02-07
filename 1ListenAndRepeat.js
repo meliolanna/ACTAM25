@@ -217,4 +217,8 @@ export class PatternRepeatMiniGame {
     };
 
   }
+
+  getId() {
+    return this.id;
+  }
 }

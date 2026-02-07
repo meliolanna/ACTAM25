@@ -174,4 +174,8 @@ export class FourBeatsMetronomeMiniGame {
     };
 
   }
+
+  getId() {
+    return this.id;
+  }
 }
