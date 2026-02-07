@@ -7,10 +7,9 @@ const settingsAudio = new AudioManager();
 let settingsWired = false;
 
 function ensureAudioUnlocked() {
-  // init() è safe chiamarla più volte
   settingsAudio.init();
 
-  // Resume se il browser ha sospeso l'audio (molto comune su mobile)
+  // Resume se il browser ha sospeso l'audio
   if (settingsAudio.ctx && settingsAudio.ctx.state === "suspended") {
     try { settingsAudio.ctx.resume(); } catch (_) {}
   }
