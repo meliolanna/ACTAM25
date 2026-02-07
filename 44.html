@@ -87,56 +87,8 @@
   </div>
 
     <script type="module" src="main.js"></script>
+    <script type="module" src="./44UI.js"></script>
 
-    <script type="module">
-        import { AudioManager } from './GameSounds.js';
-
-        window.addEventListener('load', () => {
-
-            const audio = new AudioManager();
-            audio.init(); 
-
-
-            const unlockAudio = () => {
-                if (!audio.ctx) audio.init();
-                else if (audio.ctx.state === 'suspended') audio.ctx.resume();
-            };
-
-            // pulsanti standard 
-            document.querySelectorAll('.pulsante').forEach(btn => {
-
-
-                if(btn.closest('.sound-link')) return;
-
-                btn.addEventListener('click', () => {
-                    unlockAudio();
-                    audio.playTouchUI();
-                });
-            });
-
-            // pulsanti di navigazione
-            const navLinks = document.querySelectorAll('.sound-link');
-
-            navLinks.forEach(link => {
-                link.addEventListener('click', (event) => {
-
-                    event.preventDefault();
-
-
-                    unlockAudio();
-                    audio.playTouchUI();
-
-
-                    const targetUrl = link.getAttribute('href');
-
-
-                    setTimeout(() => {
-                        window.location.href = targetUrl;
-                    }, 300);
-                });
-            });
-        });
-    </script>
   </body>
 
 
