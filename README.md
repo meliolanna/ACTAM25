@@ -50,7 +50,14 @@ The algorithm is a tree that uses some rules to implement a pattern: the whole m
 The leaf rhythms are mapped with their vlaues, so that at the end the generated pattern can be represented in time multiplying the relative durations by the duration of each beat, according to the tempo (speed) that is currently playing. 
 
 ### Mini games
-These patterns are generated into the game every time a measure is needed. In fact, the 
+These patterns are generated into the game every time a measure is needed. In fact, the three minigames that compose the steps of the main game are all based on a rhythmic sequence, but the second and the third use this algorithm to generate their sequence, always as new. 
+The logic of each minigame is common, reason why they all inherit and implement from the abstract class `0BaseRhythmMiniGame.js`: they contains 8 beats, 4 played by the game as out counting or as pattern listening, and 4 in which the game is expecting an input from the user. 
+1. The first minigame `1FollowTheBeat.js` contains as the played sequence only the 4 beats as quarter notes, and is expecting so this specific frequence as input.
+2. The second minigame `2ListenAndRepeat.js` generates the sequence, plays it and then expects this specific pattern as an input.
+3. The third minigame `3ReadAndRepeat.js` generates the sequence without playing but just counting out the 4 beats and then expects the input.
+
+
+
 
 
 
