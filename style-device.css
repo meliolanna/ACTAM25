@@ -16,7 +16,7 @@
         gap: 1dvh; /* Riduce lo spazio tra i pulsanti */
   }
   .gigapulsante {
-      height: 5dvh; /* Diventano un po' più bassi per starci tutti e tre */
+      height: 3dvh; /* Diventano un po' più bassi per starci tutti e tre */
     width: auto;
   }
   .pulsating-text{
@@ -26,12 +26,6 @@
     max-height: 20dvh;
   }
 
-
-  .game-frame {
-    width: 90dvw;
-    height: 80dvh;
-  }
-
   .info-row {
     position: fixed;
     bottom: 10dvh;
@@ -39,28 +33,34 @@
     right: 7dvw;
   }
 
+  /* GAME PART */ 
+  .game-frame {
+    width: 90dvw;
+    height: 85dvh;
+  }
+  
+  .game-title {
+    font-size: 2dvh;
+  }
+  .game-subtitle {
+    font-size: 1dvh;
+    color: var(--darkblue);
+  }
+
     /* LED */
   .led-row {
-    display: flex;
     gap: 2dvw;
-    justify-content: center;
-    margin-top: 2rem;
-    margin-bottom: 0.5rem;
   }
   .led {
     width: 5dvw;
     height: 5dvw;
-    border-radius: 50%;
-    background: var(--darkblue);
-    transition: 0.15s;
   }
     .status-text {
-    font-family: var(--font-family);
     font-size: 2dvh;
     margin-top: 3dvh;
-    color: var(--violet);
   }
 }
+
 
 
 
