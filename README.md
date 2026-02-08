@@ -70,8 +70,10 @@ Then, the rank can always be seen by the button on the right top. By hitting the
 The Firebase configuration is set in `firebaseClient.js`, then the communication, the savings and the readings are defined in `leaderboardService.js`.
 
 ### Sounds 
-Next to the rank button, there is the settings button that opens the overpage `settingsModal.html` using the script `settingsUI.js`. Here the user can change their hit input sound choosing between four sounds: synth, clap, dog and cat. 
-This choice is set in the class `GameSounds.js`, in which are defined the functions to implement the click sounds of the buttons and the sounds of the games as the metronome, the input, the error sound, the game over sound and so on.
+Next to the rank button, there is the settings button that opens the overpage `settingsModal.html` using the script `settingsUI.js`. Here the user can change their hit input sound choosing between four sounds: synth, clap, dog and cat.  
+All sounds are handled through the Web Audio API: audio buffers are loaded at startup and then played programmatically to guarantee low latency and precise timing, which is essential for a rhythm game.  
+Sound logic is implemented in the class `GameSounds.js`, which defines the functions used for button clicks, metronome, hit input, error feedback and game over sounds.
+
 
 
 ## Challenges
@@ -92,3 +94,4 @@ ___
     Finished in February 2026.
   </i></sub>
 </p>
+
