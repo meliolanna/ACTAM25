@@ -16,7 +16,7 @@
         gap: 1dvh; /* Riduce lo spazio tra i pulsanti */
   }
   .gigapulsante {
-      height: 20dvh; /* Diventano un po' più bassi per starci tutti e tre */
+      height: 5dvh; /* Diventano un po' più bassi per starci tutti e tre */
     width: auto;
   }
   .pulsating-text{
@@ -39,4 +39,5 @@
     right: 7dvw;
   }
 }
+
 
