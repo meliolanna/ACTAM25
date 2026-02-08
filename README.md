@@ -42,7 +42,8 @@ In addition to the main game, it is possible to play each single mini-game only 
 
 ## Implementation
 The web application is implemented mainly by HTML, CSS and JavaScript code. 
-The first page that the user can open contains the three buttons to choose the level of difficulty of the game. In fact, for each level a different grammar is used to generate randomly the single measure that the user has tto repeat or read.
+The first page that the user can open contains the three buttons to choose the level of difficulty of the game. In fact, for each level a different grammar is used by an algorithm to generate randomly the single measure that the user has tto repeat or read.
+
 
 
 
