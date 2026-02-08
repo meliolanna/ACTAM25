@@ -85,9 +85,15 @@ The main challenges we found implementing our idea follow here.
 Hoping we made you curious to try the game, [this is the link to the GitHub Page to play](https://meliolanna.github.io/ACTAM25/index.html).
 
 
---- 
-BEAT THE BEAT - Academic project implemented by Marzola Pier Matteo, Melioli Anna Chiara and Tortorella Elena.
+___
+<p>
+  <sub><i>
+    BEAT THE BEAT - Academic project implemented by Marzola Pier Matteo, Melioli Anna Chiara and Tortorella Elena.
 
 Finished in February 2026.
 
 GIF illustrations by @coi_illustrazioni.
+  </i></sub>
+</p>
+
+
