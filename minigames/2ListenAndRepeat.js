@@ -1,11 +1,11 @@
-import { BaseRhythmMiniGame } from "./BaseRhythmMiniGame.js";
+import { BaseRhythmMiniGame } from "./0BaseRhythmMiniGame.js";
 import {
   GrammarSequence,
   convertSymbolsToFractions,
   convertFractionsToSeconds,
   buildNotationPattern
-} from "./MusicalUtilsAndGrammar.js";
-import { SoundScheduler } from "./GameSounds.js";
+} from "../MusicalUtilsAndGrammar.js";
+import { SoundScheduler } from "../GameSounds.js";
 
 export class PatternRepeatMiniGame extends BaseRhythmMiniGame {
   constructor(audioManager, grammar) {
@@ -104,3 +104,4 @@ export class PatternRepeatMiniGame extends BaseRhythmMiniGame {
     return this._scoreHitOrTimingError(best, hitTimeMs, beatDurationMs);
   }
 }
+
