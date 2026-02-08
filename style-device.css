@@ -38,6 +38,29 @@
     left: 7dvw;
     right: 7dvw;
   }
+
+    /* LED */
+  .led-row {
+    display: flex;
+    gap: 2dvw;
+    justify-content: center;
+    margin-top: 2rem;
+    margin-bottom: 0.5rem;
+  }
+  .led {
+    width: 5dvw;
+    height: 5dvw;
+    border-radius: 50%;
+    background: var(--darkblue);
+    transition: 0.15s;
+  }
+    .status-text {
+    font-family: var(--font-family);
+    font-size: 2dvh;
+    margin-top: 3dvh;
+    color: var(--violet);
+  }
 }
+
 
 
