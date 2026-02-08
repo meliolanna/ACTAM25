@@ -88,12 +88,10 @@ Hoping we made you curious to try the game, [this is the link to the GitHub Page
 ___
 <p>
   <sub><i>
-    BEAT THE BEAT - Academic project implemented by Marzola Pier Matteo, Melioli Anna Chiara and Tortorella Elena.
-
-Finished in February 2026.
-
-GIF illustrations by @coi_illustrazioni.
+    BEAT THE BEAT - Academic project implemented by Marzola Pier Matteo, Melioli Anna Chiara and Tortorella Elena. <br>
+    Finished in February 2026.
   </i></sub>
 </p>
+
 
 
