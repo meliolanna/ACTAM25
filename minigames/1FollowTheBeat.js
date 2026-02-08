@@ -1,4 +1,4 @@
-import { BaseRhythmMiniGame } from "./BaseRhythmMiniGame.js";
+import { BaseRhythmMiniGame } from "./0BaseRhythmMiniGame.js";
 import {
   convertSymbolsToFractions,
   convertFractionsToSeconds,
@@ -57,3 +57,4 @@ export class FourBeatsMetronomeMiniGame extends BaseRhythmMiniGame {
     return this._scoreHitOrTimingError(best, hitTimeMs, beatDurationMs);
   }
 }
+
