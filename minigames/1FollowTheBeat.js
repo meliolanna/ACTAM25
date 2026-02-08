@@ -3,7 +3,7 @@ import {
   convertSymbolsToFractions,
   convertFractionsToSeconds,
   buildNotationPattern
-} from "./MusicalUtilsAndGrammar.js";
+} from "../MusicalUtilsAndGrammar.js";
 
 export class FourBeatsMetronomeMiniGame extends BaseRhythmMiniGame {
   constructor() {
@@ -57,4 +57,5 @@ export class FourBeatsMetronomeMiniGame extends BaseRhythmMiniGame {
     return this._scoreHitOrTimingError(best, hitTimeMs, beatDurationMs);
   }
 }
+
 
