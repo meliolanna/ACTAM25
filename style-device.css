@@ -11,6 +11,7 @@
       font-size: 1.8dvh;
   }*/
   .gigacontainer {
+        flex-wrap: wrap;
         flex-direction: column; /* Li mette uno sotto l'altro */
         gap: 1dvh; /* Riduce lo spazio tra i pulsanti */
   }
@@ -38,3 +39,4 @@
     right: 7dvw;
   }
 }
+
