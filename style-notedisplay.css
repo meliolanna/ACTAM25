@@ -154,6 +154,22 @@
   display: block;
 }
 
+/* Indicatore "3" per le terzine */
+.note--to::before {
+  content: "3";          
+  position: absolute;
+  top: -12px;           
+  left: 50%;             
+  transform: translateX(-20%); 
+  font-family: var(--font-family, sans-serif); 
+  font-size: 0.7rem;      
+  font-weight: bold;
+  font-style: italic;     
+  color: var(--darkblue); 
+  z-index: 10;           
+  pointer-events: none;
+}
+
 .note--to .note-flag {
   display: block;
 }
