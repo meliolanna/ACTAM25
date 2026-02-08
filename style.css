@@ -32,7 +32,8 @@ body {
   text-align: center;
   font: var(--font-family);
   flex-direction: column;
-  height: 100dvh; /*100% dello schermo*/
+  height: 100dvh; 
+  width: 100dvw;
   overflow: hidden;
 }
 .pagina-verde {
@@ -430,6 +431,7 @@ body {
 #leaderboardList ol li {
   margin: 6px 0;
 }
+
 
 
 
