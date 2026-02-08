@@ -1,5 +1,6 @@
 import { AudioManager } from './GameSounds.js';
 
+const previewCache = new Map(); // value -> Audio()
 const LS_KEY = "btb_input_sound"; // osc | clap | dog | cat
 let previewCtx = null;
 
@@ -90,6 +91,7 @@ function wireSettingsHandlers() {
 
   function open() {
     ensureAudioUnlocked();
+    warmupPreviewAudio();
     if (settingsAudio.playTouchUI) settingsAudio.playTouchUI();
     modal.classList.remove("modal--hidden");
 
@@ -130,10 +132,23 @@ function wireSettingsHandlers() {
       return;
     }
 
-    const a = new Audio(samplePath(sel));
+    const a = previewCache.get(sel) || new Audio(samplePath(sel));
     a.currentTime = 0;
     a.play();
+    previewCache.set(sel, a);
+
   });
+
+  function warmupPreviewAudio() {
+  ["clap", "dog", "cat"].forEach((k) => {
+    if (previewCache.has(k)) return;
+    const a = new Audio(samplePath(k));
+    a.preload = "auto";
+    a.load();
+    previewCache.set(k, a);
+  });
+}
+
 
   
 }
