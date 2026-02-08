@@ -41,8 +41,17 @@ In addition to the main game, it is possible to play each single mini-game only 
 
 
 ## Implementation
-The web application is implemented mainly by HTML, CSS and JavaScript code. 
-The first page that the user can open contains the three buttons to choose the level of difficulty of the game. In fact, for each level a different grammar is used by an algorithm to generate randomly the single measure that the user has tto repeat or read.
+The web application is implemented mainly by HTML, CSS and JavaScript code. Therefore, an external database is linked used FireBase.
+Each page is composed by an HTML page, with an external JS code imported which implement its functionalities, and styled by the general file `style.css` that contains all the references of the CSS sections.
+
+### Grammars
+The first page that the user can open contains the three buttons to choose the level of difficulty of the game. In fact, for each level a different grammar is used by an algorithm to generate randomly the single measure that the user has to repeat or read.
+The algorithm is a tree that uses some rules to implement a pattern: the whole measure last four beats and can be divided in two half measures, and each half measure in two beats, and each beat in other rhythmic figures seen as the "leaves" of the tree. Each level of difficulty adds more possibilities and so more rules to the grammar, so generating more possible patterns. 
+The leaf rhythms are mapped with their vlaues, so that at the end the generated pattern can be represented in time multiplying the relative durations by the duration of each beat, according to the tempo (speed) that is currently playing. 
+
+### Mini games
+These patterns are generated into the game every time a measure is needed. In fact, the 
+
 
 
 
