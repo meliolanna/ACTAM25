@@ -5,7 +5,13 @@ import { AudioManager } from "./GameSounds.js";
 
 // Parametri URL + link dinamici
 const params = new URLSearchParams(window.location.search);
-const difficulty = params.get("difficulty") || "medium";
+const difficulty =
+  params.get("difficulty") ||
+  localStorage.getItem("difficulty") ||
+  "medium";
+
+localStorage.setItem("difficulty", difficulty);
+
 
 document.getElementById("playAllBtn").href = `gamesPage.html?difficulty=${difficulty}&mode=all`;
 document.getElementById("mg1Btn").href = `gamesPage.html?difficulty=${difficulty}&mode=mg1`;

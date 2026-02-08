@@ -1,6 +1,18 @@
 import { AudioManager } from "./GameSounds.js";
 
 window.addEventListener("load", () => {
+
+  const params = new URLSearchParams(window.location.search);
+  const difficulty = params.get("difficulty") || "medium";
+
+
+  localStorage.setItem("difficulty", difficulty);
+
+  document.querySelectorAll('a[href="gameslist.html"]').forEach(a => {
+    a.href = `gameslist.html?difficulty=${difficulty}`;
+  });
+
+
   const audio = new AudioManager();
   audio.init();
 
