@@ -49,6 +49,7 @@ The project follows a simple Model–View–Controller (MVC) architecture. The M
 The first page that the user can open contains the three buttons to choose the level of difficulty of the game. In fact, for each level a different grammar is used by an algorithm to generate randomly the single measure that the user has to repeat or read.
 The algorithm is a tree that uses some rules to implement a pattern: the whole measure lasts four beats and can be divided in two half measures, and each half measure in two beats, and each beat in other rhythmic figures seen as the "leaves" of the tree. Each level of difficulty adds more possibilities and so more rules to the grammar, so generating more possible patterns. 
 The leaf rhythms are mapped with their values, so that at the end the generated pattern can be represented in time multiplying the relative durations by the duration of each beat, according to the tempo (speed) that is currently playing. 
+![Grammar scheme](./grammar.png)
 
 ### Mini games
 These patterns are generated into the game every time a measure is needed. In fact, the three minigames that compose the steps of the main game are all based on a rhythmic sequence, but the second and the third use this algorithm to generate their sequence, always as new. 
@@ -94,4 +95,5 @@ ___
     Finished in February 2026.
   </i></sub>
 </p>
+
 
