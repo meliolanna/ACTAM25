@@ -3,9 +3,9 @@ import { GameModel } from './GameModel.js';
 import { RhythmView } from './RhythmView.js';
 import { GameController } from './GameController.js';
 
-import { FourBeatsMetronomeMiniGame } from './0FollowTheBeat.js';
-import { PatternRepeatMiniGame } from './1ListenAndRepeat.js';
-import { ReadAndPlayMiniGame } from './2ReadAndRepeat.js';
+import { FourBeatsMetronomeMiniGame } from './minigames/1FollowTheBeat.js';
+import { PatternRepeatMiniGame } from './minigames/2ListenAndRepeat.js';
+import { ReadAndPlayMiniGame } from './minigames/3ReadAndRepeat.js';
 
 import { GRAMMAR_EASY44, DEFAULT_GRAMMAR, GRAMMAR_HARD44 } from './MusicalUtilsAndGrammar.js';
 
@@ -79,3 +79,4 @@ window.addEventListener("load", () => {
     model.addMiniGame(mg);
   }
 });
+
