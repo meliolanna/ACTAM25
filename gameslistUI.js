@@ -28,7 +28,7 @@ window.addEventListener("load", () => {
   };
 
 
-  //  Logica per la musica di sottofondo 
+  /*  Logica per la musica di sottofondo 
 
   const startMusicOnFirstInteraction = () => {
     unlockAudio(); 
@@ -64,7 +64,7 @@ window.addEventListener("load", () => {
  audio.playGamesListMusic();
 
 
-
+*/
 
 
  //gestione suoni pulsanti e link

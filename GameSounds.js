@@ -232,9 +232,33 @@ export class AudioManager {
     }
 } 
 
+/*
 
 
-playIndexMusic() {
+playGamesListMusic() {
+    if (!this.ctx) return;
+    
+   
+    if (this.bgmSource) return;
+
+    const buffer = this.sampleBuffers.get("menuMusic");
+    if (!buffer) return;
+
+    this.bgmSource = this.ctx.createBufferSource();
+    this.bgmGain = this.ctx.createGain();
+
+    this.bgmSource.buffer = buffer;
+    this.bgmSource.loop = true; 
+    this.bgmGain.gain.value = 0.3; 
+
+    this.bgmSource.connect(this.bgmGain);
+    this.bgmGain.connect(this.ctx.destination);
+
+    this.bgmSource.start(); 
+  }
+
+
+  playIndexMusic() {
     if (!this.ctx) return;
     
     //non sovrapporre più istanze della stessa musica
@@ -263,10 +287,12 @@ playIndexMusic() {
 
 
 
-playGamesListMusic() {
+*/
+
+playMenuMusic() {
     if (!this.ctx) return;
     
-   
+    
     if (this.bgmSource) return;
 
     const buffer = this.sampleBuffers.get("menuMusic");
@@ -275,35 +301,17 @@ playGamesListMusic() {
     this.bgmSource = this.ctx.createBufferSource();
     this.bgmGain = this.ctx.createGain();
 
-    this.bgmSource.buffer = buffer;
-    this.bgmSource.loop = true; 
-    this.bgmGain.gain.value = 0.3; 
+    // filtro passa-basso musica ovattata
 
-    this.bgmSource.connect(this.bgmGain);
-    this.bgmGain.connect(this.ctx.destination);
-
-    this.bgmSource.start(); 
-  }
-
-
-
-playMenuMusic() {
-    if (!this.ctx) return;
-    
-    
-    if (this.bgmSource) return;
-
-    const buffer = this.sampleBuffers.get("menuMusicLF");
-    if (!buffer) return;
-
-    this.bgmSource = this.ctx.createBufferSource();
-    this.bgmGain = this.ctx.createGain();
-
+    this.bgmFilter = this.ctx.createBiquadFilter();
+    this.bgmFilter.type = 'lowpass'; 
+    this.bgmFilter.frequency.value = 750; // freq di taglio
     this.bgmSource.buffer = buffer;
     this.bgmSource.loop = true; 
     this.bgmGain.gain.value = 0.4; 
 
-    this.bgmSource.connect(this.bgmGain);
+    this.bgmSource.connect(this.bgmFilter);
+    this.bgmFilter.connect(this.bgmGain);
     this.bgmGain.connect(this.ctx.destination);
 
     this.bgmSource.start(this.ctx.currentTime + 2.3); // Parte dopo 1 secondo e mezzo

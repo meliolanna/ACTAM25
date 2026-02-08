@@ -11,6 +11,8 @@ window.addEventListener("load", () => {
 
   // pulsanti standard (Start / Save / Play again / ecc.)
   document.querySelectorAll(".pulsante").forEach(btn => {
+
+    //se è soundlink, lo gestiamo dopo
     if (btn.closest(".sound-link")) return;
 
     btn.addEventListener("click", () => {
@@ -36,7 +38,7 @@ window.addEventListener("load", () => {
 
       setTimeout(() => {
         window.location.href = targetUrl;
-      }, 300);
+      }, 350);
     });
   });
 });

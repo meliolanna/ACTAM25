@@ -16,7 +16,9 @@ window.addEventListener("load", () => {
     else if (audio.ctx.state === "suspended") audio.ctx.resume();
   };
 
-//  Logica per la musica di sottofondo 
+
+
+/* Logica per la musica di sottofondo 
   const startMusicOnFirstInteraction = () => {
     unlockAudio(); 
     
@@ -52,7 +54,7 @@ window.addEventListener("load", () => {
 
   audio.playIndexMusic();
 
-
+*/
 
   
   // toolbar
