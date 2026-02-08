@@ -155,7 +155,7 @@
 }
 
 /* Indicatore "3" per le terzine e "5" per le quintine */
-.note--to::before,.note--tq::before,.note--qui::before {
+.note--to::before,.note--tb::before,.note--f::before {
          
   position: absolute;
   top: -12px;           
@@ -171,11 +171,11 @@
 }
 
 .note--to::before,
-.note--tq::before {
+.note--tb::before {
   content: "3";
 }
 
-.note--qui::before {
+.note--f::before {
   content: "5";
 }
 
