@@ -11,8 +11,7 @@ Final project by UCETO -
 - [Game instructions](#game-instructions)
 - [Implementation](#implementation)
 - [Challenges](#challenges)
-- [Video demonstration]
-- [Link to the game page]
+- [Link to the game page](#link-to-the-game-page)
 
 
 ## Purpose of the project
@@ -59,7 +58,7 @@ The logic of each minigame is common, reason why they all inherit and implement 
 ### User input
 During the game, the code is expecting a specific input from the user that has to match with the rhythm of the sequence of that measure. 
 The class `GameController.js` handles the measuring of time and the input detection, communicating with the class of the minigame. From the moment in which the user can give an input, the time starts and the hits are detected and real time compared to the original sequence in order to check the accuracy. 
-The input classification is done by two time windows: if the input is located in the exact instant +- 10% of the duration of the beat, it is classified as *Perfect* and the score is increased by 100; if it is located in a +- 20% window, it is classified as *Good* and the score is increased only by 50; a bigger difference with respect to the expected instant or a missing is classified as an error, giving no points to the score and loosing a life.
+The input classification is done by two time windows: if the input is located in the exact instant +- 10% of the duration of the beat, it is classified as *Perfect* and the score is increased by 100; if it is located in a +- 20% window, it is classified as *Good* and the score is increased only by 50; a bigger difference with respect to the expected instant or a missing is classified as an error, giving no points to the score and loosing a life (but only one for all the errors in the measure).
 
 ### Scores and FireBase
 When all the lives are lost, the game is over repporting the number of rounds, the tempo reached and the score obtained. 
@@ -68,9 +67,27 @@ Then, the rank can be always seen by the button on the right top. By hitting the
 
 The FireBaser configuration is set in `firebaseClient.js` file, then the communication, the savings and the readings are defined in `leaderboardService.js`.
 
+### Sounds 
+Next to the rank button, there is the settings button that opens the overpage `settingsModal.html` using the script `settingsUI.js`. Here the user can change their hit input sound choosing between four sounds: synth, clap, dog and cat. 
+This choice is set in the class `GameSounds.js `, in which are defined the functions to implement the click sounds of the buttons and the sounds of the games as the metronome, the input, the error sound, the game over sound and so on.
+
+
+## Challenges
+The main challenges we found implementing our idea follow here.
+1. **Pattern generation**: we thought about how to increase the difficulty in the levels, and the solution we found was the one described above. The grammar allows us to not write manually the rhythmic sequences but to obtain them automatically, setting new rules as the only feature to increase the level. It was very easy to implement, obtaining a very good and satisfying result.
+2. **Music notation**: we wanted to represent the rhythms with the traditional notation, in order to let the user learn the corrispondance between what they reads and what they hears, but it was a problem to find a good library that can work in each browser. So to overcome the problem we implemented a CSS notation that draws each single note of the sequence as an object into a little display. This display is divided in four sections in order to show the four beats and the notes are accurately located to a distance from the vertical line of the beat proportional to the fraction of beat it is. We know it is not as beautiful as the traditional notation, but it is very intuitive and a little "primitive" as the pixalated 80s aestethics we used for the whole game.
+3. **User input matching**: to classify the input as right or wrong, we had to find a solution to match the sequence given and the input one. The solution we found is to have like two different "time passing"s, one to calculate the amount of seconds the game expects from one input to the other, than another one to detect how much time passed from one "hit" to the next and comparing in real time this sequences of times in seconds. This solution allows us to have a real time detection.
 
 
 
 
+## Link to the game page
+Hoping we made you curious to try the game, [this is the link to the GitHub Page to play](https://meliolanna.github.io/ACTAM25/index.html).
 
 
+--- 
+BEAT THE BEAT - Academic project implemented by Marzola Pier Matteo, Melioli Anna Chiara and Tortorella Elena.
+
+Finished in February 2026.
+
+GIF illustrations by @coi_illustrazioni.
