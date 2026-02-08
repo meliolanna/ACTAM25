@@ -51,12 +51,22 @@ The leaf rhythms are mapped with their vlaues, so that at the end the generated 
 
 ### Mini games
 These patterns are generated into the game every time a measure is needed. In fact, the three minigames that compose the steps of the main game are all based on a rhythmic sequence, but the second and the third use this algorithm to generate their sequence, always as new. 
-The logic of each minigame is common, reason why they all inherit and implement from the abstract class `0BaseRhythmMiniGame.js`: they contains 8 beats, 4 played by the game as out counting or as pattern listening, and 4 in which the game is expecting an input from the user. 
+The logic of each minigame is common, reason why they all inherit and implement from the abstract class `0BaseRhythmMiniGame.js`: they contains 8 beats, 4 played by the game as out counting or as pattern listening, and 4 in which the game is expecting an input from the user. All this script are located in `minigames` folder. 
 1. The first minigame `1FollowTheBeat.js` contains as the played sequence only the 4 beats as quarter notes, and is expecting so this specific frequence as input.
 2. The second minigame `2ListenAndRepeat.js` generates the sequence, plays it and then expects this specific pattern as an input.
 3. The third minigame `3ReadAndRepeat.js` generates the sequence without playing but just counting out the 4 beats and then expects the input.
 
+### User input
+During the game, the code is expecting a specific input from the user that has to match with the rhythm of the sequence of that measure. 
+The class `GameController.js` handles the measuring of time and the input detection, communicating with the class of the minigame. From the moment in which the user can give an input, the time starts and the hits are detected and real time compared to the original sequence in order to check the accuracy. 
+The input classification is done by two time windows: if the input is located in the exact instant +- 10% of the duration of the beat, it is classified as *Perfect* and the score is increased by 100; if it is located in a +- 20% window, it is classified as *Good* and the score is increased only by 50; a bigger difference with respect to the expected instant or a missing is classified as an error, giving no points to the score and loosing a life.
 
+### Scores and FireBase
+When all the lives are lost, the game is over repporting the number of rounds, the tempo reached and the score obtained. 
+The score can be saved into a rank: through the button *SAVE*, the name of the gamer and the score are put into an online real time database hold by FireBase. 
+Then, the rank can be always seen by the button on the right top. By hitting the trophy icon, a overpage compares and the system import from the database all the names and score. This page is implemented in `leaderboardModal.html` and its behavior defined in `leaderboardUI.js`.
+
+The FireBaser configuration is set in `firebaseClient.js` file, then the communication, the savings and the readings are defined in `leaderboardService.js`.
 
 
 
