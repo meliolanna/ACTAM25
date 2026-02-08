@@ -1,10 +1,10 @@
-import { BaseRhythmMiniGame } from "./BaseRhythmMiniGame.js";
+import { BaseRhythmMiniGame } from "./0BaseRhythmMiniGame.js";
 import {
   GrammarSequence,
   convertSymbolsToFractions,
   convertFractionsToSeconds,
   buildNotationPattern
-} from "./MusicalUtilsAndGrammar.js";
+} from "../MusicalUtilsAndGrammar.js";
 
 export class ReadAndPlayMiniGame extends BaseRhythmMiniGame {
   constructor(grammar) {
@@ -86,3 +86,4 @@ export class ReadAndPlayMiniGame extends BaseRhythmMiniGame {
     return this._scoreHitOrTimingError(best, hitTimeMs, beatDurationMs);
   }
 }
+
