@@ -1,12 +1,10 @@
 # **BEAT THE BEAT**
-*Advanced Coding, Tools and Methodologies – A.Y. 2025/26*
+*Advanced Coding, Tools and Methodologies - A.Y. 2025/26*
 
-*Professors: Francesco Bruschi, Vincenzo Rana*
+*Professors: Bruschi Francesco, Rana Vincenzo*
 
-Final project by UCETO –  
+Final project by UCETO - 
 *Marzola Pier Matteo, Melioli Anna Chiara, Tortorella Elena*
-
----
 
 ## Outline
 - [Purpose of the project](#purpose-of-the-project)
@@ -15,181 +13,82 @@ Final project by UCETO –
 - [Challenges](#challenges)
 - [Link to the game page](#link-to-the-game-page)
 
----
 
 ## Purpose of the project
+BEAT THE BEAT is an online game to challenge your rhythmic abilities. 
+Traditional music solfeggio is boring, isn't it? With its different levels of difficulty and its practice mode, this game wants to be a funnier tool to help you learn it. 
+It is designed to be good for every user:
+- for music *beginners*, BTB can be a funny and simple way to discover the rhythmic notation, getting more confident with the duration of the notes and their subdivision in the time flowing
+- for *children*, our game can be a colorful and less boring way to practice rhythmic skills, learning better by imitation
+- for *everyone* who wants to increase their tempo perception and ability to keep time and go on time, faster and faster, without neglecting a bit of fun
 
-BEAT THE BEAT is an online game designed to challenge and improve rhythmic abilities.
-
-Traditional music solfeggio is often perceived as boring. With different difficulty levels and practice modes, this game aims to be a fun and accessible tool to learn rhythm.
-
-It is designed for different kinds of users:
-
-- **Music beginners**: a simple and playful way to discover rhythmic notation, gaining confidence with note durations and subdivisions.
-- **Children**: a colorful and engaging way to practice rhythmic skills, learning through imitation.
-- **Anyone** who wants to improve tempo perception and timing accuracy, progressively playing faster while having fun.
-
----
 
 ## Game instructions
+The game is structured by an infinite flow of 4/4 measures, one to listen and one to play, and each round is composed by three steps: 
+1. The first pattern is a simple beat keeping, in order to set on the right idea of time that is flowing.
+2. The second is a pattern randomly generated that is firstly played by the game, and then the user has to reproduce it. This is done thinking about learning the notes values by imitating and repeating.
+3. The third is a new pattern, that is no more played by the game but the user has only to read. This is designed to let the user apply their new skills just learned.
+After each round, the tempo value is increased of 6 BPM.
 
-The game is structured as an infinite flow of 4/4 measures, alternating one measure to listen and one to play.
+The score of each measure is given by the accuracy of the played rhythm. Each time an error is done, one of the three lives is lost and when all lives are lost the game ends.
+When the game is over, the user can save their score into the leaderboard, which can be always opened by the button on the right top.
 
-Each round consists of three steps:
+The difficulty of the rhythmic elements is set by the user in the first page: by their choice the game generates the pattern with more particular figures, as triplets or dotted notes.
+Therefore, also the sound of the user's "hit" can be set, choosing by a sound palette in the settings on the right top. 
 
-1. **Follow the beat** – a simple beat-keeping exercise to establish a sense of timing.
-2. **Listen and repeat** – a randomly generated rhythmic pattern is played by the game and must be reproduced by the user.
-3. **Read the rhythm** – a new pattern is generated but not played; the user must perform it by reading the displayed rhythm.
+In addition to the main game, it is possible to play each single mini-game only to practice some specific skills. For example, the user can choose to only listen and repeat.
 
-After each round, the tempo increases by 6 BPM.
-
-The score for each measure depends on rhythmic accuracy. Each mistake costs one life (out of three). When all lives are lost, the game ends.
-
-At game over, players can save their score to the leaderboard, accessible anytime through the trophy button.
-
-Difficulty is selected on the first page and affects rhythm generation (e.g., triplets and dotted notes appear at higher levels).  
-The user can also customize the hit sound via the settings menu.
-
-In addition to the main game, each mini-game can be played independently for focused practice (for example, only *Listen and Repeat*).
-
----
 
 ## Implementation
+The web application is implemented mainly by HTML, CSS and JavaScript code. Therefore, an external database is linked using Firebase.
+Each page is composed by an HTML page, with an external JS code imported which implement its functionalities, and styled by the general file `style.css` that contains all the references of the CSS sections.
 
-The web application is implemented using HTML, CSS, and JavaScript.  
-An external real-time database is provided through Firebase.
-
-Each page consists of an HTML file linked to its corresponding JavaScript logic and styled through a shared `style.css`.
-
-### MVC Architecture
-
-The project follows a simplified **Model–View–Controller (MVC)** pattern:
-
-- **Model** (`GameModel.js`)  
-  Stores the game state: score, BPM, round, lives, current rhythm pattern, and difficulty.
-
-- **View** (`RhythmView.js` and UI files)  
-  Handles visual rendering such as LEDs, rhythm notation, HUD updates, and modal screens.
-
-- **Controller** (`GameController.js`)  
-  Manages game flow, timing, user input evaluation, and communication between Model and View.
-
-This separation improves maintainability and makes it easier to extend the game with new features or mini-games.
-
----
+The project follows a simple Model–View–Controller (MVC) architecture. The Model (`GameModel.js`) stores the game state such as score, BPM, lives, rounds, generated patterns and difficulty. The View (`RhythmView.js` together with the UI scripts) manages everything visual: rhythm display, LEDs, HUD and modal screens. The Controller (`GameController.js`) handles the game flow, timing and user input, coordinating Model and View. This separation helped us keep the logic organized and makes it easier to expand the game with new features or mini-games.
 
 ### Grammars
+The first page that the user can open contains the three buttons to choose the level of difficulty of the game. In fact, for each level a different grammar is used by an algorithm to generate randomly the single measure that the user has to repeat or read.
+The algorithm is a tree that uses some rules to implement a pattern: the whole measure lasts four beats and can be divided in two half measures, and each half measure in two beats, and each beat in other rhythmic figures seen as the "leaves" of the tree. Each level of difficulty adds more possibilities and so more rules to the grammar, so generating more possible patterns. 
+The leaf rhythms are mapped with their values, so that at the end the generated pattern can be represented in time multiplying the relative durations by the duration of each beat, according to the tempo (speed) that is currently playing. 
 
-Difficulty selection determines which rhythmic grammar is used to generate measures.
-
-The generator is implemented as a tree-based grammar:
-
-- A measure (4 beats) is divided into half measures,
-- each half into beats,
-- and each beat into rhythmic figures (tree leaves).
-
-Increasing difficulty simply adds rules and rhythmic possibilities to the grammar.
-
-Each leaf rhythm is mapped to its duration value. Final timing is computed by multiplying these values by the current beat duration derived from BPM.
-
----
-
-### Mini-games
-
-Rhythmic patterns are generated whenever a new measure is required.
-
-The three mini-games share a common structure and inherit from the abstract class `BaseRhythmMiniGame.js`.  
-Each mini-game contains 8 beats: 4 played or counted by the game, followed by 4 beats where user input is expected.
-
-1. **Follow the Beat** – fixed quarter notes.
-2. **Listen and Repeat** – generated pattern is played, then reproduced.
-3. **Read and Repeat** – generated pattern is displayed only.
-
-All mini-game scripts are located in the `minigames` folder.
-
----
+### Mini games
+These patterns are generated into the game every time a measure is needed. In fact, the three minigames that compose the steps of the main game are all based on a rhythmic sequence, but the second and the third use this algorithm to generate their sequence, always as new. 
+The logic of each minigame is common, reason why they all inherit and implement from the abstract class `BaseRhythmMiniGame.js`: they contain 8 beats, 4 played by the game as out counting or as pattern listening, and 4 in which the game is expecting an input from the user. All these scripts are located in the `minigames` folder. 
+1. The first minigame `FollowTheBeat.js` contains as the played sequence only the 4 beats as quarter notes, and is expecting so this specific frequency as input.
+2. The second minigame `ListenAndRepeat.js` generates the sequence, plays it and then expects this specific pattern as an input.
+3. The third minigame `ReadAndRepeat.js` generates the sequence without playing but just counting out the 4 beats and then expects the input.
 
 ### User input
-
-During gameplay, the system evaluates the timing of user hits against expected rhythmic events.
-
-`GameController.js` manages timing and input detection, communicating with the active mini-game.
-
-Inputs are classified using two tolerance windows relative to the expected hit time:
-
-- ±10% of beat duration → *Perfect* (+100 points)
-- ±20% → *Good* (+50 points)
-- Outside these windows or missing hits count as errors
-
-Only one life can be lost per measure, regardless of how many errors occur within it.
-
----
+During the game, the code is expecting a specific input from the user that has to match with the rhythm of the sequence of that measure. 
+The class `GameController.js` handles the measuring of time and the input detection, communicating with the class of the minigame. From the moment in which the user can give an input, the time starts and each hit is compared directly with its expected timestamp.
+The input classification is done by two time windows: if the input is located in the exact instant +- 10% of the duration of the beat, it is classified as *Perfect* and the score is increased by 100; if it is located in a +- 20% window, it is classified as *Good* and the score is increased only by 50; a bigger difference with respect to the expected instant or a missing hit is classified as an error, giving no points to the score and losing a life (but only one for all the errors in the measure).
 
 ### Scores and Firebase
+When all the lives are lost, the game is over reporting the number of rounds, the tempo reached and the score obtained. 
+The score can be saved into a rank: through the button *SAVE*, the name of the gamer and the score are put into an online real-time database held by Firebase. 
+Then, the rank can always be seen by the button on the right top. By hitting the trophy icon, an overpage appears and the system imports from the database all the names and scores.
 
-When all lives are lost, the game displays the reached round, BPM, and total score.
+The Firebase configuration is set in `firebaseClient.js`, then the communication, the savings and the readings are defined in `leaderboardService.js`.
 
-Players can save their score to an online leaderboard powered by Firebase.
+### Sounds 
+Next to the rank button, there is the settings button that opens the overpage `settingsModal.html` using the script `settingsUI.js`. Here the user can change their hit input sound choosing between four sounds: synth, clap, dog and cat. 
+This choice is set in the class `GameSounds.js`, in which are defined the functions to implement the click sounds of the buttons and the sounds of the games as the metronome, the input, the error sound, the game over sound and so on.
 
-Leaderboard data is handled through:
-
-- `firebaseClient.js` – Firebase configuration
-- `leaderboardService.js` – database read/write logic
-- `leaderboardModal.html` + `leaderboardUI.js` – UI display
-
----
-
-### Sounds
-
-The settings menu allows users to select their hit sound (synth, clap, dog, or cat).
-
-Sound management is handled by `GameSounds.js`, which controls:
-
-- UI click sounds
-- metronome
-- hit feedback
-- error sounds
-- game over audio
-
----
 
 ## Challenges
+The main challenges we found implementing our idea follow here.
+1. **Pattern generation**: we thought about how to increase the difficulty in the levels, and the solution we found was the one described above. The grammar allows us to not write manually the rhythmic sequences but to obtain them automatically, setting new rules as the only feature to increase the level. It was very easy to implement, obtaining a very good and satisfying result.
+2. **Music notation**: we wanted to represent the rhythms with the traditional notation, in order to let the user learn the correspondence between what they read and what they hear, but it was a problem to find a good library that can work in each browser. So to overcome the problem we implemented a CSS notation that draws each single note of the sequence as an object into a little display. This display is divided in four sections in order to show the four beats and the notes are accurately located to a distance from the vertical line of the beat proportional to the fraction of beat it is. We know it is not as beautiful as the traditional notation, but it is very intuitive and a little "primitive" as the pixelated 80s aesthetics we used for the whole game.
+3. **User input matching**: to classify the input as right or wrong, we compare each user hit directly with its expected timestamp using tolerance windows. This event-based approach allows real-time feedback while remaining flexible to small timing variations and avoids the need to reconstruct full input sequences.
 
-The main challenges encountered during development were:
-
-1. **Pattern generation**
-
-   Designing scalable difficulty was solved through a grammar-based system. Instead of manually defining rhythms, we created a rule-based generator. Increasing difficulty simply means adding new grammar rules, producing richer rhythmic combinations with minimal code changes.
-
-2. **Music notation**
-
-   We aimed to display rhythms using traditional notation but could not find a lightweight library compatible with all browsers.  
-   As a solution, we implemented a custom CSS-based notation system: notes are rendered as visual elements positioned proportionally within each beat. While simplified, this approach matches the pixel-art aesthetic of the game and remains intuitive.
-
-3. **User input matching**
-
-   Accurately evaluating rhythmic input in real time required precise timing logic.
-
-   Our solution separates:
-
-   - the *expected timing*, computed from the generated rhythm and BPM  
-   - the *actual timing*, measured between consecutive user hits
-
-   Each hit is compared directly against its corresponding expected timestamp, using tolerance windows to classify accuracy. This event-based approach allows real-time feedback while remaining robust to small timing fluctuations.
-
----
 
 ## Link to the game page
+Hoping we made you curious to try the game, [this is the link to the GitHub Page to play](https://meliolanna.github.io/ACTAM25/index.html).
 
-If you would like to try the game:
 
-👉 https://meliolanna.github.io/ACTAM25/index.html
-
----
-
+___
 <p>
   <sub><i>
-    BEAT THE BEAT – Academic project implemented by Marzola Pier Matteo, Melioli Anna Chiara and Tortorella Elena.<br>
+    BEAT THE BEAT - Academic project implemented by Marzola Pier Matteo, Melioli Anna Chiara and Tortorella Elena. <br>
     Finished in February 2026.
   </i></sub>
 </p>
