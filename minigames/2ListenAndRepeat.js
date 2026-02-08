@@ -56,7 +56,6 @@ export class PatternRepeatMiniGame extends BaseRhythmMiniGame {
   }
 
   startRound(gameModel) {
-    // deve includere patternSymbols come prima
     return this._startRoundCommon(gameModel, {
       patternSymbols: this.symbolSequence
     });
@@ -104,4 +103,5 @@ export class PatternRepeatMiniGame extends BaseRhythmMiniGame {
     return this._scoreHitOrTimingError(best, hitTimeMs, beatDurationMs);
   }
 }
+
 
