@@ -138,8 +138,9 @@ function wireSettingsHandlers() {
     previewCache.set(sel, a);
 
   });
+}
 
-  function warmupPreviewAudio() {
+function warmupPreviewAudio() {
   ["clap", "dog", "cat"].forEach((k) => {
     if (previewCache.has(k)) return;
     const a = new Audio(samplePath(k));
@@ -147,8 +148,4 @@ function wireSettingsHandlers() {
     a.load();
     previewCache.set(k, a);
   });
-}
-
-
-  
 }
