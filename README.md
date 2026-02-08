@@ -3,21 +3,28 @@
 
 *Professors: Bruschi Francesco, Rana Vincenzo*
 
-Final project by UCETO
+Final project by UCETO - 
 *Marzola Pier Matteo, Melioli Anna Chiara, Tortorella Elena*
 
 ## Outline
-- [Nothing](#nothing)
-- [Last Updates](#last-updates)
+- [Purpose of the project](#purpose-of-the-project)
+- [Implementation](#implementation)
+- [Challenges](#challenges)
+- [Video demonstration]
+- [Link to the game page]
 
 
-## Nothing
-Here follows the final project of our group. The idea is a game that helps the users to increase their rhythm capacities. 
-We don't have rhythm capacities, so the result could be a game for babies. 
-Our coding skills are based on writing good prompt. Enjoy.
+## Purpose of the project
+BEAT THE BEAT is an online game to challenge your rhythmic abilities. 
+Traditional music solfeggio is boring, isn't it? With its different levels of difficulty and its practice mode, this game wants to be a funnier tool to help you learn it. 
+It is designed to be good for every user:
+- for music *beginners*, BTB can be a funny and simple way to discover the rhythmic notation, getting more confident with the duration of the notes and their subdivision in the time flowing
+- for *children*, our game can be a colorful and less boring way to practice rhythmic skills, learning better by imitation
+- for *everyone* who wants to increase their tempo perception and ability to keep time and go on time, faster and faster, without neglecting a bit of fun
 
-## Last Updates
-L'Anna è arrivata a copiare quasi tutto l'ultimo codepen, l'unica cosa non aggiornata sono le classi dei primi due minigiochi perchè è nata una incompresione (cioè che ho frainteso molte cose). 
-Inoltre le classi sono collegate a cazzo perchè devo capire la logica, ma solo questione di "import".
 
-Dopo direi che ci sarà da collegare i js agli html dei singoli giochetti, o quel che è 
+## Implementation
+
+
+
+
