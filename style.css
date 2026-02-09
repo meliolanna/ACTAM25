@@ -1,6 +1,3 @@
-@import url("style-notedisplay.css");
-@import url("style-device.css");
-@import url("style-modal.css");
 
 @font-face {
   font-family: 'PixelFont';
@@ -433,6 +430,9 @@ body {
 }
 
 
+@import url("style-notedisplay.css");
+@import url("style-device.css");
+@import url("style-modal.css");
 
 
 
