@@ -58,10 +58,24 @@
     width: 5dvw;
     height: 5dvw;
   }
-    .status-text {
+  .status-text {
     font-size: 2dvh;
     margin-top: 3dvh;
   }
+  
+  .top-right-toolbar {
+        top: 10px;
+        right: 10px;
+        gap: 5px;
+   }
+  .mini-btn {
+        width: 30px;
+        height: 30px;
+        font-size: 1rem;
+   }
+  .pulsating-text {
+        margin-top: 60px; 
+   }
 }
 
 
