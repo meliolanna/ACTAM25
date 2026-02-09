@@ -11,13 +11,13 @@
       font-size: 1.8dvh;
   }*/
   .gigacontainer {
-        flex-wrap: wrap;
         flex-direction: column; /* Li mette uno sotto l'altro */
         gap: 1dvh; /* Riduce lo spazio tra i pulsanti */
+        height: 80%;
   }
   .gigapulsante {
       height: 3dvh; /* Diventano un po' più bassi per starci tutti e tre */
-    width: auto;
+      width: auto;
   }
   .pulsating-text{
     font-size: 8dvw;
@@ -60,6 +60,7 @@
     margin-top: 3dvh;
   }
 }
+
 
 
 
