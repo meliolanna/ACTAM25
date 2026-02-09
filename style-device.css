@@ -16,8 +16,11 @@
         height: 80%;
   }
   .gigapulsante {
-      height: 3dvh; /* Diventano un po' più bassi per starci tutti e tre */
+      height: 30%; /* Diventano un po' più bassi per starci tutti e tre */
       width: auto;
+  }
+  .gigapulsante img {
+    height: 50%;
   }
   .pulsating-text{
     font-size: 8dvw;
@@ -60,6 +63,7 @@
     margin-top: 3dvh;
   }
 }
+
 
 
 
