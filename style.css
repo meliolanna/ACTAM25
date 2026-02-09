@@ -242,26 +242,6 @@ body {
     transform: scale(1.1);
 }
 
-/* Ottimizzazione per Smartphone */
-@media (max-width: 768px) {
-    .top-right-toolbar {
-        top: 10px;
-        right: 10px;
-        gap: 5px;
-    }
-
-    .mini-btn {
-        width: 30px;
-        height: 30px;
-        font-size: 1rem;
-    }
-    
-    /* Se il titolo pulsante è troppo vicino, abbassiamo un po' il main-title */
-    .pulsating-text {
-        margin-top: 60px; 
-    }
-}
-
 /* GAME PART */ 
 .game-frame {
   width: 50dvw;
@@ -431,4 +411,5 @@ body {
 #leaderboardList ol li {
   margin: 6px 0;
 }
+
 
